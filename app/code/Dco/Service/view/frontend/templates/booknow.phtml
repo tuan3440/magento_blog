@@ -1,0 +1,106 @@
+<?php
+/**
+ * @var Dco\Service\Block\Locator\View $block
+ */
+$locator = $block->getLocator();
+
+?>
+<div class="container">
+    <div class="title">Chọn thời gian và khung giờ sử dụng dịch vụ</div>
+    <div class="info-store">
+        <h3>Tên tiệm spa: <?= $locator->getName(); ?></h3>
+        <div> ĐỊa chỉ : <?= $locator->getAddress(); ?></div>
+        <div>Thành phố : <?= $locator->getCity(); ?></div>
+        <div>Số điện thoại : <?= $locator->getPhone(); ?></div>
+        <div class="calendar">
+            <form action="<?= $block->getUrl("bookings/locator/bookpost"); ?>" method="post" id="form-booking"
+                  >
+                <input type="hidden" name="service_id" value="<?= $block->getServiceId() ?>">
+                <input type="hidden" name="locator_id" value="<?= $locator->getId() ?>">
+                <div class="field">
+                    <label>Chọn ngày : </label>
+                    <input type="text" class="input-text" id="example-date" style="width: auto"
+                           name="date" required="true"/>
+                </div>
+                <div id="slot"></div>
+                <button type="submit" id="submit">Submit</button>
+            </form>
+        </div>
+    </div>
+</div>
+
+<script type="text/x-magento-init">
+    {
+        "#form-booking": {
+            "validation": {}
+        }
+    }
+</script>
+
+<script type="text/javascript">
+    require([
+        'jquery',
+        "mage/url"
+    ], function ($, urlBuilder) {
+        $(document).ready(function () {
+            $('#example-date').change(function () {
+                var url = urlBuilder.build('bookings/locator/slot');
+                $.ajax({
+                    url: url,
+                    type: 'POST',
+                    dataType: 'json',
+                    data: {
+                        service_id: $("input[name='service_id']").val(),
+                        locator_id: $("input[name='locator_id']").val(),
+                        date: $("input[name='date']").val()
+                    },
+                    success: function (response) {
+                        console.log(response)
+                        $('#slot').html(response.slot)
+                    },
+                    error: function (xhr, status, errorThrown) {
+                        console.log('Error happens. Try again.');
+                    }
+                });
+            });
+
+        });
+    })
+</script>
+
+<style>
+    .title {
+        text-align: center;
+        padding: 15px;
+        background-color: #0053a0;
+        font-size: 17px;
+        color: white;
+    }
+    div#slot {
+        margin-bottom: 10px;
+        margin-top: 10px;
+    }
+    .info-store {
+        width: 40%;
+        margin: auto;
+        line-height: 30px;
+    }
+
+</style>
+
+<script>
+    require([
+        'jquery',
+        'mage/translate',
+        'mage/calendar'
+    ], function ($, $t) {
+        $('#example-date').calendar({
+            changeMonth: true,
+            changeYear: true,
+            showButtonPanel: true,
+            currentText: $t('Go Today'),
+            closeText: $t('Close'),
+            showWeek: true
+        });
+    })
+</script>

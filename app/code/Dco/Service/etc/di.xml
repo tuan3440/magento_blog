@@ -1,0 +1,34 @@
+<?xml version="1.0"?>
+
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+    <preference for="Dco\Service\Api\ServiceRepositoryInterface" type="Dco\Service\Model\ServiceRepository"/>
+    <preference for="Dco\Service\Api\Data\ServiceInterface" type="Dco\Service\Model\Service"/>
+    <preference for="Dco\Service\Api\LocatorRepositoryInterface" type="Dco\Service\Model\LocatorRepository"/>
+    <preference for="Dco\Service\Api\Data\LocatorInterface" type="Dco\Service\Model\Locator"/>
+
+    <virtualType name="BookingLocatorGridFilterPool" type="Magento\Framework\View\Element\UiComponent\DataProvider\FilterPool">
+        <arguments>
+            <argument name="appliers" xsi:type="array">
+                <item name="regular" xsi:type="object">Magento\Framework\View\Element\UiComponent\DataProvider\RegularFilter</item>
+                <item name="fulltext" xsi:type="object">Magento\Framework\View\Element\UiComponent\DataProvider\FulltextFilter</item>
+            </argument>
+        </arguments>
+    </virtualType>
+
+    <virtualType name="BookingLocatorGridDataProvider" type="Magento\Framework\View\Element\UiComponent\DataProvider\DataProvider">
+        <arguments>
+            <argument name="collection" xsi:type="object" shared="false">Dco\Service\Model\ResourceModel\Locator\Collection</argument>
+            <argument name="filterPool" xsi:type="object" shared="false">BookingLocatorGridFilterPool</argument>
+        </arguments>
+    </virtualType>
+
+    <type name="Magento\Framework\View\Element\UiComponent\DataProvider\CollectionFactory">
+        <arguments>
+            <argument name="collections" xsi:type="array">
+                <item name="booking_service_listing_data_source" xsi:type="string">Dco\Service\Model\ResourceModel\Service\Grid</item>
+                <item name="booking_locator_listing_data_source" xsi:type="string">Dco\Service\Model\ResourceModel\Locator\Grid</item>
+                <item name="booking_calendar_listing_data_source" xsi:type="string">Dco\Service\Model\ResourceModel\CalendarBooking\Grid</item>
+            </argument>
+        </arguments>
+    </type>
+</config>

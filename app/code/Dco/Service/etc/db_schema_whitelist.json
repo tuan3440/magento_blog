@@ -1,0 +1,16 @@
+{
+    "calendar_booking": {
+        "column": {
+            "id": true,
+            "customer_id": true,
+            "locator_id": true,
+            "service_id": true,
+            "date": true,
+            "hour": true,
+            "booking_status": true
+        },
+        "constraint": {
+            "PRIMARY": true
+        }
+    }
+}
