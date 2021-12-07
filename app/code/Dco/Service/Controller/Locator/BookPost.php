@@ -21,6 +21,7 @@ class BookPost extends \Dco\Service\Controller\Index\Index
     protected $session;
     protected $calendar;
     protected $helper;
+
     public function __construct(Context $context,
                                 PageFactory $resultPageFactory,
                                 CalendarBooking $calendarBooking,
@@ -41,28 +42,32 @@ class BookPost extends \Dco\Service\Controller\Index\Index
             return $resultRedirect;
         }
         $data = $this->getRequest()->getParams();
-        if (!isset($data['id'])) {
+        $pointReliable = $this->session->getCustomer()->getData("point");
+        if ($pointReliable == '0') {
+            $this->messageManager->addWarningMessage(__("Your account is locked from booking feature.Please come back later"));
+            $this->_redirect('*/*/booknow', ['id' => $data['locator_id'], 'service' => $data['locator_id']]);
+        } else {
+            if (!isset($data['id'])) {
                 $customerId = $this->session->getCustomer()->getEntityId();
                 $calendar = $this->calendar;
                 $time = strtotime($data['date']);
-                $newformat = date('Y-m-d',$time);
+                $newformat = date('Y-m-d', $time);
                 $calendar->setData('customer_id', $customerId);
                 $calendar->setData('service_id', $data['service_id']);
                 $calendar->setData('locator_id', $data['locator_id']);
                 $calendar->setData('date', $newformat);
                 $calendar->setData('hour', $data['hour']);
+                $calendar->setData('require', $data['require']);
                 $calendar->setData('booking_status', 0);
                 try {
                     $calendar->save();
-//                    $email = $this->session->getCustomer()->getEmail();
-//                    $this->helper->sendEmailWating($email);
                 } catch (\Exception $e) {
                     $this->messageManager->addExceptionMessage($e, __('Booking Calendar is not success'));
                 }
                 $this->messageManager->addSuccessMessage(__("You have booked success.Please check mail and follow instruction"));
                 $this->_redirect('*/*/booknow', ['id' => $data['locator_id'], 'service' => $data['locator_id']]);
             }
-//            }
-    }
+        }
 
+    }
 }

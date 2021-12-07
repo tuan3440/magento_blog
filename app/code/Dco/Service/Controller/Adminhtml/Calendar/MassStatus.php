@@ -67,27 +67,17 @@ class MassStatus extends \Magento\Backend\App\Action
 
         foreach ($collection as $item) {
             $item->setBookingStatus($statusValue);
-            $idCustomer = $item->getCustomerId();
-            $emailCustomer = $this->customer->create()->load($idCustomer)->getEmail();
-            $nameCustomer = $this->customer->create()->load($idCustomer)->getName();
-
             if ($statusValue == 1) {
-                $idLocator = $item->getLocatorId();
-                $idService = $item->getServiceId();
-                $locator = $this->getInfoLocator($idLocator);
-                $service = $this->getInfoService($idService);
-                $date = $item->getDate();
-                $hour = $this->getHour($item->getHour());
-
-                $this->helper->sendEmailRemindCalendar($emailCustomer, $nameCustomer, $locator, $service, $date, $hour);
+                $this->helper->sendEmail();
             }
             if ($statusValue == 2) {
-                $this->helper->sendMail();
-//                $this->helper->sendEmailNotifyCancel($emailCustomer, $nameCustomer);
+                $this->helper->sendEmail();
             }
             if ($statusValue == 3) {
-                $this->helper->sendMail();
-//                $this->helper->sendEmailThankYou($emailCustomer, $nameCustomer);
+                $customer = $this->customer->create()->load($item->getData("customer_id"));
+                $customer->setData("point", (int)$customer->getData("point") + 1);
+                $customer->save();
+                $this->helper->sendEmail();
             }
             $item->save();
         }
@@ -99,38 +89,6 @@ class MassStatus extends \Magento\Backend\App\Action
         return $resultRedirect->setPath('*/*/');
     }
 
-    private function getInfoLocator($id)
-    {
-        $locator = $this->locator->create()->load($id);
-        $nameLocator =$locator->getName();
-        $addressLocator = $locator->getAddress();
-        $phone = $locator->getPhone();
-        return [
-            'name' => $nameLocator,
-            'phone' => $phone,
-            'address' => $addressLocator
-        ];
-    }
-
-    private function getInfoService($id)
-    {
-        $service = $this->service->create()->load($id);
-        $nameService =$service->getName();
-        $price = $service->getPriceService();
-        return [
-            'name' => $nameService,
-            'price' => $price
-        ];
-    }
-
-    private function getHour($hour) {
-        $hours = $this->hour->toArray();
-        foreach ($hours as $key => $value) {
-            if ($key == $hour) {
-                return $value;
-            }
-        }
-    }
 
 }
 

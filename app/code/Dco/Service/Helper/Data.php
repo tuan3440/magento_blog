@@ -20,127 +20,54 @@ use Magento\Framework\App\Helper\AbstractHelper;
 use Magento\Framework\Exception\LocalizedException;
 use Magento\Framework\Mail\Template\TransportBuilder;
 use Magento\Framework\Translate\Inline\StateInterface;
+use Magento\Framework\Escaper;
 
-class Data extends AbstractHelper
+class Data extends \Magento\Framework\App\Helper\AbstractHelper
 {
-    const EMAIL_TEMPLATE = 'email_section/sendmail/email_template';
+    protected $inlineTranslation;
+    protected $escaper;
+    protected $transportBuilder;
+    protected $logger;
 
-    const EMAIL_SERVICE_ENABLE = 'email_section/sendmail/enabled';
-
-    /**
-     * @var StateInterface
-     */
-    private $inlineTranslation;
-
-    /**
-     * @var TransportBuilder
-     */
-    private $transportBuilder;
-
-    /**
-     * @var StoreManagerInterface
-     */
-    private $storeManager;
-
-    /**
-     * @var LoggerInterface
-     */
-    private $logger;
-
-    /**
-     * Data constructor.
-     * @param Context $context
-     * @param StoreManagerInterface $storeManager
-     * @param TransportBuilder $transportBuilder
-     * @param StateInterface $inlineTranslation
-     * @param LoggerInterface $logger
-     */
     public function __construct(
-        Context $context,
-        StoreManagerInterface $storeManager,
-        TransportBuilder $transportBuilder,
-        StateInterface $inlineTranslation,
-        LoggerInterface $logger
-    )
-    {
-        $this->storeManager = $storeManager;
-        $this->transportBuilder = $transportBuilder;
-        $this->inlineTranslation = $inlineTranslation;
-        $this->logger = $logger;
-        parent::__construct($context);
-    }
+    Context $context,
+    StateInterface $inlineTranslation,
+    Escaper $escaper,
+    TransportBuilder $transportBuilder
+) {
+    parent::__construct($context);
+    $this->inlineTranslation = $inlineTranslation;
+    $this->escaper = $escaper;
+    $this->transportBuilder = $transportBuilder;
+    $this->logger = $context->getLogger();
+}
 
-    /**
-     * Send Mail
-     *
-     * @return $this
-     *
-     * @throws LocalizedException
-     * @throws MailException
-     */
-    public function sendMail()
-    {
-        $email = 'tuannguyen190499@gmail.com'; //set receiver mail
-
+    public function sendEmail()
+{
+    try {
         $this->inlineTranslation->suspend();
-        $storeId = $this->getStoreId();
-
-//        /* email template */
-//        $template = $this->scopeConfig->getValue(
-//            self::EMAIL_TEMPLATE,
-//            ScopeInterface::SCOPE_STORE,
-//            $storeId
-//        );
-//
-//        $vars = [
-//            'message_1' => 'CUSTOM MESSAGE STR 1',
-//            'message_2' => 'custom message str 2',
-//            'store' => $this->getStore()
-//        ];
-
-        // set from email
-//        $sender = $this->scopeConfig->getValue(
-//            'email_section/sendmail/sender',
-//            ScopeInterface::SCOPE_STORE,
-//            $this->getStoreId()
-//        );
-        $a = __("xxx");
-        $store = $this->storeManager->getStore();
-        $transport = $this->transportBuilder->setTemplateIdentifier(
-            'notify_cutomer_cancel'
-        )->setTemplateOptions(
-            ['area' => 'frontend', 'store' => $store->getId()]
-        )->addTo(
-            'tuannguyen1904@gmail.com', "Tuandz"
-        )->setTemplateVars([
-            'a' => $a
-        ])->setFrom(
-            'general'
-        )->getTransport();
-
-        try {
-            $transport->sendMessage();
-        } catch (\Exception $exception) {
-            $this->logger->critical($exception->getMessage());
-        }
+        $sender = [
+            'name' => $this->escaper->escapeHtml('Test'),
+            'email' => $this->escaper->escapeHtml('tuannguyen190499@gmail.com'),
+        ];
+        $transport = $this->transportBuilder
+            ->setTemplateIdentifier('notify_customer_cancel')
+            ->setTemplateOptions(
+                [
+                    'area' => \Magento\Framework\App\Area::AREA_FRONTEND,
+                    'store' => \Magento\Store\Model\Store::DEFAULT_STORE_ID,
+                ]
+            )
+            ->setTemplateVars([
+                'templateVar'  => 'My Topic',
+            ])
+            ->setFrom($sender)
+            ->addTo('tuannguyen190499@gmail.com')
+            ->getTransport();
+        $transport->sendMessage();
         $this->inlineTranslation->resume();
-
-        return $this;
+    } catch (\Exception $e) {
+        $this->logger->debug($e->getMessage());
     }
-
-    /*
-     * get Current store id
-     */
-    public function getStoreId()
-    {
-        return $this->storeManager->getStore()->getId();
-    }
-
-    /*
-     * get Current store Info
-     */
-    public function getStore()
-    {
-        return $this->storeManager->getStore();
-    }
+}
 }

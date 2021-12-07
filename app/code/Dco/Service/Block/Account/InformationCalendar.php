@@ -65,7 +65,7 @@ class InformationCalendar extends \Magento\Framework\View\Element\Template
         $locatorId = $this->getLocatorId();
         $date = $this->getDateBooking();
         $time = strtotime($date);
-        $date = date('Y-m-d',$time);
+        $date = date('Y-m-d h:i:s',$time);
         $calendars = $this->calendar->create()->addFieldToFilter('service_id', $serviceId)
             ->addFieldToFilter("locator_id", $locatorId)
             ->addFieldToFilter("date", $date)

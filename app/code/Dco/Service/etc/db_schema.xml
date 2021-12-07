@@ -16,6 +16,7 @@
                 identity="false"  comment="Locator Id"/>
         <column xsi:type="smallint" name="service_id" padding="5" unsigned="true" nullable="false"
                 identity="false"  comment="Service Id"/>
+        <column xsi:type="varchar" name="require" nullable="true" length="255" comment="Require"/>
         <column xsi:type="datetime" name="date" nullable="false" length="32"  comment="Date create"/>
         <column xsi:type="smallint" name="hour" nullable="false" padding="5" unsigned="true" comment="Hour"/>
         <column xsi:type="smallint" name="booking_status" nullable="false" default="0" padding="5" unsigned="true" comment="Hour"/>

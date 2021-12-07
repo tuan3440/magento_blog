@@ -164,6 +164,14 @@
                 </item>
             </argument>
         </column>
+        <column name="require">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="filter" xsi:type="string">text</item>
+                    <item name="label" xsi:type="string" translate="true">Require of customer</item>
+                </item>
+            </argument>
+        </column>
         <column name="hour">
             <argument name="data" xsi:type="array">
                 <item name="options" xsi:type="object">Dco\Service\Model\Source\Hour</item>
