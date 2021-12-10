@@ -20,7 +20,7 @@ $locator = $block->getLocator();
                 <div class="field">
                     <label>Chọn ngày : </label>
                     <input type="text" class="input-text" id="example-date" style="width: auto"
-                           name="date" required="true"/>
+                           name="date" data-validate="{required:true, 'validate-date':true}"/>
                 </div>
                 <div id="slot"></div>
                 <div>
@@ -99,6 +99,7 @@ $locator = $block->getLocator();
         'mage/calendar'
     ], function ($, $t) {
         $('#example-date').calendar({
+            dateFormat: "d/M/yy",
             changeMonth: true,
             changeYear: true,
             showButtonPanel: true,

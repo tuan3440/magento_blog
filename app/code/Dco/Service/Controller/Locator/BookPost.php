@@ -15,6 +15,7 @@ use Magento\Framework\View\Result\PageFactory;
 use Dco\Service\Model\CalendarBooking;
 use Dco\Service\Helper\Data;
 
+
 class BookPost extends \Dco\Service\Controller\Index\Index
 {
     const NUMBER_MAX = 5;
@@ -50,12 +51,13 @@ class BookPost extends \Dco\Service\Controller\Index\Index
             if (!isset($data['id'])) {
                 $customerId = $this->session->getCustomer()->getEntityId();
                 $calendar = $this->calendar;
-                $time = strtotime($data['date']);
-                $newformat = date('Y-m-d', $time);
+//                $time = strtotime($data['date']);
+//                $time = new \DateTime($data['date']);
+//                $newformat = date('d-m-Y', $time);
                 $calendar->setData('customer_id', $customerId);
                 $calendar->setData('service_id', $data['service_id']);
                 $calendar->setData('locator_id', $data['locator_id']);
-                $calendar->setData('date', $newformat);
+                $calendar->setData('date', $data['date']);
                 $calendar->setData('hour', $data['hour']);
                 $calendar->setData('require', $data['require']);
                 $calendar->setData('booking_status', 0);
