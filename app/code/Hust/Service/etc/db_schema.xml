@@ -1,0 +1,215 @@
+<?xml version="1.0"?>
+<schema xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:framework:Setup/Declaration/Schema/etc/schema.xsd">
+    <table name="hust_service" resource="default" engine="innodb" comment="hust_service">
+        <column xsi:type="int" name="service_id" padding="10" unsigned="true" nullable="false" identity="true"
+                comment="Service Id"/>
+        <column xsi:type="varchar" name="name" nullable="false" length="255" default="" comment="Name Service"/>
+        <column xsi:type="varchar" name="image" nullable="false" length="255" comment="Image"/>
+        <column xsi:type="text" name="short_description" nullable="true" comment="Short description"/>
+        <column xsi:type="text" name="content" nullable="true" comment="Content"/>
+        <column xsi:type="int" name="duration" padding="10" unsigned="true" comment="Duration"/>
+        <column xsi:type="boolean" name="is_active" nullable="false" comment="Is Active" default="false"/>
+        <column xsi:type="int" name="position" padding="10" unsigned="true" comment="Position"/>
+        <column xsi:type="timestamp" name="created_at" on_update="false" nullable="false" default="CURRENT_TIMESTAMP"
+                comment="Created At"/>
+        <column xsi:type="timestamp" name="updated_at" on_update="true" nullable="false" default="CURRENT_TIMESTAMP"
+                comment="Updated At"/>
+
+        <constraint xsi:type="primary" referenceId="PRIMARY">
+            <column name="service_id"/>
+        </constraint>
+    </table>
+
+    <table name="hust_service_products" resource="default" engine="innodb" comment="hust_service_products">
+        <column xsi:type="int" name="service_id" padding="10" unsigned="true" nullable="false" identity="false"
+                comment="Service Id"/>
+        <column xsi:type="int" name="product_id" padding="10" unsigned="true" nullable="false" identity="false"
+                comment="Product Id"/>
+        <column xsi:type="int" name="position" padding="10" unsigned="true" nullable="false" identity="false"
+                comment="Sort order on frontend"/>
+
+        <constraint xsi:type="primary" referenceId="PRIMARY">
+            <column name="service_id"/>
+            <column name="product_id"/>
+        </constraint>
+
+        <constraint
+            xsi:type="foreign"
+            referenceId="hust_service_products_hust_service_service_id"
+            table="hust_service_products"
+            column="service_id"
+            referenceTable="hust_service"
+            referenceColumn="service_id"
+            onDelete="CASCADE"
+        />
+        <constraint
+            xsi:type="foreign"
+            referenceId="hust_service_products_catalog_product_entity_product_id"
+            table="hust_service_products"
+            column="product_id"
+            referenceTable="catalog_product_entity"
+            referenceColumn="entity_id"
+            onDelete="CASCADE"
+        />
+    </table>
+
+    <table name="hust_locator" resource="default" engine="innodb" comment="hust_locator">
+        <column xsi:type="int" name="locator_id" padding="10" unsigned="true" nullable="false" identity="true"
+                comment="Locator Id"/>
+        <column xsi:type="varchar" name="name" length="255" nullable="false" comment="Name locator"/>
+        <column xsi:type="varchar" name="code" length="255" nullable="false" comment="Code locator"/>
+        <column xsi:type="varchar" name="address" length="255" nullable="false" comment="Address locator"/>
+        <column xsi:type="varchar" name="city" length="255" nullable="false" comment="City locator"/>
+        <column xsi:type="varchar" name="country" length="255" nullable="false" comment="Country locator"/>
+        <column xsi:type="varchar" name="phone" length="255" nullable="false" comment="Phone locator"/>
+        <column xsi:type="varchar" name="email" length="255" nullable="false" comment="Email locator"/>
+        <column xsi:type="boolean" name="is_active" nullable="false" comment="Is Active" default="false"/>
+        <column xsi:type="timestamp" name="created_at" on_update="false" nullable="false" default="CURRENT_TIMESTAMP"
+                comment="Created At"/>
+        <column xsi:type="timestamp" name="updated_at" on_update="true" nullable="false" default="CURRENT_TIMESTAMP"
+                comment="Updated At"/>
+        <constraint xsi:type="primary" referenceId="PRIMARY">
+            <column name="locator_id"/>
+            <column name="code"/>
+        </constraint>
+
+    </table>
+
+    <table name="hust_service_locator" resource="default" engine="innodb" comment="hust_service_locator">
+        <column xsi:type="int" name="service_id" padding="10" unsigned="true" comment="Service Id"/>
+        <column xsi:type="int" name="locator_id" padding="10" unsigned="true" comment="Locator Id"/>
+        <constraint
+            xsi:type="foreign"
+            referenceId="hust_service_locator_hust_service_service_id"
+            table="hust_service_locator"
+            column="service_id"
+            referenceTable="hust_service"
+            referenceColumn="service_id"
+            onDelete="CASCADE"
+        />
+        <constraint
+            xsi:type="foreign"
+            referenceId="hust_service_locator_hust_locator_locator_id"
+            table="hust_service_locator"
+            column="locator_id"
+            referenceTable="hust_locator"
+            referenceColumn="locator_id"
+            onDelete="CASCADE"
+        />
+
+    </table>
+
+    <table name="hust_service_appreciate" resource="default" engine="innodb" comment="service_appreciate">
+        <column xsi:type="int" name="id" comment="Appreciate Id" unsigned="true" padding="10" nullable="false"
+                identity="true"/>
+        <column xsi:type="int" name="service_id" comment="Service Id" nullable="false" unsigned="true"/>
+        <column xsi:type="int" name="customer_id" comment="Customer Id" nullable="false" unsigned="true"/>
+        <column xsi:type="smallint" name="status" comment="Status" unsigned="true" default="0" nullable="false" />
+        <column xsi:type="text" name="content" comment="Content" />
+        <column xsi:type="timestamp" name="created_at" nullable="false" default="CURRENT_TIMESTAMP"
+                comment="Created At"/>
+
+        <constraint xsi:type="primary" referenceId="PRIMARY">
+            <column name="id"/>
+        </constraint>
+        <constraint
+            xsi:type="foreign"
+            referenceId="hust_service_appreciate_hust_service_service_id"
+            table="hust_service_appreciate"
+            column="service_id"
+            referenceTable="hust_service"
+            referenceColumn="service_id"
+            onDelete="CASCADE"
+        />
+        <constraint
+            xsi:type="foreign"
+            referenceId="hust_service_appreciate_customer_entity_service_id"
+            table="hust_service_appreciate"
+            column="customer_id"
+            referenceTable="customer_entity"
+            referenceColumn="entity_id"
+            onDelete="CASCADE"
+        />
+    </table>
+
+
+    <table name="hust_calendar_booking" resource="default" engine="innodb" comment="calendar_booking">
+        <column xsi:type="int" name="booking_id" comment="Booking Id" unsigned="true" padding="10" nullable="false"
+                identity="true"/>
+        <column xsi:type="int" name="service_id" comment="Service Id" nullable="false" unsigned="true"/>
+        <column xsi:type="int" name="customer_id" comment="Customer Id" nullable="false" unsigned="true"/>
+        <column xsi:type="int" name="locator_id" comment="Customer Id" nullable="false" unsigned="true"/>
+        <column xsi:type="smallint" name="booking_status" comment="Booking Status" unsigned="true" default="0" nullable="false" />
+        <column xsi:type="varchar" name="booking_hour" comment="Hour booking" length="255" nullable="false"/>
+        <column xsi:type="date" name="date" comment="Date select" nullable="false" />
+        <column xsi:type="timestamp" name="created_at" on_update="false" nullable="false" default="CURRENT_TIMESTAMP"
+                comment="Created At"/>
+        <column xsi:type="timestamp" name="updated_at" on_update="true" nullable="false" default="CURRENT_TIMESTAMP"
+                comment="Updated At"/>
+
+        <constraint xsi:type="primary" referenceId="PRIMARY">
+            <column name="booking_id"/>
+        </constraint>
+
+        <constraint
+            xsi:type="foreign"
+            referenceId="hust_calendar_booking_hust_service_service_id"
+            table="hust_calendar_booking"
+            column="service_id"
+            referenceTable="hust_service"
+            referenceColumn="service_id"
+            onDelete="CASCADE"
+        />
+
+        <constraint
+            xsi:type="foreign"
+            referenceId="hust_calendar_booking_hust_locator_locator_id"
+            table="hust_calendar_booking"
+            column="locator_id"
+            referenceTable="hust_locator"
+            referenceColumn="locator_id"
+            onDelete="CASCADE"
+        />
+
+        <constraint
+            xsi:type="foreign"
+            referenceId="hust_calendar_booking_customer_entity_service_id"
+            table="hust_calendar_booking"
+            column="customer_id"
+            referenceTable="customer_entity"
+            referenceColumn="entity_id"
+            onDelete="CASCADE"
+        />
+    </table>
+
+    <table name="hust_booking_info-customer" resource="default" engine="innodb" comment="hust_booking_info-customer">
+        <column xsi:type="int" name="id" comment="Id" unsigned="true" padding="10" nullable="false"
+                identity="true"/>
+        <column xsi:type="int" name="booking_id" comment="Booking Id" nullable="false" unsigned="true"/>
+        <column xsi:type="varchar" name="first_name" comment="First Name" nullable="false" length="255" />
+        <column xsi:type="varchar" name="last_name" comment="Last Name" nullable="false" length="255" />
+        <column xsi:type="int" name="age" comment="Age" nullable="false" unsigned="true"/>
+        <column xsi:type="smallint" name="gender" comment="Gender" nullable="false" />
+        <column xsi:type="varchar" name="number_id" comment="Number id" length="255" nullable="false"/>
+        <column xsi:type="varchar" name="phone" comment="phone" length="255" nullable="false"/>
+        <column xsi:type="varchar" name="email" comment="email" length="255" nullable="false"/>
+        <column xsi:type="varchar" name="address" comment="address" length="255" nullable="false"/>
+
+        <constraint xsi:type="primary" referenceId="PRIMARY">
+            <column name="id"/>
+        </constraint>
+
+        <constraint
+            xsi:type="foreign"
+            referenceId="hust_booking_info-customer_hust_calendar_booking_booking_id"
+            table="hust_booking_info-customer"
+            column="booking_id"
+            referenceTable="hust_calendar_booking"
+            referenceColumn="booking_id"
+            onDelete="CASCADE"
+        />
+
+    </table>
+
+</schema>
