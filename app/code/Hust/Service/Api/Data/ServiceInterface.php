@@ -9,7 +9,7 @@ interface ServiceInterface
     const IMAGE = 'image';
     const SHORT_DESCRIPTION = 'short_description';
     const CONTENT = 'content';
-    const PRICE_SERVICE = 'price_service';
+    const CHARGE = 'charge';
     const IS_ACTIVE = 'is_active';
     const POSITION = 'position';
     const CREATED_AT = 'created_at';
@@ -25,8 +25,8 @@ interface ServiceInterface
     public function setShortDescription($shortDescription);
     public function getContent();
     public function setContent($content);
-    public function getPriceService();
-    public function setPriceService($price);
+    public function getCharge();
+    public function setCharge($price);
     public function getIsActive();
     public function setIsActive($isActive);
     public function getPosition();

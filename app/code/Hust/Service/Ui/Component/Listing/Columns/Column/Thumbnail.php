@@ -1,12 +1,12 @@
 <?php
 
-namespace Dco\Service\Ui\Component\Listing\Columns\Column;
+namespace Hust\Service\Ui\Component\Listing\Columns\Column;
 
 use Magento\Framework\UrlInterface;
 use Magento\Framework\View\Element\UiComponent\ContextInterface;
 use Magento\Framework\View\Element\UiComponentFactory;
 use Magento\Ui\Component\Listing\Columns\Column;
-use Dco\Service\Model\System\UrlResolver;
+use Hust\Service\Model\System\UrlResolver;
 
 class Thumbnail extends Column
 {
@@ -62,3 +62,4 @@ class Thumbnail extends Column
         return $dataSource;
     }
 }
+

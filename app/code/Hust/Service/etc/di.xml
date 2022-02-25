@@ -1,0 +1,19 @@
+<?xml version="1.0"?>
+
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+    <preference for="Hust\Service\Api\ServiceRepositoryInterface" type="Hust\Service\Model\Repository\ServiceRepository"/>
+    <preference for="Hust\Service\Api\Data\ServiceInterface" type="Hust\Service\Model\Service"/>
+    <preference for="Hust\Service\Api\LocatorRepositoryInterface" type="Hust\Service\Model\Repository\LocatorRepository"/>
+    <preference for="Hust\Service\Api\Data\LocatorInterface" type="Hust\Service\Model\Locator"/>
+    <preference for="Hust\Service\Api\BookingRepositoryInterface" type="Hust\Service\Model\Repository\LocatorRepository"/>
+    <preference for="Hust\Service\Api\Data\BookingInterface" type="Hust\Service\Model\Booking"/>
+
+    <type name="Magento\Framework\View\Element\UiComponent\DataProvider\CollectionFactory">
+        <arguments>
+            <argument name="collections" xsi:type="array">
+                <item name="service_listing_data_source" xsi:type="string">Hust\Service\Model\ResourceModel\Service\Grid</item>
+            </argument>
+        </arguments>
+    </type>
+
+</config>

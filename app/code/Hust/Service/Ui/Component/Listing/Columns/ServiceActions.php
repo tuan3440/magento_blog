@@ -1,14 +1,13 @@
 <?php
 
-namespace Dco\Service\Ui\Component\Listing\Columns\Column;
+namespace Hust\Service\Ui\Component\Listing\Columns;
 
 use Magento\Framework\UrlInterface;
 use Magento\Framework\View\Element\UiComponent\ContextInterface;
 use Magento\Framework\View\Element\UiComponentFactory;
 use Magento\Ui\Component\Listing\Columns\Column;
-use Dco\Service\Model\System\UrlResolver;
 
-class Thumbnail extends Column
+class ServiceActions extends Column
 {
     /**
      * @var UrlInterface
@@ -16,17 +15,11 @@ class Thumbnail extends Column
     protected $urlBuilder;
 
     /**
-     * @var UrlResolver
-     */
-    protected $urlResolver;
-
-    /**
      * Constructor
      *
      * @param ContextInterface $context
      * @param UiComponentFactory $uiComponentFactory
      * @param UrlInterface $urlBuilder
-     * @param UrlResolver $urlResolver
      * @param array $components
      * @param array $data
      */
@@ -34,12 +27,10 @@ class Thumbnail extends Column
         ContextInterface $context,
         UiComponentFactory $uiComponentFactory,
         UrlInterface $urlBuilder,
-        UrlResolver $urlResolver,
         array $components = [],
         array $data = []
     ) {
         $this->urlBuilder = $urlBuilder;
-        $this->urlResolver = $urlResolver;
         parent::__construct($context, $uiComponentFactory, $components, $data);
     }
 
@@ -52,13 +43,20 @@ class Thumbnail extends Column
     public function prepareDataSource(array $dataSource)
     {
         if (isset($dataSource['data']['items'])) {
-            $fieldName = $this->getData('name');
             foreach ($dataSource['data']['items'] as &$item) {
-                if (!empty($item['image'])) {
-                    $item[$fieldName . '_src'] = $this->urlResolver->getImageUrlByName($item['image']);
-                }
+                $name = $this->getData('name');
+                $item[$name]['edit'] = [
+                    'href' => $this->urlBuilder->getUrl(
+                        'booking/service/edit',
+                        ['id' => $item['service_id']]
+                    ),
+                    'label' => __('Edit')
+                ];
             }
         }
+
+
         return $dataSource;
     }
 }
+

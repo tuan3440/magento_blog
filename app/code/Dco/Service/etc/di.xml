@@ -31,4 +31,7 @@
             </argument>
         </arguments>
     </type>
+    <type name="Magento\Theme\Block\Html\Topmenu">
+        <plugin name="aureatelabs-non-category-link" type="Dco\Service\Plugin\NonCategoryLink" />
+    </type>
 </config>

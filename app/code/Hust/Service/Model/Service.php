@@ -74,14 +74,14 @@ class Service extends AbstractModel implements IdentityInterface, ServiceInterfa
         return $this;
     }
 
-    public function getPriceService()
+    public function getCharge()
     {
-        return $this->getData(ServiceInterface::PRICE_SERVICE);
+        return $this->getData(ServiceInterface::CHARGE);
     }
 
-    public function setPriceService($price)
+    public function setCharge($price)
     {
-        $this->setData(ServiceInterface::PRICE_SERVICE, $price);
+        $this->setData(ServiceInterface::CHARGE, $price);
         return $this;
     }
 
