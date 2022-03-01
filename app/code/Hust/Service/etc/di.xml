@@ -16,4 +16,23 @@
         </arguments>
     </type>
 
+    <virtualType name="Hust\Service\Model\ImageUpload" type="Magento\Catalog\Model\ImageUploader">
+        <arguments>
+            <argument name="baseTmpPath" xsi:type="const">Hust\Service\Model\System\UrlResolver::DIRECTORY_MEDIA</argument>
+            <argument name="basePath" xsi:type="const">Hust\Service\Model\System\UrlResolver::DIRECTORY_TMP_MEDIA</argument>
+            <argument name="allowedExtensions" xsi:type="array">
+                <item name="jpg" xsi:type="string">jpg</item>
+                <item name="jpeg" xsi:type="string">jpeg</item>
+                <item name="gif" xsi:type="string">gif</item>
+                <item name="png" xsi:type="string">png</item>
+            </argument>
+        </arguments>
+    </virtualType>
+
+    <type name="Hust\Service\Controller\Adminhtml\Service\Uploader">
+        <arguments>
+            <argument name="imageUploader" xsi:type="object">Hust\Service\Model\ImageUpload</argument>
+        </arguments>
+    </type>
+
 </config>

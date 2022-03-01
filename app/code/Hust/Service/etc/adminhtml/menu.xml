@@ -6,7 +6,7 @@
         <add id="Hust_Service::hust_service" title="Services" module="Hust_Service" sortOrder="50" parent="Hust_Service::booking_system" action="booking/service" resource="Hust_Service::hust_service" />
         <add id="Hust_Service::hust_locator" title="Locators" module="Hust_Service" sortOrder="60" action="booking/locator" parent="Hust_Service::booking_system" resource="Hust_Service::hust_locator" />
         <add id="Hust_Service::hust_booking" title="Booking" module="Hust_Service" sortOrder="60" action="booking/booking" parent="Hust_Service::booking_system" resource="Hust_Service::hust_booking" />
-        <add id="Hust_Service::hust_comment" title="Comment" module="Hust_Service" sortOrder="60" action="booking/comment" parent="Hust_Service::booking_system" resource="Hust_Service::hust_comment" />
+        <add id="Hust_Service::hust_employee" title="Employee" module="Hust_Service" sortOrder="40" action="booking/employee" parent="Hust_Service::booking_system" resource="Hust_Service::hust_employee" />
         <add id="Hust_Service::hust_report" title="Report" module="Hust_Service" sortOrder="60" action="booking/report" parent="Hust_Service::booking_system" resource="Hust_Service::hust_report" />
     </menu>
 </config>

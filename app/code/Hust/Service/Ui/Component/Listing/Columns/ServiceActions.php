@@ -48,7 +48,7 @@ class ServiceActions extends Column
                 $item[$name]['edit'] = [
                     'href' => $this->urlBuilder->getUrl(
                         'booking/service/edit',
-                        ['id' => $item['service_id']]
+                        ['service_id' => $item['service_id']]
                     ),
                     'label' => __('Edit')
                 ];

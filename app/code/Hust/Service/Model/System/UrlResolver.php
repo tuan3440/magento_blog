@@ -8,7 +8,9 @@ use Magento\Framework\UrlInterface;
 
 class UrlResolver
 {
-    const DIRECTORY_MEDIA = 'hust/service';
+    public const DIRECTORY_MEDIA = 'hust/service';
+
+    public const DIRECTORY_TMP_MEDIA = 'hust/service/tmp';
 
     /**
      * @var WriteInterface

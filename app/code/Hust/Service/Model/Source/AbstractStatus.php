@@ -5,7 +5,7 @@ namespace Hust\Service\Model\Source;
 use Magento\Framework\Data\OptionSourceInterface;
 use Magento\Framework\Option\ArrayInterface;
 
-abstract class AbstractStatus implements OptionSourceInterface, ArrayInterface
+class AbstractStatus implements OptionSourceInterface, ArrayInterface
 {
     const DISABLED = 0;
     const ENABLED = 1;
