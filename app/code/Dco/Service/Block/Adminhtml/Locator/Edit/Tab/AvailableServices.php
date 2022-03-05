@@ -187,6 +187,7 @@ class AvailableServices extends Extended
         return '';
     }
 
+
     protected function _getSelectedServices()
     {
         $locator = $this->getLocator();

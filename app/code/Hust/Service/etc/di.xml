@@ -12,6 +12,7 @@
         <arguments>
             <argument name="collections" xsi:type="array">
                 <item name="service_listing_data_source" xsi:type="string">Hust\Service\Model\ResourceModel\Service\Grid</item>
+                <item name="locator_listing_data_source" xsi:type="string">Hust\Service\Model\ResourceModel\Locator\Grid</item>
             </argument>
         </arguments>
     </type>

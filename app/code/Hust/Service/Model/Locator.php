@@ -5,14 +5,17 @@ namespace Hust\Service\Model;
 use Magento\Framework\Model\AbstractModel;
 use Magento\Framework\DataObject\IdentityInterface;
 use Hust\Service\Api\Data\LocatorInterface;
+use Magento\Framework\Model\Context;
 
 class Locator extends AbstractModel implements IdentityInterface, LocatorInterface
 {
     const CACHE_TAG = 'hust_locator';
-    protected function __construct()
+
+    protected function _construct()
     {
         $this->_init('Hust\Service\Model\ResourceModel\Locator');
     }
+
     public function getIdentities()
     {
         return [self::CACHE_TAG . '_' . $this->getId()];
@@ -20,91 +23,115 @@ class Locator extends AbstractModel implements IdentityInterface, LocatorInterfa
 
     public function getLocatorId()
     {
-        // TODO: Implement getLocatorId() method.
+        return $this->getData(LocatorInterface::LOCATOR_ID);
+
     }
 
     public function setLocatorId($locatorId)
     {
-        // TODO: Implement setLocatorId() method.
+        $this->setData(LocatorInterface::LOCATOR_ID, $locatorId);
+        return $this;
     }
 
     public function getName()
     {
-        // TODO: Implement getName() method.
+        return $this->getData(LocatorInterface::NAME);
     }
 
     public function setName($name)
     {
-        // TODO: Implement setName() method.
+        $this->setData(LocatorInterface::NAME, $name);
+        return $this;
     }
 
     public function getCode()
     {
-        // TODO: Implement getCode() method.
+        return $this->getData(LocatorInterface::CODE);
     }
 
     public function setCode($code)
     {
-        // TODO: Implement setCode() method.
+        $this->setData(LocatorInterface::CODE, $code);
+        return $this;
     }
 
     public function getAddress()
     {
-        // TODO: Implement getAddress() method.
+        return $this->getData(LocatorInterface::ADDRESS);
     }
 
     public function setAddress($address)
     {
-        // TODO: Implement setAddress() method.
+        $this->setData(LocatorInterface::ADDRESS, $address);
+        return $this;
     }
 
     public function getCity()
     {
-        // TODO: Implement getCity() method.
+        return $this->getData(LocatorInterface::CITY);
     }
 
     public function setCity($city)
     {
-        // TODO: Implement setCity() method.
+        $this->setData(LocatorInterface::CITY, $city);
+        return $this;
     }
 
     public function getCountry()
     {
-        // TODO: Implement getCountry() method.
+        return $this->getData(LocatorInterface::COUNTRY);
     }
 
     public function setCountry($country)
     {
-        // TODO: Implement setCountry() method.
+        $this->setData(LocatorInterface::COUNTRY, $country);
+        return $this;
     }
 
     public function getPhone()
     {
-        // TODO: Implement getPhone() method.
+        return $this->getData(LocatorInterface::PHONE);
     }
 
     public function setPhone($phone)
     {
-        // TODO: Implement setPhone() method.
+        $this->setData(LocatorInterface::PHONE, $phone);
+        return $this;
     }
 
     public function getEmail()
     {
-        // TODO: Implement getEmail() method.
+        return $this->getData(LocatorInterface::EMAIL);
     }
 
     public function setEmail($email)
     {
-        // TODO: Implement setEmail() method.
+        $this->setData(LocatorInterface::EMAIL, $email);
+        return $this;
     }
 
     public function getIsActive()
     {
-        // TODO: Implement getIsActive() method.
+        return $this->getData(LocatorInterface::IS_ACTIVE);
     }
 
     public function setIsActive($isActive)
     {
-        // TODO: Implement setIsActive() method.
+        $this->setData(LocatorInterface::IS_ACTIVE, $isActive);
+        return $this;
+    }
+
+    public function getServicesWithPosition(\Hust\Service\Model\Locator $object)
+    {
+        $tbl = $this->_resource->getTable('hust_service_locator');
+        $select = $this->_resource->getConnection()->select()->from(
+            $tbl,
+            ['service_id']
+        )
+            ->where(
+                'locator_id = ?',
+                (int) $object->getId()
+            );
+        return $this->_resource->getConnection()->fetchAll($select);
     }
 }

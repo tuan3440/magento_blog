@@ -1,8 +1,8 @@
 <?php
 
-namespace Hust\Service\Controller\Adminhtml\Service;
+namespace Hust\Service\Controller\Adminhtml\Locator;
 
-use Hust\Service\Model\Source\ServiceStatus;
+use Hust\Service\Model\Source\LocatorStatus;
 
 class MassInactivate extends AbstractMassAction
 {
@@ -10,11 +10,11 @@ class MassInactivate extends AbstractMassAction
      * @param $service
      * @return \Magento\Framework\Controller\Result\Redirect
      */
-    protected function itemAction($service)
+    protected function itemAction($locator)
     {
         try {
-            $service->setIsActive(ServiceStatus::DISABLED);
-            $this->getRepository()->save($service);
+            $locator->setIsActive(LocatorStatus::DISABLED);
+            $this->getRepository()->save($locator);
         } catch (\Exception $e) {
             $this->getMessageManager()->addErrorMessage($e->getMessage());
         }

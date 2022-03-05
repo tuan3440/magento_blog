@@ -53,6 +53,4 @@ abstract class Service extends Action
     {
         return $this->serviceRegistry;
     }
-
-
 }

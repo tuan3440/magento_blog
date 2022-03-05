@@ -3,30 +3,30 @@
 <listing xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Ui:etc/ui_configuration.xsd">
     <argument name="data" xsi:type="array">
         <item name="js_config" xsi:type="array">
-            <item name="provider" xsi:type="string">service_listing.service_listing_data_source</item>
-            <item name="deps" xsi:type="string">service_listing.service_listing_data_source</item>
+            <item name="provider" xsi:type="string">locator_listing.locator_listing_data_source</item>
+            <item name="deps" xsi:type="string">locator_listing.locator_listing_data_source</item>
         </item>
-        <item name="spinner" xsi:type="string">hust_service_columns</item>
+        <item name="spinner" xsi:type="string">hust_locator_columns</item>
         <item name="buttons" xsi:type="array">
             <item name="add" xsi:type="array">
                 <item name="name" xsi:type="string">add</item>
-                <item name="label" xsi:type="string" translate="true">Add Service</item>
+                <item name="label" xsi:type="string" translate="true">Add Locator</item>
                 <item name="class" xsi:type="string">primary</item>
-                <item name="url" xsi:type="string">*/service/newAction</item>
+                <item name="url" xsi:type="string">*/locator/newAction</item>
             </item>
         </item>
     </argument>
-    <dataSource name="service_listing_data_source">
+    <dataSource name="locator_listing_data_source">
         <argument name="dataProvider" xsi:type="configurableObject">
             <argument name="class" xsi:type="string">Magento\Framework\View\Element\UiComponent\DataProvider\DataProvider</argument>
-            <argument name="name" xsi:type="string">service_listing_data_source</argument>
-            <argument name="primaryFieldName" xsi:type="string">service_id</argument>
-            <argument name="requestFieldName" xsi:type="string">service_id</argument>
+            <argument name="name" xsi:type="string">locator_listing_data_source</argument>
+            <argument name="primaryFieldName" xsi:type="string">locator_id</argument>
+            <argument name="requestFieldName" xsi:type="string">locator_id</argument>
             <argument name="data" xsi:type="array">
                 <item name="config" xsi:type="array">
                     <item name="update_url" xsi:type="url" path="mui/index/render"/>
                     <item name="storageConfig" xsi:type="array">
-                        <item name="indexField" xsi:type="string">service_id</item>
+                        <item name="indexField" xsi:type="string">locator_id</item>
                     </item>
                 </item>
             </argument>
@@ -78,7 +78,7 @@
                     <item name="config" xsi:type="array">
                         <item name="type" xsi:type="string">activate</item>
                         <item name="label" xsi:type="string" translate="true">Activate</item>
-                        <item name="url" xsi:type="url" path="*/service/massActivate">
+                        <item name="url" xsi:type="url" path="*/locator/massActivate">
                             <param name="action">activate</param>
                         </item>
                         <item name="confirm" xsi:type="array">
@@ -93,7 +93,7 @@
                     <item name="config" xsi:type="array">
                         <item name="type" xsi:type="string">inactivate</item>
                         <item name="label" xsi:type="string" translate="true">Inactivate</item>
-                        <item name="url" xsi:type="url" path="*/service/massInactivate">
+                        <item name="url" xsi:type="url" path="*/locator/massInactivate">
                             <param name="action">inactivate</param>
                         </item>
                         <item name="confirm" xsi:type="array">
@@ -108,7 +108,7 @@
                     <item name="config" xsi:type="array">
                         <item name="type" xsi:type="string">delete</item>
                         <item name="label" xsi:type="string" translate="true">Delete</item>
-                        <item name="url" xsi:type="url" path="*/service/massDelete">
+                        <item name="url" xsi:type="url" path="*/locator/massDelete">
                             <param name="action">delete</param>
                         </item>
                         <item name="confirm" xsi:type="array">
@@ -121,20 +121,20 @@
         </massaction>
         <paging name="listing_paging"/>
     </listingToolbar>
-    <columns name="hust_service_columns">
+    <columns name="hust_locator_columns">
         <argument name="data" xsi:type="array">
             <item name="config" xsi:type="array">
                 <item name="editorConfig" xsi:type="array">
-                    <item name="indexField" xsi:type="string">service_id</item>
+                    <item name="indexField" xsi:type="string">locator_id</item>
                     <item name="enabled" xsi:type="boolean">true</item>
-                    <item name="selectProvider" xsi:type="string">service_listing.service_listing.hust_service_columns.ids</item>
+                    <item name="selectProvider" xsi:type="string">locator_listing.locator_listing.hust_locator_columns.ids</item>
                     <item name="clientConfig" xsi:type="array">
                         <item name="validateBeforeSave" xsi:type="boolean">false</item>
                     </item>
                 </item>
                 <item name="childDefaults" xsi:type="array">
                     <item name="fieldAction" xsi:type="array">
-                        <item name="provider" xsi:type="string">service_listing.service_listing.hust_service_columns.actions</item>
+                        <item name="provider" xsi:type="string">service_listing.service_listing.hust_locator_columns.actions</item>
                         <item name="target" xsi:type="string">applyAction</item>
                         <item name="params" xsi:type="array">
                             <item name="0" xsi:type="string">edit</item>
@@ -151,12 +151,12 @@
                 <item name="config" xsi:type="array">
                     <item name="resizeEnabled" xsi:type="boolean">false</item>
                     <item name="resizeDefaultWidth" xsi:type="string">10</item>
-                    <item name="indexField" xsi:type="string">service_id</item>
+                    <item name="indexField" xsi:type="string">locator_id</item>
                 </item>
             </argument>
         </selectionsColumn>
 
-        <column name="service_id">
+        <column name="locator_id">
             <argument name="data" xsi:type="array">
                 <item name="config" xsi:type="array">
                     <item name="filter" xsi:type="string">textRange</item>
@@ -170,39 +170,37 @@
             <argument name="data" xsi:type="array">
                 <item name="config" xsi:type="array">
                     <item name="filter" xsi:type="string">text</item>
-                    <item name="label" xsi:type="string" translate="true">Name Service</item>
+                    <item name="label" xsi:type="string" translate="true">Name Locator</item>
                     <item name="sortOrder" xsi:type="number">20</item>
                 </item>
             </argument>
         </column>
 
-        <column name="image" class="Hust\Service\Ui\Component\Listing\Columns\Column\Thumbnail">
+        <column name="code">
             <argument name="data" xsi:type="array">
                 <item name="config" xsi:type="array">
-                    <item name="component" xsi:type="string">Magento_Ui/js/grid/columns/thumbnail</item>
-                    <item name="sortable" xsi:type="boolean">false</item>
-                    <item name="altField" xsi:type="string">name</item>
-                    <item name="label" xsi:type="string" translate="true">Thumbnail</item>
+                    <item name="filter" xsi:type="string">text</item>
+                    <item name="label" xsi:type="string" translate="true">Code</item>
                     <item name="sortOrder" xsi:type="number">30</item>
                 </item>
             </argument>
         </column>
 
-        <column name="charge">
+        <column name="address">
             <argument name="data" xsi:type="array">
                 <item name="config" xsi:type="array">
                     <item name="filter" xsi:type="string">text</item>
-                    <item name="label" xsi:type="string" translate="true">Charge ($)</item>
+                    <item name="label" xsi:type="string" translate="true">Address</item>
                     <item name="sortOrder" xsi:type="number">40</item>
                 </item>
             </argument>
         </column>
 
-        <column name="position">
+        <column name="phone">
             <argument name="data" xsi:type="array">
                 <item name="config" xsi:type="array">
                     <item name="filter" xsi:type="string">text</item>
-                    <item name="label" xsi:type="string" translate="true">Position</item>
+                    <item name="label" xsi:type="string" translate="true">Phone</item>
                     <item name="sortOrder" xsi:type="number">50</item>
                 </item>
             </argument>
@@ -220,7 +218,7 @@
                     <item name="dataType" xsi:type="string">select</item>
                     <item name="sortOrder" xsi:type="number">60</item>
                 </item>
-                <item name="options" xsi:type="object">Hust\Service\Model\Source\ServiceStatus</item>
+                <item name="options" xsi:type="object">Hust\Service\Model\Source\LocatorStatus</item>
             </argument>
         </column>
 
@@ -248,12 +246,12 @@
             </argument>
         </column>
 
-        <actionsColumn name="actions" class="Hust\Service\Ui\Component\Listing\Columns\ServiceActions">
+        <actionsColumn name="actions" class="Hust\Service\Ui\Component\Listing\Columns\LocatorActions">
             <argument name="data" xsi:type="array">
                 <item name="config" xsi:type="array">
                     <item name="resizeEnabled" xsi:type="boolean">false</item>
                     <item name="resizeDefaultWidth" xsi:type="string">107</item>
-                    <item name="indexField" xsi:type="string">service_id</item>
+                    <item name="indexField" xsi:type="string">locator_id</item>
                     <item name="sortOrder" xsi:type="number">99</item>
                 </item>
             </argument>

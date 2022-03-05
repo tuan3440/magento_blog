@@ -147,6 +147,7 @@
             referenceColumn="entity_id"
             onDelete="CASCADE"
         />
+
     </table>
 
     <table name="hust_booking_customer" resource="default" engine="innodb" comment="hust_booking_customer">
@@ -169,6 +170,70 @@
             xsi:type="foreign"
             referenceId="hust_booking_customer_hust_booking_booking_id"
             table="hust_booking_customer"
+            column="booking_id"
+            referenceTable="hust_booking"
+            referenceColumn="booking_id"
+            onDelete="CASCADE"
+        />
+    </table>
+
+    <table name="hust_employee" resource="default" engine="innodb" comment="hust_employee">
+        <column xsi:type="int" name="employee_id" comment="Id" unsigned="true" padding="10" nullable="false"
+                identity="true"/>
+        <column xsi:type="varchar" name="image" nullable="false" length="255" comment="Image"/>
+        <column xsi:type="varchar" name="first_name" comment="First Name" nullable="false" length="255" />
+        <column xsi:type="varchar" name="last_name" comment="Last Name" nullable="false" length="255" />
+        <column xsi:type="smallint" name="gender" comment="Gender" nullable="false" />
+        <column xsi:type="date" name="date_of_birth" comment="Date of birth" nullable="true" />
+        <column xsi:type="varchar" name="address" comment="Address" nullable="true" length="255" />
+        <column xsi:type="text" name="description" comment="Description" nullable="true" />
+        <column xsi:type="varchar" name="phone" comment="phone" length="255" nullable="false"/>
+
+        <constraint xsi:type="primary" referenceId="PRIMARY">
+            <column name="employee_id"/>
+        </constraint>
+    </table>
+
+    <table name="hust_employee_service" resource="default" engine="innodb" comment="hust_employee_service">
+        <column xsi:type="int" name="employee_id" padding="10" unsigned="true" comment="Employee Id"/>
+        <column xsi:type="int" name="service_id" padding="10" unsigned="true" comment="Service Id"/>
+        <constraint
+            xsi:type="foreign"
+            referenceId="hust_employee_service_hust_service_service_id"
+            table="hust_employee_service"
+            column="service_id"
+            referenceTable="hust_service"
+            referenceColumn="service_id"
+            onDelete="CASCADE"
+        />
+        <constraint
+            xsi:type="foreign"
+            referenceId="hust_employee_service_hust_employee_employee_id"
+            table="hust_employee_service"
+            column="employee_id"
+            referenceTable="hust_employee"
+            referenceColumn="employee_id"
+            onDelete="CASCADE"
+        />
+
+    </table>
+
+    <table name="hust_booking_employee" resource="default" engine="innodb" comment="hust_booking_employee">
+        <column xsi:type="int" name="employee_id" padding="10" unsigned="true" comment="Employee Id"/>
+        <column xsi:type="int" name="booking_id" padding="10" unsigned="true" comment="Booking Id"/>
+        <constraint
+            xsi:type="foreign"
+            referenceId="hust_booking_employee_hust_employee_employee_id"
+            table="hust_booking_employee"
+            column="employee_id"
+            referenceTable="hust_employee"
+            referenceColumn="employee_id"
+            onDelete="CASCADE"
+        />
+        <constraint
+            xsi:type="foreign"
+            referenceId="hust_booking_employee_hust_booking_booking_id"
+            table="hust_booking_employee"
             column="booking_id"
             referenceTable="hust_booking"
             referenceColumn="booking_id"
