@@ -1,0 +1,892 @@
+.click-and-collect {
+    bottom: 0;
+    left: 0;
+    width: 100%;
+}
+.click-and-collect .title {
+    padding: 15px 15px;
+    font-family: 'Roboto Condensed',sans-serif;
+    border: 1px solid #014c9d;
+    font-size: 14px;
+    color: #014c9d;
+    background: #ffffff;
+    border-radius: 0;
+    box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
+    line-height: 25px;
+    display: block;
+    width: 100%;
+    position: relative;
+    max-width: 300px;
+}
+.click-and-collect .title strong {
+    font-size: 14px;
+    font-weight: 700;
+    text-transform: uppercase;
+    cursor: pointer;
+    padding-right: 33px;
+}
+.click-and-collect #click-and-collect-heading:after{
+    content: '\e622';
+    font-family: 'luma-icons';
+    position: absolute;
+    color: #014c9d;
+    right: 15px;
+    top: 15px;
+    margin: 0;
+}
+.click-and-collect.active #click-and-collect-heading:after{
+    content: '\e621';
+}
+.click-and-collect .content{
+    padding: 15px 15px;
+    border: 1px solid #014c9d;
+    border-radius: 0;
+    box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
+}
+.click-and-collect .title strong .text-two {
+    font-size: 10px;
+    font-style: italic;
+    color: #ec0f23;
+    margin-left: 10px;
+    vertical-align: middle;
+}
+.click-and-collect .warehouse {
+    margin-top: 10px;
+    color: #282828;
+    position: relative;
+}
+.click-and-collect .warehouse .store-info {
+    font-weight: 700;
+}
+.click-and-collect .warehouse .store-info .store-name .status.success:before{
+    content: '\f00c';
+    font-family: 'Font Awesome 5 Pro';
+    color: #3e7f16;
+    width: 25px;
+    height: 25px;
+    display: inline-block;
+    margin-right: 10px;
+    font-size: 16px;
+}
+.click-and-collect .warehouse .store-info .store-name .status.error:before{
+    content: '\f00d';
+    font-family: 'Font Awesome 5 Pro';
+    color: #ec0f23;
+    width: 25px;
+    height: 25px;
+    display: inline-block;
+    font-size: 18px;
+    margin-right: 10px;
+}
+.click-and-collect .warehouse .store-info .store-name .store-title {
+    font-size: 16px;
+}
+.click-and-collect .warehouse .store-info .store-available {
+    margin-left: 35px;
+}
+.click-and-collect .warehouse .store-info .store-available .available {
+    color: #3e7f16;
+}
+.click-and-collect .warehouse .store-info .store-available .unavailable {
+    color: #ec0f23;
+}
+.click-and-collect .warehouse .store-address .address {
+    display: flex;
+}
+.click-and-collect .warehouse .store-address .address .full-address {
+    margin-left: 10px;
+}
+.click-and-collect .warehouse .store-address .address:before{
+    content: '\f3c5';
+    font-family: 'Font Awesome 5 Pro';
+    color: #333333;
+    width: 25px;
+    height: 25px;
+    display: inline-block;
+    margin-right: 6px;
+    font-size: 18px;
+}
+.click-and-collect .warehouse .store-hours .view-store-hours:before{
+    content: '\f494';
+    font-family: 'Font Awesome 5 Pro';
+    color: #333333;
+    width: 25px;
+    height: 25px;
+    display: inline-block;
+    margin-right: 9px;
+    font-size: 14px;
+}
+.click-and-collect .warehouse .store-phone .view-store-phone:before{
+    content: '\f095';
+    font-family: 'Font Awesome 5 Pro';
+    color: #333333;
+    width: 25px;
+    height: 25px;
+    display: inline-block;
+    margin-right: 6px;
+    font-size: 16px;
+}
+.click-and-collect .warehouse .store-email .view-store-email:before{
+    content: '\f0e0';
+    font-family: 'Font Awesome 5 Pro';
+    color: #333333;
+    width: 25px;
+    height: 25px;
+    display: inline-block;
+    margin-right: 6px;
+    font-size: 16px;
+}
+.click-and-collect #block-click-and-collect .stores .warehouse {
+    padding: 15px 15px;
+    border: 1px solid #014c9d;
+    border-radius: 0;
+    box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
+    line-height: 25px;
+}
+.click-and-collect #block-click-and-collect .stores .warehouse .store-info {
+    font-weight: 700;
+}
+.click-and-collect #block-click-and-collect .stores .warehouse .store-info .store-name .status.success:before{
+    content: '\f00c';
+    font-family: 'Font Awesome 5 Pro';
+    color: #3e7f16;
+    width: 25px;
+    height: 25px;
+    display: inline-block;
+    margin-right: 10px;
+    font-size: 16px;
+}
+.click-and-collect #block-click-and-collect .stores .warehouse .store-info .store-name .status.error:before{
+    content: '\f00d';
+    font-family: 'Font Awesome 5 Pro';
+    color: #ec0f23;
+    width: 25px;
+    height: 25px;
+    display: inline-block;
+    font-size: 18px;
+    margin-right: 10px;
+}
+.click-and-collect #block-click-and-collect .stores .warehouse .store-info .store-name .store-title {
+    font-size: 16px;
+}
+.click-and-collect #block-click-and-collect .stores .warehouse .store-info .store-available {
+    margin-left: 35px;
+}
+.click-and-collect #block-click-and-collect .stores .warehouse .store-info .store-available .available {
+    color: #3e7f16;
+}
+.click-and-collect #block-click-and-collect .stores .warehouse .store-info .store-available .unavailable {
+    color: #ec0f23;
+}
+.click-and-collect #block-click-and-collect .stores .warehouse .store-address .address {
+    display: flex;
+}
+.click-and-collect #block-click-and-collect .stores .warehouse .store-address .address .full-address {
+    margin-left: 4px;
+}
+.click-and-collect #block-click-and-collect .stores .warehouse .store-address .address:before{
+    content: '\f3c5';
+    font-family: 'Font Awesome 5 Pro';
+    color: #333333;
+    width: 25px;
+    height: 25px;
+    display: inline-block;
+    margin-right: 6px;
+    font-size: 18px;
+}
+.click-and-collect #block-click-and-collect .stores .warehouse .store-hours .view-store-hours:before{
+    content: '\f494';
+    font-family: 'Font Awesome 5 Pro';
+    color: #333333;
+    width: 25px;
+    height: 25px;
+    display: inline-block;
+    margin-right: 9px;
+    font-size: 14px;
+}
+.click-and-collect #block-click-and-collect .stores .warehouse .store-phone .view-store-phone:before{
+    content: '\f095';
+    font-family: 'Font Awesome 5 Pro';
+    color: #333333;
+    width: 25px;
+    height: 25px;
+    display: inline-block;
+    margin-right: 7px;
+    font-size: 16px;
+}
+.click-and-collect #block-click-and-collect .stores .warehouse .store-email .view-store-email:before{
+    content: '\f0e0';
+    font-family: 'Font Awesome 5 Pro';
+    color: #333333;
+    width: 25px;
+    height: 25px;
+    display: inline-block;
+    margin-right: 7px;
+    font-size: 16px;
+}
+.click-and-collect .store-hours .view-store-hours .hours-list {
+    overflow: hidden;
+    display: none;
+}
+.click-and-collect .store-hours .view-store-hours .hours-list .item {
+    clear: both;
+    margin-left: 35px;
+}
+.click-and-collect .store-hours .view-store-hours .hours-list .item .day {
+    float: left;
+    font-weight: 700;
+}
+.click-and-collect .store-hours .view-store-hours .hours-list .item .time {
+    float: right;
+}
+.click-and-collect .store-hours .view-store-hours .hours-list .item .day:after {
+    content: ':';
+}
+.click-and-collect .view-store-hours-link {
+    text-decoration:none;
+}
+.click-and-collect .view-store-hours-link:after {
+    content: '\e622';
+    font-family: 'luma-icons';
+    position: absolute;
+    color: #014c9d;
+    margin: 0;
+    margin-left: 5px;
+}
+.click-and-collect .view-store-hours-link.active:after {
+    content: '\e621';
+}
+.click-and-collect .store-distance {
+    color: #ec0f23;
+    font-size: 22px;
+    float: right;
+}
+.click-and-collect .store-actions {
+    position: absolute;
+    top: 130px;
+    right: 15px;
+    transform: translateY(-50%);
+}
+.click-and-collect .warehouse-show-more {
+    text-align: center;
+    margin-top: 20px;
+}
+.click-and-collect .warehouse-show-more .btn-show-more {
+    width: 100%;
+}
+.cart-click-and-collect {
+    margin-top: 20px;
+    width: 100%;
+}
+.cart-click-and-collect .title strong span{
+    font-family: 'Roboto Condensed',sans-serif;
+    font-size: 16px;
+    color: #014c9d;
+}
+.cart-click-and-collect .content .button-actions {
+    margin-top: 10px;
+}
+.cart-click-and-collect .content .button-actions button.action.primary span {
+    display: block;
+}
+.cart-click-and-collect .content .button-actions .btn-deliver-to-door {
+    width: 119px !important;
+}
+.cart-click-and-collect .content .button-actions .btn-click-and-collect {
+    width: 125px !important;
+}
+.cart-click-and-collect .content .button-actions .btn-deliver-to-door .delivery {
+    font-size: 12px;
+}
+.cart-click-and-collect .content .button-actions .btn-deliver-to-door .deliver-to-door {
+    font-size: 10px;
+    text-transform: capitalize;
+}
+.cart-click-and-collect .content .button-actions .btn-click-and-collect .click-and-collect {
+    font-size: 12px;
+}
+.cart-click-and-collect .content .button-actions .btn-click-and-collect .store-pick-up {
+    font-size: 10px;
+    text-transform: capitalize;
+}
+.cart-click-and-collect #block-cart-click-and-collect {
+    display: none;
+    margin-top: 15px;
+}
+.cart-click-and-collect .content .button-actions .btn-click-and-collect.active{
+    background: #006bb4;
+    border: 1px solid #006bb4;
+    color: #fff;
+}
+.cart-click-and-collect .warehouse {
+    margin-top: 10px;
+    color: #282828;
+    position: relative;
+}
+.cart-click-and-collect .warehouse .store-info {
+    font-weight: 700;
+}
+.cart-click-and-collect .warehouse .store-info .store-name .status.success:before{
+    content: '\f00c';
+    font-family: 'Font Awesome 5 Pro';
+    color: #3e7f16;
+    width: 25px;
+    height: 25px;
+    display: inline-block;
+    margin-right: 10px;
+    font-size: 16px;
+}
+.cart-click-and-collect .warehouse .store-info .store-name .status.error:before{
+    content: '\f00d';
+    font-family: 'Font Awesome 5 Pro';
+    color: #ec0f23;
+    width: 25px;
+    height: 25px;
+    display: inline-block;
+    font-size: 18px;
+    margin-right: 10px;
+}
+.cart-click-and-collect .warehouse .store-info .store-name .store-title {
+    font-size: 16px;
+}
+.cart-click-and-collect .warehouse .store-info .store-available {
+    margin-left: 35px;
+}
+.cart-click-and-collect .warehouse .store-info .store-available .available {
+    color: #3e7f16;
+}
+.cart-click-and-collect .warehouse .store-info .store-available .unavailable {
+    color: #ec0f23;
+}
+.cart-click-and-collect .warehouse .store-address .address {
+    display: flex;
+}
+.cart-click-and-collect .warehouse .store-address .address .full-address {
+    margin-left: 10px;
+}
+.cart-click-and-collect .warehouse .store-address .address:before{
+    content: '\f3c5';
+    font-family: 'Font Awesome 5 Pro';
+    color: #333333;
+    width: 25px;
+    height: 25px;
+    display: inline-block;
+    margin-right: 6px;
+    font-size: 18px;
+}
+.cart-click-and-collect .warehouse .store-hours .view-store-hours:before{
+    content: '\f494';
+    font-family: 'Font Awesome 5 Pro';
+    color: #333333;
+    width: 25px;
+    height: 25px;
+    display: inline-block;
+    margin-right: 9px;
+    font-size: 14px;
+}
+.cart-click-and-collect .warehouse .store-phone .view-store-phone:before{
+    content: '\f095';
+    font-family: 'Font Awesome 5 Pro';
+    color: #333333;
+    width: 25px;
+    height: 25px;
+    display: inline-block;
+    margin-right: 6px;
+    font-size: 16px;
+}
+.cart-click-and-collect .warehouse .store-email .view-store-email:before{
+    content: '\f0e0';
+    font-family: 'Font Awesome 5 Pro';
+    color: #333333;
+    width: 25px;
+    height: 25px;
+    display: inline-block;
+    margin-right: 6px;
+    font-size: 16px;
+}
+.cart-click-and-collect #block-cart-click-and-collect {
+    display: none;
+}
+.cart-click-and-collect #block-cart-click-and-collect .stores .warehouse {
+    padding: 15px 15px;
+    border: 1px solid #014c9d;
+    border-radius: 0;
+    box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
+    line-height: 25px;
+}
+.cart-click-and-collect #block-cart-click-and-collect .stores .warehouse .store-info {
+    font-weight: 700;
+}
+.cart-click-and-collect #block-cart-click-and-collect .stores .warehouse .store-info .store-name .status.success:before{
+    content: '\f00c';
+    font-family: 'Font Awesome 5 Pro';
+    color: #3e7f16;
+    width: 25px;
+    height: 25px;
+    display: inline-block;
+    margin-right: 10px;
+    font-size: 16px;
+}
+.cart-click-and-collect #block-cart-click-and-collect .stores .warehouse .store-info .store-name .status.error:before{
+    content: '\f00d';
+    font-family: 'Font Awesome 5 Pro';
+    color: #ec0f23;
+    width: 25px;
+    height: 25px;
+    display: inline-block;
+    font-size: 18px;
+    margin-right: 10px;
+}
+.cart-click-and-collect #block-cart-click-and-collect .stores .warehouse .store-info .store-name .store-title {
+    font-size: 16px;
+}
+.cart-click-and-collect #block-cart-click-and-collect .stores .warehouse .store-info .store-available {
+    margin-left: 35px;
+}
+.cart-click-and-collect #block-cart-click-and-collect .stores .warehouse .store-info .store-available .available {
+    color: #3e7f16;
+}
+.cart-click-and-collect #block-cart-click-and-collect .stores .warehouse .store-info .store-available .unavailable {
+    color: #ec0f23;
+}
+.cart-click-and-collect #block-cart-click-and-collect .stores .warehouse .store-address .address {
+    display: flex;
+}
+.cart-click-and-collect #block-cart-click-and-collect .stores .warehouse .store-address .address .full-address {
+    margin-left: 4px;
+}
+.cart-click-and-collect #block-cart-click-and-collect .stores .warehouse .store-address .address:before{
+    content: '\f3c5';
+    font-family: 'Font Awesome 5 Pro';
+    color: #333333;
+    width: 25px;
+    height: 25px;
+    display: inline-block;
+    margin-right: 6px;
+    font-size: 18px;
+}
+.cart-click-and-collect #block-cart-click-and-collect .stores .warehouse .store-hours .view-store-hours:before{
+    content: '\f494';
+    font-family: 'Font Awesome 5 Pro';
+    color: #333333;
+    width: 25px;
+    height: 25px;
+    display: inline-block;
+    margin-right: 9px;
+    font-size: 14px;
+}
+.cart-click-and-collect #block-cart-click-and-collect .stores .warehouse .store-phone .view-store-phone:before{
+    content: '\f095';
+    font-family: 'Font Awesome 5 Pro';
+    color: #333333;
+    width: 25px;
+    height: 25px;
+    display: inline-block;
+    margin-right: 7px;
+    font-size: 16px;
+}
+.cart-click-and-collect #block-cart-click-and-collect .stores .warehouse .store-email .view-store-email:before{
+    content: '\f0e0';
+    font-family: 'Font Awesome 5 Pro';
+    color: #333333;
+    width: 25px;
+    height: 25px;
+    display: inline-block;
+    margin-right: 7px;
+    font-size: 16px;
+}
+.cart-click-and-collect .store-hours .view-store-hours .hours-list {
+    overflow: hidden;
+    display: none;
+}
+.cart-click-and-collect .store-hours .view-store-hours .hours-list .item {
+    clear: both;
+    margin-left: 35px;
+}
+.cart-click-and-collect .store-hours .view-store-hours .hours-list .item .day {
+    float: left;
+    font-weight: 700;
+}
+.cart-click-and-collect .store-hours .view-store-hours .hours-list .item .time {
+    float: right;
+}
+.cart-click-and-collect .store-hours .view-store-hours .hours-list .item .day:after {
+    content: ':';
+}
+.cart-click-and-collect .view-store-hours-link {
+    text-decoration:none;
+}
+.cart-click-and-collect .view-store-hours-link:after {
+    content: '\e622';
+    font-family: 'luma-icons';
+    position: absolute;
+    color: #014c9d;
+    margin: 0;
+    margin-left: 5px;
+}
+.cart-click-and-collect .view-store-hours-link.active:after {
+    content: '\e621';
+}
+.cart-click-and-collect .store-distance {
+    color: #ec0f23;
+    font-size: 22px;
+    float: right;
+}
+.cart-click-and-collect .store-actions {
+    position: absolute;
+    top: 130px;
+    right: 15px;
+    transform: translateY(-50%);
+}
+.cart-click-and-collect .warehouse-show-more {
+    text-align: center;
+    margin-top: 20px;
+}
+.cart-click-and-collect .warehouse-show-more .btn-show-more {
+    width: 100%;
+}
+.cart-click-and-collect #current_warehouse {
+    margin-top: 10px;
+    padding: 15px 15px;
+    border: 1px solid #014c9d;
+    border-radius: 0;
+    box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
+    line-height: 25px;
+}
+.cart-click-and-collect .items-unavailable .items-unavailable-link {
+    color: #ec0f23;
+    font-weight: 700;
+    text-decoration: none;
+}
+.cart-click-and-collect .items-unavailable .items-list {
+    display: none;
+    padding: 5px 5px;
+    background: #FAEBD7;
+    color: #ec0f23;
+}
+.cart-click-and-collect .items-unavailable .items-unavailable-link:after {
+    content: '\e622';
+    font-family: 'luma-icons';
+    position: absolute;
+    color: #ec0f23;
+    margin: 0;
+    margin-left: 5px;
+}
+.cart-click-and-collect .items-unavailable .items-unavailable-link.active:after{
+    content: '\e621';
+}
+.checkout-cart-index .cart.item .item-info .product-item-details .store-available {
+    margin-top: 20px;
+    color: #fff;
+    font-weight: 700;
+}
+.checkout-cart-index .cart.item .item-info .product-item-details .store-available span.unavailable {
+    padding: 5px 5px;
+    background: #ff0000;
+}
+#checkout-click-and-collect #block-checkout-click-and-collect .title .change-store {
+    text-transform: uppercase;
+    font-size: 18px;
+}
+#checkout-click-and-collect {
+    margin-top: 15px;
+}
+.checkout-click-and-collect .title strong span{
+    font-family: 'Roboto Condensed',sans-serif;
+    font-size: 16px;
+    color: #014c9d;
+}
+.checkout-click-and-collect .content .button-actions {
+    margin-top: 10px;
+}
+.checkout-click-and-collect .content .button-actions button.action.primary span {
+    display: block;
+}
+.checkout-click-and-collect .content .button-actions .btn-deliver-to-door {
+    width: 119px !important;
+}
+.checkout-click-and-collect .content .button-actions .btn-click-and-collect {
+    width: 125px !important;
+}
+.checkout-click-and-collect .content .button-actions .btn-deliver-to-door .delivery {
+    font-size: 12px;
+}
+.checkout-click-and-collect .content .button-actions .btn-deliver-to-door .deliver-to-door {
+    font-size: 10px;
+    text-transform: capitalize;
+}
+.checkout-click-and-collect .content .button-actions .btn-click-and-collect .click-and-collect {
+    font-size: 12px;
+}
+.checkout-click-and-collect .content .button-actions .btn-click-and-collect .store-pick-up {
+    font-size: 10px;
+    text-transform: capitalize;
+}
+.checkout-click-and-collect #block-checkout-click-and-collect {
+    margin-top: 15px;
+}
+.checkout-click-and-collect .content .button-actions .btn-click-and-collect.active{
+    background: #006bb4;
+    border: 1px solid #006bb4;
+    color: #fff;
+}
+.checkout-click-and-collect .warehouse {
+    margin-top: 10px;
+    color: #282828;
+    position: relative;
+}
+.checkout-click-and-collect .warehouse .store-info {
+    font-weight: 700;
+}
+.checkout-click-and-collect .warehouse .store-info .store-name .status.success:before{
+    content: '\f00c';
+    font-family: 'Font Awesome 5 Pro';
+    color: #3e7f16;
+    width: 25px;
+    height: 25px;
+    display: inline-block;
+    margin-right: 10px;
+    font-size: 16px;
+}
+.checkout-click-and-collect .warehouse .store-info .store-name .status.error:before{
+    content: '\f00d';
+    font-family: 'Font Awesome 5 Pro';
+    color: #ec0f23;
+    width: 25px;
+    height: 25px;
+    display: inline-block;
+    font-size: 18px;
+    margin-right: 10px;
+}
+.checkout-click-and-collect .warehouse .store-info .store-name .store-title {
+    font-size: 16px;
+}
+.checkout-click-and-collect .warehouse .store-info .store-available {
+    margin-left: 35px;
+}
+.checkout-click-and-collect .warehouse .store-info .store-available .available {
+    color: #3e7f16;
+}
+.checkout-click-and-collect .warehouse .store-info .store-available .unavailable {
+    color: #ec0f23;
+}
+.checkout-click-and-collect .warehouse .store-address .address {
+    display: flex;
+}
+.checkout-click-and-collect .warehouse .store-address .address .full-address {
+    margin-left: 10px;
+}
+.checkout-click-and-collect .warehouse .store-address .address:before{
+    content: '\f3c5';
+    font-family: 'Font Awesome 5 Pro';
+    color: #333333;
+    width: 25px;
+    height: 25px;
+    display: inline-block;
+    margin-right: 6px;
+    font-size: 18px;
+}
+.checkout-click-and-collect .warehouse .store-hours .view-store-hours:before{
+    content: '\f494';
+    font-family: 'Font Awesome 5 Pro';
+    color: #333333;
+    width: 25px;
+    height: 25px;
+    display: inline-block;
+    margin-right: 9px;
+    font-size: 14px;
+}
+.checkout-click-and-collect .warehouse .store-phone .view-store-phone:before{
+    content: '\f095';
+    font-family: 'Font Awesome 5 Pro';
+    color: #333333;
+    width: 25px;
+    height: 25px;
+    display: inline-block;
+    margin-right: 6px;
+    font-size: 16px;
+}
+.checkout-click-and-collect .warehouse .store-email .view-store-email:before{
+    content: '\f0e0';
+    font-family: 'Font Awesome 5 Pro';
+    color: #333333;
+    width: 25px;
+    height: 25px;
+    display: inline-block;
+    margin-right: 6px;
+    font-size: 16px;
+}
+.checkout-click-and-collect #block-checkout-click-and-collect .stores .warehouse {
+    padding: 15px 15px;
+    border: 1px solid #014c9d;
+    border-radius: 0;
+    box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
+    line-height: 25px;
+}
+.checkout-click-and-collect #block-checkout-click-and-collect .stores .warehouse .store-info {
+    font-weight: 700;
+}
+.checkout-click-and-collect #block-checkout-click-and-collect .stores .warehouse .store-info .store-name .status.success:before{
+    content: '\f00c';
+    font-family: 'Font Awesome 5 Pro';
+    color: #3e7f16;
+    width: 25px;
+    height: 25px;
+    display: inline-block;
+    margin-right: 10px;
+    font-size: 16px;
+}
+.checkout-click-and-collect #block-checkout-click-and-collect .stores .warehouse .store-info .store-name .status.error:before{
+    content: '\f00d';
+    font-family: 'Font Awesome 5 Pro';
+    color: #ec0f23;
+    width: 25px;
+    height: 25px;
+    display: inline-block;
+    font-size: 18px;
+    margin-right: 10px;
+}
+.checkout-click-and-collect #block-checkout-click-and-collect .stores .warehouse .store-info .store-name .store-title {
+    font-size: 16px;
+}
+.checkout-click-and-collect #block-checkout-click-and-collect .stores .warehouse .store-info .store-available {
+    margin-left: 35px;
+}
+.checkout-click-and-collect #block-checkout-click-and-collect .stores .warehouse .store-info .store-available .available {
+    color: #3e7f16;
+}
+.checkout-click-and-collect #block-checkout-click-and-collect .stores .warehouse .store-info .store-available .unavailable {
+    color: #ec0f23;
+}
+.checkout-click-and-collect #block-checkout-click-and-collect .stores .warehouse .store-address .address {
+    display: flex;
+}
+.checkout-click-and-collect #block-checkout-click-and-collect .stores .warehouse .store-address .address .full-address {
+    margin-left: 4px;
+}
+.checkout-click-and-collect #block-checkout-click-and-collect .stores .warehouse .store-address .address:before{
+    content: '\f3c5';
+    font-family: 'Font Awesome 5 Pro';
+    color: #333333;
+    width: 25px;
+    height: 25px;
+    display: inline-block;
+    margin-right: 6px;
+    font-size: 18px;
+}
+.checkout-click-and-collect #block-checkout-click-and-collect .stores .warehouse .store-hours .view-store-hours:before{
+    content: '\f494';
+    font-family: 'Font Awesome 5 Pro';
+    color: #333333;
+    width: 25px;
+    height: 25px;
+    display: inline-block;
+    margin-right: 9px;
+    font-size: 14px;
+}
+.checkout-click-and-collect #block-checkout-click-and-collect .stores .warehouse .store-phone .view-store-phone:before{
+    content: '\f095';
+    font-family: 'Font Awesome 5 Pro';
+    color: #333333;
+    width: 25px;
+    height: 25px;
+    display: inline-block;
+    margin-right: 7px;
+    font-size: 16px;
+}
+.checkout-click-and-collect #block-checkout-click-and-collect .stores .warehouse .store-email .view-store-email:before{
+    content: '\f0e0';
+    font-family: 'Font Awesome 5 Pro';
+    color: #333333;
+    width: 25px;
+    height: 25px;
+    display: inline-block;
+    margin-right: 7px;
+    font-size: 16px;
+}
+.checkout-click-and-collect .store-hours .view-store-hours .hours-list {
+    overflow: hidden;
+    display: none;
+}
+.checkout-click-and-collect .store-hours .view-store-hours .hours-list .item {
+    clear: both;
+    margin-left: 35px;
+}
+.checkout-click-and-collect .store-hours .view-store-hours .hours-list .item .day {
+    float: left;
+    font-weight: 700;
+}
+.checkout-click-and-collect .store-hours .view-store-hours .hours-list .item .time {
+    float: right;
+}
+.checkout-click-and-collect .store-hours .view-store-hours .hours-list .item .day:after {
+    content: ':';
+}
+.checkout-click-and-collect .view-store-hours-link {
+    text-decoration:none;
+}
+.checkout-click-and-collect .view-store-hours-link:after {
+    content: '\e622';
+    font-family: 'luma-icons';
+    position: absolute;
+    color: #014c9d;
+    margin: 0;
+    margin-left: 5px;
+}
+.checkout-click-and-collect .view-store-hours-link.active:after {
+    content: '\e621';
+}
+.checkout-click-and-collect .store-distance {
+    color: #ec0f23;
+    font-size: 22px;
+    float: right;
+}
+.checkout-click-and-collect .store-actions {
+    position: absolute;
+    top: 130px;
+    right: 15px;
+    transform: translateY(-50%);
+}
+.checkout-click-and-collect .warehouse-show-more {
+    text-align: center;
+    margin-top: 20px;
+}
+.checkout-click-and-collect .warehouse-show-more .btn-show-more {
+    width: 100%;
+}
+.checkout-click-and-collect #current_warehouse {
+    margin-top: 10px;
+    padding: 15px 15px;
+    border: 1px solid #014c9d;
+    border-radius: 0;
+    box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
+    line-height: 25px;
+}
+.checkout-click-and-collect .items-unavailable .items-unavailable-link {
+    color: #ec0f23;
+    font-weight: 700;
+    text-decoration: none;
+}
+.checkout-click-and-collect .items-unavailable .items-list {
+    display: none;
+    padding: 5px 5px;
+    background: #FAEBD7;
+    color: #ec0f23;
+}
+.checkout-click-and-collect .items-unavailable .items-unavailable-link:after {
+    content: '\e622';
+    font-family: 'luma-icons';
+    position: absolute;
+    color: #ec0f23;
+    margin: 0;
+    margin-left: 5px;
+}
+.checkout-click-and-collect .items-unavailable .items-unavailable-link.active:after{
+    content: '\e621';
+}
+.block-checkout-pickup-time {
+    margin-top: 20px;
+}
+.block-checkout-pickup-time .title span.pickup-time {
+    text-transform: uppercase;
+}

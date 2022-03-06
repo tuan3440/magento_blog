@@ -77,13 +77,6 @@ class View extends Template
         return $data;
     }
 
-    /**
-     * @return mixed|null
-     */
-//    public function getServiceId()
-//    {
-//        return $this->getService();
-//    }
 
     public function getExistsLocator()
     {

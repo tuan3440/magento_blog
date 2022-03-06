@@ -11,6 +11,11 @@ class Locator extends AbstractModel implements IdentityInterface, LocatorInterfa
 {
     const CACHE_TAG = 'hust_locator';
 
+    public function __construct(Context $context, \Magento\Framework\Registry $registry, ResourceModel\Locator $resource, \Magento\Framework\Data\Collection\AbstractDb $resourceCollection = null, array $data = [])
+    {
+        parent::__construct($context, $registry, $resource, $resourceCollection, $data);
+    }
+
     protected function _construct()
     {
         $this->_init('Hust\Service\Model\ResourceModel\Locator');
@@ -133,5 +138,17 @@ class Locator extends AbstractModel implements IdentityInterface, LocatorInterfa
                 (int) $object->getId()
             );
         return $this->_resource->getConnection()->fetchAll($select);
+    }
+
+    public function getLocatorInService($serviceId)
+    {
+        $table = $this->_resource->getTable('hust_service_locator');
+        $select = $this->_resource->getConnection()->select()
+            ->from(
+                $table,
+                ['locator_id']
+            )->where('service_id = ?', (int)$serviceId);
+        return $this->_resource->getConnection()->fetchCol($select);
+
     }
 }
