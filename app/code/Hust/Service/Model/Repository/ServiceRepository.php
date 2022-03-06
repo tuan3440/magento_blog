@@ -117,4 +117,11 @@ class ServiceRepository implements ServiceRepositoryInterface
 
         return true;
     }
+
+    public function getListService()
+    {
+       $services = $this->serviceFactory->create()->getCollection();
+       $services->addFieldToFilter('is_active', 1);
+       return $services;
+    }
 }

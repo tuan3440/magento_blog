@@ -48,7 +48,7 @@ class Save extends Service
             if (isset($data['image'][0]['name']) && isset($data['image'][0]['tmp_name'])) {
                 $data['image'] = $data['image'][0]['file'];
             } else {
-                $data['image'] = '';
+                $data['image'] = $data['image'][0]['name'];
             }
         }
         return $data;

@@ -22,7 +22,7 @@ class EmployeeRepository implements EmployeeRepositoryInterface
     )
     {
         $this->employeeFactory = $employeeFactory;
-        $this->locatorResource = $employeeResource;
+        $this->employeeResource = $employeeResource;
     }
 
     public function save(EmployeeInterface $employee)
@@ -52,7 +52,7 @@ class EmployeeRepository implements EmployeeRepositoryInterface
     {
         if (!isset($this->employees[$employeeId])) {
             $employee = $this->employeeFactory->create();
-            $this->locatorResource->load($employee, $employeeId);
+            $this->employeeResource->load($employee, $employeeId);
             if (!$employee->getEmployeeId()) {
                 throw new NoSuchEntityException(__('Employee with specified ID "%1" not found.', $employeeId));
             }

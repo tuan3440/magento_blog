@@ -9,4 +9,9 @@ class DeleteButton extends \Hust\Service\Block\Adminhtml\DeleteButton
     {
         return (int)$this->getRegistry()->registry(Edit::CURRENT_SERVICE)->getServiceId();
     }
+
+    public function getUrlDelete($id)
+    {
+         return $this->urlBuilder->getUrl('*/*/delete', ['service_id' => $id]);
+    }
 }

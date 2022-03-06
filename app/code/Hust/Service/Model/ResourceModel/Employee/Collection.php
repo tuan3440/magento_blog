@@ -2,7 +2,7 @@
 
 namespace Hust\Service\Model\ResourceModel\Employee;
 
-use Hust\Service\Model\ResourceModel\Employee;
+use Hust\Service\Model\Employee;
 use Hust\Service\Model\ResourceModel\Employee as ResourceLocator;
 use Magento\Framework\Model\ResourceModel\Db\Collection\AbstractCollection;
 

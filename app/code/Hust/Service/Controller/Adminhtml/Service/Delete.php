@@ -27,5 +27,6 @@ class Delete extends Service
         }
         $this->getMessageManager()->addErrorMessage(__('We can\'t find a service to delete.'));
 
-        return $resultRedirect->setPath('*/*/');    }
+        return $resultRedirect->setPath('*/*/');
+    }
 }

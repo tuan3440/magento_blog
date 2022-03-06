@@ -1,22 +1,16 @@
 <?php
 
-namespace Hust\Service\Controller\Adminhtml\Locator;
+namespace Hust\Service\Controller\Adminhtml\Employee;
 
-use Hust\Service\Controller\Adminhtml\Locator\AbstractMassAction;
+use Amasty\Blog\Controller\Adminhtml\AbstractMassAction;
+use Magento\Framework\Data\Collection\AbstractDb;
 
-/**
- * Class MassDelete
- */
-class MassDelete extends AbstractMassAction
+class MassDelete extends \Hust\Service\Controller\Adminhtml\Employee\AbstractMassAction
 {
-    /**
-     * @param $service
-     * @return \Magento\Framework\Controller\Result\Redirect
-     */
-    protected function itemAction($locator)
+    protected function itemAction($employee)
     {
         try {
-            $this->getRepository()->deleteById($locator->getLocatorId());
+            $this->getRepository()->deleteById($employee->getEmployeeId());
         } catch (\Exception $e) {
             $this->getMessageManager()->addErrorMessage($e->getMessage());
         }

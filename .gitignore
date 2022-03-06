@@ -34,6 +34,7 @@ atlassian*
 /.php_cs.cache
 /grunt-config.json
 /pub/media/*.*
+pub/media/*
 !/pub/media/.htaccess
 /pub/media/attribute/*
 !/pub/media/attribute/.htaccess

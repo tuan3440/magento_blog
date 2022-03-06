@@ -7,7 +7,7 @@ use Magento\Framework\View\Element\UiComponent\Control\ButtonProviderInterface;
 class DeleteButton implements ButtonProviderInterface
 {
 
-    private $urlBuilder;
+    protected $urlBuilder;
     private $serviceRegistry;
 
     public function __construct(
@@ -27,7 +27,8 @@ class DeleteButton implements ButtonProviderInterface
         $data = [];
         $id = $this->getItemId();
         if ($id) {
-            $deleteUrl = $this->urlBuilder->getUrl('*/*/delete', ['service_id' => $id]);
+            $deleteUrl = $this->getUrlDelete($id);
+//            $deleteUrl = $this->urlBuilder->getUrl('*/*/delete', ['service_id' => $id]);
             $data = [
                 'label' => __('Delete'),
                 'class' => 'delete',
@@ -38,6 +39,11 @@ class DeleteButton implements ButtonProviderInterface
         }
 
         return $data;
+    }
+
+    public function getUrlDelete($id)
+    {
+        return '';
     }
 
     /**

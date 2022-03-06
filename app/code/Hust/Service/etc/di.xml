@@ -7,12 +7,15 @@
     <preference for="Hust\Service\Api\Data\LocatorInterface" type="Hust\Service\Model\Locator"/>
     <preference for="Hust\Service\Api\BookingRepositoryInterface" type="Hust\Service\Model\Repository\LocatorRepository"/>
     <preference for="Hust\Service\Api\Data\BookingInterface" type="Hust\Service\Model\Booking"/>
+    <preference for="Hust\Service\Api\EmployeeRepositoryInterface" type="Hust\Service\Model\Repository\EmployeeRepository"/>
+    <preference for="Hust\Service\Api\Data\EmployeeInterface" type="Hust\Service\Model\Employee"/>
 
     <type name="Magento\Framework\View\Element\UiComponent\DataProvider\CollectionFactory">
         <arguments>
             <argument name="collections" xsi:type="array">
                 <item name="service_listing_data_source" xsi:type="string">Hust\Service\Model\ResourceModel\Service\Grid</item>
                 <item name="locator_listing_data_source" xsi:type="string">Hust\Service\Model\ResourceModel\Locator\Grid</item>
+                <item name="employee_listing_data_source" xsi:type="string">Hust\Service\Model\ResourceModel\Employee\Grid</item>
             </argument>
         </arguments>
     </type>
@@ -31,6 +34,12 @@
     </virtualType>
 
     <type name="Hust\Service\Controller\Adminhtml\Service\Uploader">
+        <arguments>
+            <argument name="imageUploader" xsi:type="object">Hust\Service\Model\ImageUpload</argument>
+        </arguments>
+    </type>
+
+    <type name="Hust\Service\Controller\Adminhtml\Employee\Uploader">
         <arguments>
             <argument name="imageUploader" xsi:type="object">Hust\Service\Model\ImageUpload</argument>
         </arguments>
