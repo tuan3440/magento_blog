@@ -7,8 +7,8 @@
     </head>
     <body>
         <referenceContainer name="content">
-            <block class="Hust\Service\Block\ListServices" name="booking.services.head" template="Dco_Service::head.phtml"/>
-            <block class="Hust\Service\Block\Locator\View" name="booking.locator.now" template="Dco_Service::booknow.phtml"/>
+            <block class="Hust\Service\Block\ListServices" name="booking.services.head" template="Hust_Service::head.phtml"/>
+            <block class="Hust\Service\Block\Locator\View" name="booking.locator.now" template="Hust_Service::booknow.phtml"/>
         </referenceContainer>
     </body>
 </page>
