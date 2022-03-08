@@ -3,6 +3,7 @@
 namespace Hust\Service\Controller\Adminhtml\Service;
 
 use Hust\Service\Controller\Adminhtml\Service;
+use Magento\Framework\App\ObjectManager;
 use Magento\Framework\App\ResponseInterface;
 use Magento\Framework\Exception\LocalizedException;
 
@@ -23,6 +24,7 @@ class Save extends Service
                 $data = $this->prepareData($data);
                 $model->addData($data);
                 $this->getServiceRepository()->save($model);
+                $this->saveProductRelative($model);
                 $this->messageManager->addSuccessMessage(__('You saved the item.'));
 
                 if ($this->getRequest()->getParam('back')) {
@@ -52,5 +54,35 @@ class Save extends Service
             }
         }
         return $data;
+    }
+
+    private function saveProductRelative($model)
+    {
+        if (isset($model['related_products_container'])) {
+            try {
+                $this->_resources = ObjectManager::getInstance()->get('Magento\Framework\App\ResourceConnection');
+                $connection = $this->_resources->getConnection();
+
+                $table = $this->_resources->getTableName('hust_service_products');
+                $where = [
+                    'service_id = ?' => (int)$model->getId()
+                ];
+                $connection->delete($table, $where);
+
+                if ($model['related_products_container']) {
+                    $data = [];
+                    foreach ($model['related_products_container'] as $product) {
+                        $data[] = [
+                            'service_id' => $model->getId(),
+                            'product_id' => $product['entity_id'],
+                            'position' => $product['amasty_blog_position']
+                        ];
+                    }
+                    $connection->insertMultiple($table, $data);
+                }
+            } catch (Exception $e) {
+                $this->messageManager->addExceptionMessage($e, __('Something went wrong while saving the services.'));
+            }
+        }
     }
 }

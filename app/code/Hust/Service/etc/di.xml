@@ -16,6 +16,7 @@
                 <item name="service_listing_data_source" xsi:type="string">Hust\Service\Model\ResourceModel\Service\Grid</item>
                 <item name="locator_listing_data_source" xsi:type="string">Hust\Service\Model\ResourceModel\Locator\Grid</item>
                 <item name="employee_listing_data_source" xsi:type="string">Hust\Service\Model\ResourceModel\Employee\Grid</item>
+                <item name="booking_listing_data_source" xsi:type="string">Hust\Service\Model\ResourceModel\Booking\Grid</item>
             </argument>
         </arguments>
     </type>

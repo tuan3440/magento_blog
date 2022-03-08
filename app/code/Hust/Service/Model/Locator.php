@@ -149,6 +149,5 @@ class Locator extends AbstractModel implements IdentityInterface, LocatorInterfa
                 ['locator_id']
             )->where('service_id = ?', (int)$serviceId);
         return $this->_resource->getConnection()->fetchCol($select);
-
     }
 }
