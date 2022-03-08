@@ -108,4 +108,11 @@ class LocatorRepository implements LocatorRepositoryInterface
 
         return true;
     }
+
+    public function getListLocator()
+    {
+        $locators = $this->locatorFactory->create()->getCollection();
+        $locators->addFieldToFilter('is_active', 1);
+        return $locators;
+    }
 }

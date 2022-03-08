@@ -40,6 +40,7 @@ class Form extends AbstractDataProvider
             $employeeId = (int)$data['items'][0]['employee_id'];
             $model = $this->getEmployee($employeeId);
             $services = $this->getServices($employeeId);
+            $locator = $this->getLocator($employeeId);
             if ($model) {
                 $employeeData = $model->getData();
                 $employeeData['image'] = [
@@ -49,6 +50,7 @@ class Form extends AbstractDataProvider
                     ]
                 ];
                 $employeeData['service_id'] = $services;
+                $employeeData['locator_id'] = $locator;
                 $data[$model->getEmployeeId()] = $employeeData;
             }
         }
@@ -79,6 +81,19 @@ class Form extends AbstractDataProvider
             }
         }
         return implode(',', $array);
+    }
+
+    private function getLocator($employeeId)
+    {
+        $locator = null;
+        $connection = $this->resource->getConnection();
+        $table = $connection->getTableName('hust_employee_locator');
+        $sql = "Select * FROM ".$table." where employee_id=".$employeeId;
+        $result = $connection->fetchAll($sql);
+        if ($result) {
+            $locator = $result[0]['locator_id'];
+        }
+        return $locator;
     }
 }
 

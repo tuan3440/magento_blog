@@ -24,6 +24,7 @@ class Save extends Employee
                 $model->addData($data);
                 $this->getEmployeeRepository()->save($model);
                 $this->saveServiceEmployee($model);
+                $this->saveLocatorEmployee($model);
                 $this->messageManager->addSuccessMessage(__('You saved the item.'));
 
                 if ($this->getRequest()->getParam('back')) {
@@ -81,6 +82,29 @@ class Save extends Employee
             }
         } catch (Exception $e) {
             $this->messageManager->addExceptionMessage($e, __('Something went wrong while saving the services.'));
+        }
+    }
+
+    private function saveLocatorEmployee($model)
+    {
+        try {
+            $newLocator = $model['locator_id'];
+            $this->_resources = ObjectManager::getInstance()->get('Magento\Framework\App\ResourceConnection');
+            $connection = $this->_resources->getConnection();
+
+            $table = $this->_resources->getTableName('hust_employee_locator');
+            $employeeId = (int)$model->getId();
+            $where = [
+                'employee_id = ?' => $employeeId
+            ];
+            $connection->delete($table, $where);
+
+            if ($newLocator) {
+                $sql = "Insert into " . $table . " (employee_id, locator_id) values( ".$employeeId.",".$newLocator.")";
+                $connection->query($sql);
+            }
+        } catch (Exception $e) {
+            $this->messageManager->addExceptionMessage($e, __('Something went wrong while saving the employee.'));
         }
     }
 }

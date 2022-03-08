@@ -27,7 +27,7 @@ class Edit extends Employee
 
         $this->getServiceRegistry()->register(self::CURRENT_EMPLOYEE, $model);
         $this->initAction();
-        $title = $model->getId() ? __('Edit Employee `%1`', $model->getName()) : __("Add New Employee");
+        $title = $model->getId() ? __('Edit Employee `%1`', $model->getFirstName()." ".$model->getLastName()) : __("Add New Employee");
 
         $this->_view->getPage()->getConfig()->getTitle()->prepend($title);
         $this->_view->renderLayout();

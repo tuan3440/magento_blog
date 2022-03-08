@@ -194,6 +194,30 @@
         </constraint>
     </table>
 
+    <table name="hust_employee_locator" resource="default" engine="innodb" comment="hust_employee_locator">
+        <column xsi:type="int" name="employee_id" padding="10" unsigned="true" comment="Employee Id"/>
+        <column xsi:type="int" name="locator_id" padding="10" unsigned="true" comment="Locator Id"/>
+        <constraint
+            xsi:type="foreign"
+            referenceId="hust_employee_locator_hust_locator_locator_id"
+            table="hust_employee_locator"
+            column="locator_id"
+            referenceTable="hust_locator"
+            referenceColumn="locator_id"
+            onDelete="CASCADE"
+        />
+        <constraint
+            xsi:type="foreign"
+            referenceId="hust_employee_locator_hust_employee_employee_id"
+            table="hust_employee_locator"
+            column="employee_id"
+            referenceTable="hust_employee"
+            referenceColumn="employee_id"
+            onDelete="CASCADE"
+        />
+
+    </table>
+
     <table name="hust_employee_service" resource="default" engine="innodb" comment="hust_employee_service">
         <column xsi:type="int" name="employee_id" padding="10" unsigned="true" comment="Employee Id"/>
         <column xsi:type="int" name="service_id" padding="10" unsigned="true" comment="Service Id"/>
