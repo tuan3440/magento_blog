@@ -13,20 +13,21 @@ $hours = $block->getHours();
         <div>Thành phố : <?= $locator->getCity(); ?></div>
         <div>Số điện thoại : <?= $locator->getPhone(); ?></div>
         <div class="calendar">
-                <div class="field">
-                    <label>Chọn ngày : </label>
-                    <input type="text" class="input-text" id="example-date" style="width: auto"
-                           name="date" data-validate="{required:true, 'validate-date':true}"/>
-                </div>
-            <?php
-                 foreach ($hours as $key => $hour):
-            ?>
-                 <button value="<?=$key?>"><?= $hour?></button>
-            <?php
+            <div class="field">
+                <label>Chọn ngày : </label>
+                <input type="text" class="input-text" id="example-date" style="width: auto"
+                       name="date" data-validate="{required:true, 'validate-date':true}"/>
+            </div>
+            <div class="select-hour">
+                <?php
+                foreach ($hours as $key => $hour):
+                    ?>
+                    <button value="<?= $key ?>" class="o-active"><?= $hour ?></button>
+                <?php
                 endforeach;
-            ?>
-                <br>
-                <button id="booking" class="booking">Book</button>
+                ?>
+            </div>
+            <button id="booking" class="booking">Book</button>
         </div>
     </div>
 </div>
@@ -39,37 +40,6 @@ $hours = $block->getHours();
     }
 </script>
 
-<!--<script type="text/javascript">-->
-<!--    require([-->
-<!--        'jquery',-->
-<!--        "mage/url"-->
-<!--    ], function ($, urlBuilder) {-->
-<!--        $(document).ready(function () {-->
-<!--            $('#example-date').change(function () {-->
-<!--                var url = urlBuilder.build('bookings/locator/slot');-->
-<!--                $.ajax({-->
-<!--                    url: url,-->
-<!--                    type: 'POST',-->
-<!--                    dataType: 'json',-->
-<!--                    data: {-->
-<!--                        service_id: $("input[name='service_id']").val(),-->
-<!--                        locator_id: $("input[name='locator_id']").val(),-->
-<!--                        date: $("input[name='date']").val()-->
-<!--                    },-->
-<!--                    success: function (response) {-->
-<!--                        console.log(response)-->
-<!--                        $('#slot').html(response.slot)-->
-<!--                    },-->
-<!--                    error: function (xhr, status, errorThrown) {-->
-<!--                        console.log('Error happens. Try again.');-->
-<!--                    }-->
-<!--                });-->
-<!--            });-->
-<!---->
-<!--        });-->
-<!--    })-->
-<!--</script>-->
-
 <style>
     .title {
         text-align: center;
@@ -78,20 +48,30 @@ $hours = $block->getHours();
         font-size: 17px;
         color: white;
     }
+
     div#slot {
         margin-bottom: 10px;
         margin-top: 10px;
     }
+
     .info-store {
         width: 60%;
         margin: auto;
         line-height: 30px;
     }
+
     .calendar button {
         margin-left: 20px;
         margin-top: 20px;
     }
 
+    .o-active {
+        background-color: #45c3d2;
+    }
+
+    .active {
+        background-color: #c34706!important;
+    }
 
 </style>
 
@@ -114,8 +94,52 @@ $hours = $block->getHours();
 </script>
 
 <div id="modal-booking-customer" style="display:none;">
-    <form class="form form-booking-customer" action="<?php /* @escapeNotVerified */ echo $block->getUrl('bookings/locator/bookPost') ?>" method="post" id="form-validate" enctype="multipart/form-data" data-hasrequired="<?php /* @escapeNotVerified */ echo __('* Required Fields') ?>" autocomplete="off">
-        <?php echo $block->getBlockHtml('formkey')?>
+    <form class="form form-booking-customer" action="<?php /* @escapeNotVerified */
+    echo $block->getUrl('bookings/locator/bookPost') ?>" method="post" id="form-validate" enctype="multipart/form-data"
+          data-hasrequired="<?php /* @escapeNotVerified */
+          echo __('* Required Fields') ?>" autocomplete="off">
+        <h2>Date : <span class="data-date"></span></h2>
+        <h2>Hour : <span class="data-hour">8h30AM:10AM</span></h2>
+        <?php echo $block->getBlockHtml('formkey') ?>
+        <div class="field">
+            <label class="label">Name</label>
+            <div class="control">
+                <input type="text" name="name">
+            </div>
+        </div>
+        <div class="field">
+            <label class="label">Age</label>
+            <div class="control">
+                <input type="text" name="age">
+            </div>
+        </div>
+        <div class="field">
+            <label class="label">Gender</label>
+            <div class="control">
+                <select name="gender">
+                    <option value="1">Male</option>
+                    <option value="0">Female</option>
+                </select>
+            </div>
+        </div>
+        <div class="field">
+            <label class="label">Phone</label>
+            <div class="control">
+                <input type="text" name="phone">
+            </div>
+        </div>
+        <div class="field">
+            <label class="label">Address</label>
+            <div class="control">
+                <input type="text" name="address">
+            </div>
+        </div>
+        <div class="field">
+            <label class="label">Gmall</label>
+            <div class="control">
+                <input type="text" name="gmall">
+            </div>
+        </div>
     </form>
 </div>
 
@@ -123,10 +147,14 @@ $hours = $block->getHours();
     require(['jquery', 'Magento_Ui/js/modal/modal', 'mage/mage'], function ($, modal) {
         $(document).ready(function () {
             $('#booking').on('click', function () {
+                let date = $('#example-date').val();
+                console.log("aa" + date);
+                $('.data-date').text($('#example-date').val());
+                $('.data-hour').text($('button.active').text())
                 var options = {
                     type: 'popup',
                     modalClass: 'popup-change-profile',
-                    title: 'Edit Account Information',
+                    title: 'Customer Information',
                     responsive: true,
                     buttons: [
                         {
@@ -137,17 +165,23 @@ $hours = $block->getHours();
                             }
                         },
                         {
-                            text: 'Save',
+                            text: 'Submit',
                             class: 'action save primary',
                             click: function () {
-
-                                $('form.form.form-change-profile').submit();
+                                $('.form.form-booking-customer').submit();
                             }
                         }
                     ]
                 };
-                var popupAdd = modal(options, $('#modal-change-profile'));
-                $('#modal-change-profile').modal('openModal');
+                var popupAdd = modal(options, $('#modal-booking-customer'));
+                $('#modal-booking-customer').modal('openModal');
+            })
+
+            $('.select-hour button').on('click', function () {
+                $( ".select-hour button" ).each(function() {
+                    $(this).removeClass('active');
+                });
+                $(this).addClass('active');
             })
         });
     })
