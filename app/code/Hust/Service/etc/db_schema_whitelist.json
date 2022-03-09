@@ -9,7 +9,8 @@
             "is_active": true,
             "position": true,
             "created_at": true,
-            "updated_at": true
+            "updated_at": true,
+            "charge": true
         },
         "constraint": {
             "PRIMARY": true
@@ -104,6 +105,87 @@
         "constraint": {
             "PRIMARY": true,
             "FK_C213CD193C142F494809AA25FB810B73": true
+        }
+    },
+    "hust_booking": {
+        "column": {
+            "booking_id": true,
+            "service_id": true,
+            "customer_id": true,
+            "locator_id": true,
+            "booking_status": true,
+            "booking_hour": true,
+            "date": true,
+            "created_at": true,
+            "updated_at": true
+        },
+        "constraint": {
+            "PRIMARY": true,
+            "HUST_BOOKING_SERVICE_ID_HUST_SERVICE_SERVICE_ID": true,
+            "HUST_BOOKING_LOCATOR_ID_HUST_LOCATOR_LOCATOR_ID": true,
+            "HUST_BOOKING_CUSTOMER_ID_CUSTOMER_ENTITY_ENTITY_ID": true
+        }
+    },
+    "hust_booking_customer": {
+        "column": {
+            "id": true,
+            "booking_id": true,
+            "name": true,
+            "age": true,
+            "gender": true,
+            "phone": true,
+            "email": true,
+            "address": true
+        },
+        "constraint": {
+            "PRIMARY": true,
+            "HUST_BOOKING_CUSTOMER_BOOKING_ID_HUST_BOOKING_BOOKING_ID": true
+        }
+    },
+    "hust_employee": {
+        "column": {
+            "employee_id": true,
+            "image": true,
+            "first_name": true,
+            "last_name": true,
+            "gender": true,
+            "date_of_birth": true,
+            "address": true,
+            "description": true,
+            "phone": true
+        },
+        "constraint": {
+            "PRIMARY": true
+        }
+    },
+    "hust_employee_locator": {
+        "column": {
+            "employee_id": true,
+            "locator_id": true
+        },
+        "constraint": {
+            "HUST_EMPLOYEE_LOCATOR_LOCATOR_ID_HUST_LOCATOR_LOCATOR_ID": true,
+            "HUST_EMPLOYEE_LOCATOR_EMPLOYEE_ID_HUST_EMPLOYEE_EMPLOYEE_ID": true
+        }
+    },
+    "hust_employee_service": {
+        "column": {
+            "employee_id": true,
+            "service_id": true
+        },
+        "constraint": {
+            "HUST_EMPLOYEE_SERVICE_SERVICE_ID_HUST_SERVICE_SERVICE_ID": true,
+            "HUST_EMPLOYEE_SERVICE_EMPLOYEE_ID_HUST_EMPLOYEE_EMPLOYEE_ID": true
+        }
+    },
+    "hust_booking_employee": {
+        "column": {
+            "employee_id": true,
+            "booking_id": true
+        },
+        "constraint": {
+            "HUST_BOOKING_EMPLOYEE_EMPLOYEE_ID_HUST_EMPLOYEE_EMPLOYEE_ID": true,
+            "HUST_BOOKING_EMPLOYEE_BOOKING_ID_HUST_BOOKING_BOOKING_ID": true
         }
     }
 }

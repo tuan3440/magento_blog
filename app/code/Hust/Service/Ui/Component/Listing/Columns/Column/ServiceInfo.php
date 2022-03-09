@@ -1,36 +1,26 @@
 <?php
 
-namespace Hust\Service\Ui\Component\Listing\Columns;
+namespace Hust\Service\Ui\Component\Listing\Columns\Column;
 
 use Magento\Framework\UrlInterface;
 use Magento\Framework\View\Element\UiComponent\ContextInterface;
 use Magento\Framework\View\Element\UiComponentFactory;
 use Magento\Ui\Component\Listing\Columns\Column;
+use Hust\Service\Model\Repository\ServiceRepository;
 
-class EmployeeActions extends Column
+class ServiceInfo extends Column
 {
-    /**
-     * @var UrlInterface
-     */
-    protected $urlBuilder;
 
-    /**
-     * Constructor
-     *
-     * @param ContextInterface $context
-     * @param UiComponentFactory $uiComponentFactory
-     * @param UrlInterface $urlBuilder
-     * @param array $components
-     * @param array $data
-     */
+    protected $service;
+
     public function __construct(
         ContextInterface $context,
         UiComponentFactory $uiComponentFactory,
-        UrlInterface $urlBuilder,
+        ServiceRepository $serviceRepository,
         array $components = [],
         array $data = []
     ) {
-        $this->urlBuilder = $urlBuilder;
+        $this->service = $serviceRepository;
         parent::__construct($context, $uiComponentFactory, $components, $data);
     }
 
@@ -43,21 +33,16 @@ class EmployeeActions extends Column
     public function prepareDataSource(array $dataSource)
     {
         if (isset($dataSource['data']['items'])) {
+            $fieldName = $this->getData('name');
             foreach ($dataSource['data']['items'] as &$item) {
-                $name = $this->getData('name');
-                $item[$name]['edit'] = [
-                    'href' => $this->urlBuilder->getUrl(
-                        'booking/booking/edit',
-                        ['booking_id' => $item['booking_id']]
-                    ),
-                    'label' => __('Edit')
-                ];
+                if (!empty($item[$fieldName])) {
+                    $service = $this->service->getById($item[$fieldName]);
+                    $info = $service->getName();
+                    $item[$fieldName] = $info;
+                }
             }
         }
-
-
         return $dataSource;
     }
 }
-
 

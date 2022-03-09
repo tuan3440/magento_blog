@@ -9,6 +9,16 @@
         <referenceContainer name="content">
             <block class="Hust\Service\Block\ListServices" name="booking.services.head" template="Hust_Service::head.phtml"/>
             <block class="Hust\Service\Block\Service\View" name="booking.services.detail" template="Hust_Service::service/detail.phtml" />
+            <block class="Hust\Service\Block\Service\RelatedProducts"
+                   name="amblog.post.related.products"
+                   template="Hust_Service::service/related_products.phtml"
+            >
+                <arguments>
+                    <argument name="view_model" xsi:type="object">
+                        Hust\Service\ViewModel\RelatedProducts
+                    </argument>
+                </arguments>
+            </block>
         </referenceContainer>
     </body>
 </page>

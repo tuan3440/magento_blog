@@ -35,6 +35,17 @@ class Data extends AbstractHelper
        return $data;
    }
 
+    public function getRelatedProductAllData($items)
+    {
+        $data = [];
+        if ($items) {
+            foreach ($items as $item) {
+                $data[] = $this->getProductAllData($item);
+            }
+        }
+        return $data;
+    }
+
    public function getProductData($item)
    {
        $product = $this->productRepository->getById($item['product_id']);
@@ -47,5 +58,10 @@ class Data extends AbstractHelper
            'status' => $product->getStatus(),
            'thumbnail' => $this->imageProvider->init($product, 'product_listing_thumbnail')->getUrl()
        ];
+   }
+
+   public function getProductAllData($item)
+   {
+       return $this->productRepository->getById($item['product_id']);
    }
 }

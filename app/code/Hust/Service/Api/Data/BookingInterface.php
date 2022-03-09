@@ -6,11 +6,16 @@ interface BookingInterface
 {
 
     const BOOKING_ID = 'booking_id';
-    const CUSTOMER_ID = 'customer_id';
     const LOCATOR_ID = 'locator_id';
     const SERVICE_ID = 'service_id';
     const HOUR_BOOKING = 'hour_booking';
     const DATE_BOOKING = 'date_booking';
+    const NAME = 'name';
+    const AGE = 'age';
+    const GENDER = 'gender';
+    const PHONE = 'phone';
+    const EMAIL = 'email';
+    const ADDRESS = 'address';
     const BOOKING_STATUS = 'booking_status';
     const CREATED_AT = 'created_at';
 
@@ -20,13 +25,22 @@ interface BookingInterface
     public function setLocatorId($locatorId);
     public function getServiceId();
     public function setServiceId($serviceId);
-    public function getCustomerId();
-    public function setCustomerId($customerId);
     public function getBookingStatus();
     public function setBookingStatus($status);
     public function getHourBooking();
     public function setHourBooking($hourBooking);
     public function getDateBooking();
     public function setDateBooking($dateBooking);
-
+    public function getName();
+    public function setName($name);
+    public function getAge();
+    public function setAge($age);
+    public function getGender();
+    public function setGender($gender);
+    public function getPhone();
+    public function setPhone($phone);
+    public function getEmail();
+    public function setEmail($email);
+    public function getAddress();
+    public function setAddress($address);
 }

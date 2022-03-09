@@ -20,11 +20,14 @@ abstract class Index extends Action
      * @param \Magento\Framework\App\Action\Context      $context
      * @param \Magento\Framework\View\Result\PageFactory $resultPageFactory
      */
+
+    protected $registry;
     public function __construct(
         Context $context,
-        PageFactory $resultPageFactory
+        PageFactory $resultPageFactory,
     ) {
         $this->resultPageFactory = $resultPageFactory;
         parent::__construct($context);
     }
+
 }

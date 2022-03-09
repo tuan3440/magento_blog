@@ -136,7 +136,7 @@
             </argument>
         </column>
 
-        <column name="locator_id">
+        <column name="locator_id" class="Hust\Service\Ui\Component\Listing\Columns\Column\LocatorInfo">
             <argument name="data" xsi:type="array">
                 <item name="config" xsi:type="array">
                     <item name="filter" xsi:type="string">text</item>
@@ -146,7 +146,7 @@
             </argument>
         </column>
 
-        <column name="service_id">
+        <column name="service_id" class="Hust\Service\Ui\Component\Listing\Columns\Column\ServiceInfo">
             <argument name="data" xsi:type="array">
                 <item name="config" xsi:type="array">
                     <item name="filter" xsi:type="string">text</item>
@@ -162,8 +162,9 @@
                     <item name="filter" xsi:type="string">dateRange</item>
                     <item name="component" xsi:type="string">Magento_Ui/js/grid/columns/date</item>
                     <item name="dataType" xsi:type="string">date</item>
-                    <item name="label" xsi:type="string" translate="true">Date of Birth</item>
+                    <item name="label" xsi:type="string" translate="true">Date</item>
                     <item name="sortOrder" xsi:type="number">70</item>
+                    <item name="dateFormat" xsi:type="string">Y-MM-dd</item>
                 </item>
             </argument>
         </column>
@@ -176,18 +177,7 @@
                     <item name="dataType" xsi:type="string">date</item>
                     <item name="label" xsi:type="string" translate="true">Created At</item>
                     <item name="sortOrder" xsi:type="number">70</item>
-                </item>
-            </argument>
-        </column>
-
-        <column name="updated_at" class="Magento\Ui\Component\Listing\Columns\Date">
-            <argument name="data" xsi:type="array">
-                <item name="config" xsi:type="array">
-                    <item name="filter" xsi:type="string">dateRange</item>
-                    <item name="component" xsi:type="string">Magento_Ui/js/grid/columns/date</item>
-                    <item name="dataType" xsi:type="string">date</item>
-                    <item name="label" xsi:type="string" translate="true">Updated At</item>
-                    <item name="sortOrder" xsi:type="number">80</item>
+                    <item name="dateFormat" xsi:type="string">Y-MM-dd HH:mm:ss</item>
                 </item>
             </argument>
         </column>
@@ -197,12 +187,13 @@
                 <item name="config" xsi:type="array">
                     <item name="label" xsi:type="string" translate="true">Status</item>
                     <item name="filter" xsi:type="string">select</item>
-                    <item name="component" xsi:type="string">Magento_Ui/js/grid/columns/select</item>
+                    <item name="component" xsi:type="string">Hust_Service/js/grid/columns/select</item>
                     <item name="editor" xsi:type="array">
                         <item name="editorType" xsi:type="string">select</item>
                     </item>
                     <item name="dataType" xsi:type="string">select</item>
                     <item name="sortOrder" xsi:type="number">60</item>
+                    <item name="bodyTmpl" xsi:type="string">ui/grid/cells/html</item>
                 </item>
                 <item name="options" xsi:type="object">Hust\Service\Model\Source\BookingStatus</item>
             </argument>
@@ -213,7 +204,7 @@
                 <item name="config" xsi:type="array">
                     <item name="resizeEnabled" xsi:type="boolean">false</item>
                     <item name="resizeDefaultWidth" xsi:type="string">107</item>
-                    <item name="indexField" xsi:type="string">service_id</item>
+                    <item name="indexField" xsi:type="string">booking_id</item>
                     <item name="sortOrder" xsi:type="number">99</item>
                 </item>
             </argument>

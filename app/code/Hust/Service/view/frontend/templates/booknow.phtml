@@ -3,6 +3,7 @@
  * @var Hust\Service\Block\Locator\View $block
  */
 $locator = $block->getLocator();
+$serviceId = $block->getServiceId();
 $hours = $block->getHours();
 ?>
 <div class="container">
@@ -70,7 +71,7 @@ $hours = $block->getHours();
     }
 
     .active {
-        background-color: #c34706!important;
+        background-color: #c34706 !important;
     }
 
 </style>
@@ -99,18 +100,22 @@ $hours = $block->getHours();
           data-hasrequired="<?php /* @escapeNotVerified */
           echo __('* Required Fields') ?>" autocomplete="off">
         <h2>Date : <span class="data-date"></span></h2>
+        <input type="hidden" name="date"></input>
+        <input type="hidden" name="booking_hour"></input>
+        <input type="hidden" name="locator_id" value="<?= $locator->getLocatorId();?>"></input>
+        <input type="hidden" name="service_id" value="<?= $serviceId;?>"></input>
         <h2>Hour : <span class="data-hour">8h30AM:10AM</span></h2>
         <?php echo $block->getBlockHtml('formkey') ?>
         <div class="field">
             <label class="label">Name</label>
             <div class="control">
-                <input type="text" name="name">
+                <input type="text" name="name" />
             </div>
         </div>
         <div class="field">
             <label class="label">Age</label>
             <div class="control">
-                <input type="text" name="age">
+                <input type="text" name="age" />
             </div>
         </div>
         <div class="field">
@@ -131,13 +136,13 @@ $hours = $block->getHours();
         <div class="field">
             <label class="label">Address</label>
             <div class="control">
-                <input type="text" name="address">
+                <input type="text" name="address" />
             </div>
         </div>
         <div class="field">
             <label class="label">Gmall</label>
             <div class="control">
-                <input type="text" name="gmall">
+                <input type="text" name="emall" />
             </div>
         </div>
     </form>
@@ -150,7 +155,9 @@ $hours = $block->getHours();
                 let date = $('#example-date').val();
                 console.log("aa" + date);
                 $('.data-date').text($('#example-date').val());
-                $('.data-hour').text($('button.active').text())
+                $('.data-hour').text($('button.active').text());
+                $('input[name="date"]').val($('#example-date').val());
+                $('input[name="booking_hour"]').val($('button.active').val());
                 var options = {
                     type: 'popup',
                     modalClass: 'popup-change-profile',
@@ -178,7 +185,7 @@ $hours = $block->getHours();
             })
 
             $('.select-hour button').on('click', function () {
-                $( ".select-hour button" ).each(function() {
+                $(".select-hour button").each(function () {
                     $(this).removeClass('active');
                 });
                 $(this).addClass('active');
