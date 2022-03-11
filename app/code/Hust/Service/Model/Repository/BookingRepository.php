@@ -86,4 +86,5 @@ class BookingRepository implements BookingRepositoryInterface
 
         return true;
     }
+
 }

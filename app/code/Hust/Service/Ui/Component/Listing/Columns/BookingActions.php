@@ -7,7 +7,7 @@ use Magento\Framework\View\Element\UiComponent\ContextInterface;
 use Magento\Framework\View\Element\UiComponentFactory;
 use Magento\Ui\Component\Listing\Columns\Column;
 
-class EmployeeActions extends Column
+class BookingActions extends Column
 {
     /**
      * @var UrlInterface
@@ -47,10 +47,10 @@ class EmployeeActions extends Column
                 $name = $this->getData('name');
                 $item[$name]['edit'] = [
                     'href' => $this->urlBuilder->getUrl(
-                        'booking/employee/edit',
-                        ['employee_id' => $item['employee_id']]
+                        'booking/booking/edit',
+                        ['booking_id' => $item['booking_id']]
                     ),
-                    'label' => __('Edit')
+                    'label' => __('View')
                 ];
             }
         }
@@ -59,5 +59,6 @@ class EmployeeActions extends Column
         return $dataSource;
     }
 }
+
 
 

@@ -199,7 +199,7 @@
             </argument>
         </column>
 
-        <actionsColumn name="actions" class="Hust\Service\Ui\Component\Listing\Columns\EmployeeActions">
+        <actionsColumn name="actions" class="Hust\Service\Ui\Component\Listing\Columns\BookingActions">
             <argument name="data" xsi:type="array">
                 <item name="config" xsi:type="array">
                     <item name="resizeEnabled" xsi:type="boolean">false</item>

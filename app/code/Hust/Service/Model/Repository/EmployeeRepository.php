@@ -87,4 +87,10 @@ class EmployeeRepository implements EmployeeRepositoryInterface
 
         return true;
     }
+
+    public function getListEmployee()
+    {
+        $collection = $this->employeeFactory->create()->getCollection();
+        return $collection;
+    }
 }

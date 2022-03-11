@@ -7,20 +7,28 @@ use \Magento\Framework\App\Helper\AbstractHelper;
 use Magento\Framework\App\Helper\Context;
 use Magento\Catalog\Model\ProductRepository;
 use Magento\Catalog\Helper\Image;
+use Hust\Service\Model\Repository\EmployeeRepository;
+use Hust\Service\Model\ResourceModel\Booking;
 
 class Data extends AbstractHelper
 {
     public $productRepository;
     private $imageProvider;
+    private $employeeRepo;
+    private $bookingRepo;
 
    public function __construct(
        Context $context,
        ProductRepository $productRepository,
-       Image $imageProvider
+       EmployeeRepository $employeeRepo,
+       Image $imageProvider,
+       Booking $bookingRepo
    )
    {
        $this->productRepository = $productRepository;
        $this->imageProvider = $imageProvider;
+       $this->employeeRepo = $employeeRepo;
+       $this->bookingRepo = $bookingRepo;
        parent::__construct($context);
    }
 
@@ -63,5 +71,22 @@ class Data extends AbstractHelper
    public function getProductAllData($item)
    {
        return $this->productRepository->getById($item['product_id']);
+   }
+
+   public function getListEmployeeAvailable()
+   {
+       $employees = $this->employeeRepo->getListEmployee()->getItems();
+       $data = [];
+       $data[''] = __('Select employee');
+
+       foreach ($employees as $employee) {
+           $data[$employee->getData('employee_id')] = __($employee->getData('first_name') . ' ' . $employee->getData('last_name'));
+       }
+       return $data;
+   }
+
+   public function getEmployeeOfBooking($bookingId)
+   {
+       return $this->bookingRepo->getEmployeeBooking($bookingId);
    }
 }
