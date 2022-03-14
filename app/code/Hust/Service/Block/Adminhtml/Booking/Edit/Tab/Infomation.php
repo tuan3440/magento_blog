@@ -1,6 +1,6 @@
 <?php
 
-namespace Hust\Service\Block\Adminhtml\Booking\Tab\Edit\Tab;
+namespace Hust\Service\Block\Adminhtml\Booking\Edit\Tab;
 
 use Magento\Backend\Block\Widget\Form\Generic;
 use Hust\Service\Model\ServiceRegistry;
@@ -24,7 +24,7 @@ class Infomation extends Generic
         parent::__construct($context, $registry, $formFactory, $data);
     }
 
-    protected function _prepareLayout()
+    protected function _prepareForm()
     {
 //        $form = $this->_formFactory->create(
 //            [
@@ -46,17 +46,16 @@ class Infomation extends Generic
             ]
         );
 
-//        $fieldGeneralInformation->addField(
-//            'booking_id',
-//            'text',
-//            [
-//                'label' => __('Booking ID'),
-//                'name' => 'booking_id',
-//                'required' => true,
-//                'disabled' => true,
-//                'value' => $bookingCurrent->getBookingId()
-//            ]
-//        );
+        $fieldGeneralInformation->addField(
+            'booking_id',
+            'hidden',
+            [
+                'label' => __('Booking ID'),
+                'name' => 'booking_id',
+                'required' => true,
+                'value' => $bookingCurrent->getBookingId()
+            ]
+        );
 
         $fieldGeneralInformation->addField(
             'name',
@@ -159,9 +158,9 @@ class Infomation extends Generic
             ]
         );
 
-        $form->setUseContainer(true);
+//        $form->setUseContainer(true);
         $this->setForm($form);
 
-        return parent::_prepareLayout();
+        return parent::_prepareForm();
     }
 }

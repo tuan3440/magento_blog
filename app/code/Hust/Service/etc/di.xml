@@ -5,7 +5,7 @@
     <preference for="Hust\Service\Api\Data\ServiceInterface" type="Hust\Service\Model\Service"/>
     <preference for="Hust\Service\Api\LocatorRepositoryInterface" type="Hust\Service\Model\Repository\LocatorRepository"/>
     <preference for="Hust\Service\Api\Data\LocatorInterface" type="Hust\Service\Model\Locator"/>
-    <preference for="Hust\Service\Api\BookingRepositoryInterface" type="Hust\Service\Model\Repository\LocatorRepository"/>
+    <preference for="Hust\Service\Api\BookingRepositoryInterface" type="Hust\Service\Model\Repository\BookingRepository"/>
     <preference for="Hust\Service\Api\Data\BookingInterface" type="Hust\Service\Model\Booking"/>
     <preference for="Hust\Service\Api\EmployeeRepositoryInterface" type="Hust\Service\Model\Repository\EmployeeRepository"/>
     <preference for="Hust\Service\Api\Data\EmployeeInterface" type="Hust\Service\Model\Employee"/>

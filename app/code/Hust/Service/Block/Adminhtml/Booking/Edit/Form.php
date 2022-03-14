@@ -1,6 +1,6 @@
 <?php
 
-namespace Hust\Service\Block\Adminhtml\Booking\Tab\Edit;
+namespace Hust\Service\Block\Adminhtml\Booking\Edit;
 
 use Magento\Backend\Block\Widget\Form\Generic;
 

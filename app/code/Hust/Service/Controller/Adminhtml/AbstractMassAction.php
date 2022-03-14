@@ -52,7 +52,6 @@ abstract class AbstractMassAction extends Action
     public function execute()
     {
 //        $this->filter->applySelectionOnTargetProvider(); // compatibility with Mass Actions on Magento 2.1.0
-
         $collection = $this->filter->getCollection($this->getCollection());
 
         $collectionSize = $collection->getSize();

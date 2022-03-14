@@ -1,6 +1,6 @@
 <?php
 
-namespace Hust\Service\Block\Adminhtml\Booking\Tab\Edit;
+namespace Hust\Service\Block\Adminhtml\Booking\Edit;
 
 use Magento\Backend\Block\Widget\Tabs as WidgetTabs;
 
@@ -26,7 +26,7 @@ class Tabs extends WidgetTabs
             [
                 'label' => __('Information'),
                 'title' => __('Information'),
-                'content' => $this->getLayout()->createBlock('Hust\Service\Block\Adminhtml\Booking\Tab\Edit\Tab\Infomation')->toHtml(),
+                'content' => $this->getLayout()->createBlock('Hust\Service\Block\Adminhtml\Booking\Edit\Tab\Infomation')->toHtml(),
                 'active' => true
             ]
         );
@@ -36,7 +36,7 @@ class Tabs extends WidgetTabs
             [
                 'label' => __('Setting'),
                 'title' => __('Setting'),
-                'content' => $this->getLayout()->createBlock('Hust\Service\Block\Adminhtml\Booking\Tab\Edit\Tab\Setting')->toHtml(),
+                'content' => $this->getLayout()->createBlock('Hust\Service\Block\Adminhtml\Booking\Edit\Tab\Setting')->toHtml(),
                 'active' => false
             ]
         );

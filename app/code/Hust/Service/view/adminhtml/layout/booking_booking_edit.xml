@@ -4,13 +4,13 @@
       xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
     <body>
         <referenceContainer name="left">
-            <block class="Hust\Service\Block\Adminhtml\Booking\Tab\Edit\Tabs" name="return_edit_tabs" >
+            <block class="Hust\Service\Block\Adminhtml\Booking\Edit\Tabs" name="return_edit_tabs" >
 <!--                <block class="Hust\Service\Block\Adminhtml\Booking\Tab\Edit\Tab\ReturnItems"-->
 <!--                       name="return_returnitem_edit_tabs.form" as="return_returnitem_edit_tabs_form"/>-->
             </block>
         </referenceContainer>
         <referenceContainer name="content">
-            <block class="Hust\Service\Block\Adminhtml\Booking\Tab\Edit" name="return_item_edit">
+            <block class="Hust\Service\Block\Adminhtml\Booking\Edit" name="return_item_edit">
             </block>
         </referenceContainer>
     </body>

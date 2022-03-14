@@ -27,5 +27,6 @@ class ListLocator implements OptionSourceInterface
         }
         return $data;
     }
+
 }
 

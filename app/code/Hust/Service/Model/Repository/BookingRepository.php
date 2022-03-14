@@ -47,6 +47,11 @@ class BookingRepository implements BookingRepositoryInterface
         }
     }
 
+    /**
+     * @param $bookingId
+     * @return \Hust\Service\Model\Booking|mixed
+     * @throws NoSuchEntityException
+     */
     public function getById($bookingId)
     {
         if (!isset($this->booking[$bookingId])) {
