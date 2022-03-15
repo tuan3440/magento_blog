@@ -8,7 +8,7 @@
         <column xsi:type="varchar" name="image" nullable="false" length="255" comment="Image"/>
         <column xsi:type="text" name="short_description" nullable="true" comment="Short description"/>
         <column xsi:type="text" name="content" nullable="true" comment="Content"/>
-        <column xsi:type="text" name="charge" nullable="true" comment="Charge"/>
+        <column xsi:type="int" name="charge" nullable="true" comment="Charge"/>
         <column xsi:type="boolean" name="is_active" nullable="false" comment="Is Active" default="false"/>
         <column xsi:type="int" name="position" padding="10" unsigned="true" comment="Position"/>
         <column xsi:type="timestamp" name="created_at" on_update="false" nullable="false" default="CURRENT_TIMESTAMP"
@@ -229,6 +229,36 @@
             column="booking_id"
             referenceTable="hust_booking"
             referenceColumn="booking_id"
+            onDelete="CASCADE"
+        />
+    </table>
+
+    <table name="hust_booking_sale">
+        <column xsi:type="int" name="id" comment="Booking Sale Id" unsigned="true" padding="10" nullable="false"
+                identity="true"/>
+        <column xsi:type="int" name="service_id" padding="10" unsigned="true" comment="Service Id"/>
+        <column xsi:type="int" name="locator_id" padding="10" unsigned="true" comment="Locator Id"/>
+        <column xsi:type="date" name="date" comment="Date select" nullable="false" />
+        <column xsi:type="int" name="charge" nullable="true" comment="Charge"/>
+        <constraint xsi:type="primary" referenceId="PRIMARY">
+            <column name="id"/>
+        </constraint>
+        <constraint
+            xsi:type="foreign"
+            referenceId="hust_booking_sale_hust_service_service_id"
+            table="hust_booking_sale"
+            column="service_id"
+            referenceTable="hust_service"
+            referenceColumn="service_id"
+            onDelete="CASCADE"
+        />
+        <constraint
+            xsi:type="foreign"
+            referenceId="hust_booking_sale_hust_locator_locator_id"
+            table="hust_booking_sale"
+            column="locator_id"
+            referenceTable="hust_locator"
+            referenceColumn="locator_id"
             onDelete="CASCADE"
         />
     </table>
