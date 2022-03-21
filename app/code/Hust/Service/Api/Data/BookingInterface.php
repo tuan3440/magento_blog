@@ -9,7 +9,7 @@ interface BookingInterface
     const LOCATOR_ID = 'locator_id';
     const SERVICE_ID = 'service_id';
     const HOUR_BOOKING = 'hour_booking';
-    const DATE_BOOKING = 'date_booking';
+    const DATE_BOOKING = 'date';
     const NAME = 'name';
     const AGE = 'age';
     const GENDER = 'gender';
