@@ -262,4 +262,21 @@
             onDelete="CASCADE"
         />
     </table>
+
+    <table name="hust_booking_promotion" resource="default" engine="innodb" comment="hust_booking_promotion">
+        <column xsi:type="int" name="promotion_id" comment="Id" unsigned="true" padding="10" nullable="false"
+                identity="true"/>
+        <column xsi:type="varchar" name="image" nullable="false" length="255" comment="Image"/>
+        <column xsi:type="varchar" name="name" comment="Name" nullable="false" length="255" />
+        <column xsi:type="int" name="rule" comment="Rule" unsigned="true" nullable="true" />
+        <column xsi:type="smallint" name="status" comment="promotion Status" unsigned="true" default="0" nullable="false" />
+        <column xsi:type="date" name="date_start" comment="Date of birth" nullable="true" />
+        <column xsi:type="date" name="date_end" comment="Date of birth" nullable="true" />
+        <column xsi:type="text" name="description" comment="Description" nullable="true" />
+        <column xsi:type="varchar" name="service_id" comment="Service Id" length="255" nullable="true"/>
+
+        <constraint xsi:type="primary" referenceId="PRIMARY">
+            <column name="promotion_id"/>
+        </constraint>
+    </table>
 </schema>

@@ -9,6 +9,8 @@
     <preference for="Hust\Service\Api\Data\BookingInterface" type="Hust\Service\Model\Booking"/>
     <preference for="Hust\Service\Api\EmployeeRepositoryInterface" type="Hust\Service\Model\Repository\EmployeeRepository"/>
     <preference for="Hust\Service\Api\Data\EmployeeInterface" type="Hust\Service\Model\Employee"/>
+    <preference for="Hust\Service\Api\PromotionRepositoryInterface" type="Hust\Service\Model\Repository\PromotionRepository"/>
+    <preference for="Hust\Service\Api\Data\PromotionInterface" type="Hust\Service\Model\Promotion"/>
 
     <type name="Magento\Framework\View\Element\UiComponent\DataProvider\CollectionFactory">
         <arguments>
@@ -17,6 +19,7 @@
                 <item name="locator_listing_data_source" xsi:type="string">Hust\Service\Model\ResourceModel\Locator\Grid</item>
                 <item name="employee_listing_data_source" xsi:type="string">Hust\Service\Model\ResourceModel\Employee\Grid</item>
                 <item name="booking_listing_data_source" xsi:type="string">Hust\Service\Model\ResourceModel\Booking\Grid</item>
+                <item name="promotion_listing_data_source" xsi:type="string">Hust\Service\Model\ResourceModel\Promotion\Grid</item>
             </argument>
         </arguments>
     </type>
