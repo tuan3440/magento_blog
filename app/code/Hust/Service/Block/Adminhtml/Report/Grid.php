@@ -125,17 +125,6 @@ class Grid extends \Magento\Backend\Block\Widget\Grid\Extended
                 $to = $this->_prepareDateTo($to);
                 $collection->addFieldToFilter('date', ['from' => $from, 'to' => $to]);
 
-                switch ($period) {
-                    case 'day':
-                        $collection->getSelect()->group('concat(day(date), month(date), year(date))');
-                        break;
-                    case 'month':
-                        $collection->getSelect()->group('concat(month(date), year(date))');
-                        break;
-                    case 'year':
-                        $collection->getSelect()->group('concat(year(date))');
-                        break;
-                }
                 if ($locator = $params->getLocatorId()) {
                     $collection->addFieldToFilter('locator_id', ['in' => $locator]);
                 }
@@ -205,9 +194,9 @@ class Grid extends \Magento\Backend\Block\Widget\Grid\Extended
             'type' => 'number',
             'index' => 'charge',
         ]);
-        $this->addExportType('*/*/exportReturnItemsCsv', __('CSV'));
-        $this->addExportType('*/*/exportReturnItemsExcel', __('Excel XML'));
-        $this->addExportType('*/*/downloadPdfReturnItems', __('Download PDF'));
+        $this->addExportType('*/*/exportReportCsv', __('CSV'));
+        $this->addExportType('*/*/exportReportExcel', __('Excel XML'));
+//        $this->addExportType('*/*/downloadPdfReturnItems', __('Download PDF'));
 
         return parent::_prepareColumns();
     }
