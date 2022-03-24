@@ -31,9 +31,7 @@ class PromotionRepository implements PromotionRepositoryInterface
     {
         try {
             if ($promotion->getPromotionId()) {
-                $promotion = $this->getById($$promotion->getPromotionId())->addData($promotion->getData());
-            } else {
-                $promotion->setPromotionId(null);
+                $promotion = $this->getById($promotion->getPromotionId())->addData($promotion->getData());
             }
             $this->promotionResource->save($promotion);
             unset($this->promotions[$promotion->getPromotionId()]);
@@ -57,9 +55,9 @@ class PromotionRepository implements PromotionRepositoryInterface
             $promotion = $this->promotionFactory->create();
             $this->promotionResource->load($promotion, $promotionId);
             if (!$promotion->getPromotionId()) {
-                throw new NoSuchEntityException(__('Service with specified ID "%1" not found.', $promotionId));
+                throw new NoSuchEntityException(__('Promotion with specified ID "%1" not found.', $promotionId));
             }
-            $this->services[$promotionId] = $promotion;
+            $this->promotions[$promotionId] = $promotion;
         }
         return $this->promotions[$promotionId];
     }

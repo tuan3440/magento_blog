@@ -49,4 +49,10 @@
         </arguments>
     </type>
 
+    <type name="Hust\Service\Controller\Adminhtml\Promotion\Uploader">
+        <arguments>
+            <argument name="imageUploader" xsi:type="object">Hust\Service\Model\ImageUpload</argument>
+        </arguments>
+    </type>
+
 </config>

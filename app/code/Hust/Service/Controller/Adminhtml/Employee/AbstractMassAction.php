@@ -24,7 +24,7 @@ abstract class AbstractMassAction extends \Hust\Service\Controller\Adminhtml\Abs
         Action\Context $context,
         Filter $filter,
         LoggerInterface $logger,
-        \Hust\Service\Api\EmployeeRepositoryInterface $repository,
+        \Hust\Service\Model\Repository\EmployeeRepository $repository,
         \Hust\Service\Model\ResourceModel\Employee\CollectionFactory $collectionFactory
     ) {
         parent::__construct($context, $filter, $logger);

@@ -2,8 +2,8 @@
 
 namespace Hust\Service\Model\ResourceModel\Promotion;
 
-use Hust\Service\Model\ResourceModel\Promotion as ResourceService;
-use Hust\Service\Model\ResourceModel\Promotion;
+use Hust\Service\Model\ResourceModel\Promotion as ResourcePromotion;
+use Hust\Service\Model\Promotion;
 use Magento\Framework\Model\ResourceModel\Db\Collection\AbstractCollection;
 
 class Collection extends AbstractCollection
@@ -12,6 +12,6 @@ class Collection extends AbstractCollection
 
     protected function _construct()
     {
-        $this->_init(Promotion::class, ResourceService::class);
+        $this->_init(Promotion::class, ResourcePromotion::class);
     }
 }

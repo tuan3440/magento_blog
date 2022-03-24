@@ -1,14 +1,11 @@
 <?php
 
-namespace Hust\Service\Controller\Adminhtml\Service;
+namespace Hust\Service\Controller\Adminhtml\Promotion;
 
-use Magento\Backend\App\Action;
 use Magento\Ui\Component\MassAction\Filter;
 use Psr\Log\LoggerInterface;
+use Magento\Backend\App\Action;
 
-/**
- * Class AbstractMassAction
- */
 abstract class AbstractMassAction extends \Hust\Service\Controller\Adminhtml\AbstractMassAction
 {
     /**
@@ -16,7 +13,7 @@ abstract class AbstractMassAction extends \Hust\Service\Controller\Adminhtml\Abs
      *
      * @see _isAllowed()
      */
-    const ADMIN_RESOURCE = 'Hust_Service::hust_service';
+    const ADMIN_RESOURCE = 'Hust_Service::hust_promotion';
 
 
     private $repository;
@@ -27,8 +24,8 @@ abstract class AbstractMassAction extends \Hust\Service\Controller\Adminhtml\Abs
         Action\Context $context,
         Filter $filter,
         LoggerInterface $logger,
-        \Hust\Service\Model\Repository\ServiceRepository $repository,
-        \Hust\Service\Model\ResourceModel\Service\CollectionFactory $collectionFactory
+        \Hust\Service\Model\Repository\PromotionRepository $repository,
+        \Hust\Service\Model\ResourceModel\Promotion\CollectionFactory $collectionFactory
     ) {
         parent::__construct($context, $filter, $logger);
         $this->repository = $repository;

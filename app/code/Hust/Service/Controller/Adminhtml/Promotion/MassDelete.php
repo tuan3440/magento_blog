@@ -1,21 +1,16 @@
 <?php
 
-namespace Hust\Service\Controller\Adminhtml\Service;
+namespace Hust\Service\Controller\Adminhtml\Promotion;
 
+use Hust\Service\Controller\Adminhtml\Promotion\AbstractMassAction;
 
-/**
- * Class MassDelete
- */
 class MassDelete extends AbstractMassAction
 {
-    /**
-     * @param $service
-     * @return \Magento\Framework\Controller\Result\Redirect
-     */
-    protected function itemAction($service)
+
+    protected function itemAction($promotion)
     {
         try {
-            $this->getRepository()->deleteById($service->getServiceId());
+            $this->getRepository()->deleteById($promotion->getPromotionId());
         } catch (\Exception $e) {
             $this->getMessageManager()->addErrorMessage($e->getMessage());
         }

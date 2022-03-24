@@ -11,7 +11,7 @@ class Promotion extends AbstractModel implements IdentityInterface, PromotionInt
 {
     const CACHE_TAG = 'hust_booking_promotion';
 
-    public function __construct(Context $context, \Magento\Framework\Registry $registry, ResourceModel\Locator $resource, \Magento\Framework\Data\Collection\AbstractDb $resourceCollection = null, array $data = [])
+    public function __construct(Context $context, \Magento\Framework\Registry $registry, ResourceModel\Promotion $resource, \Magento\Framework\Data\Collection\AbstractDb $resourceCollection = null, array $data = [])
     {
         parent::__construct($context, $registry, $resource, $resourceCollection, $data);
     }
@@ -28,7 +28,7 @@ class Promotion extends AbstractModel implements IdentityInterface, PromotionInt
 
     public function getPromotionId()
     {
-        // TODO: Implement getPromotionId() method.
+        return $this->getData(PromotionInterface::PROMOTION_ID);
     }
 
     public function setPromotionId($promotionId)
@@ -38,7 +38,7 @@ class Promotion extends AbstractModel implements IdentityInterface, PromotionInt
 
     public function getImage()
     {
-        // TODO: Implement getImage() method.
+        return $this->getData(PromotionInterface::IMAGE);
     }
 
     public function setImage($image)
@@ -98,7 +98,7 @@ class Promotion extends AbstractModel implements IdentityInterface, PromotionInt
 
     public function getName()
     {
-        // TODO: Implement getName() method.
+        return $this->getData(PromotionInterface::NAME);
     }
 
     public function setName($name)
