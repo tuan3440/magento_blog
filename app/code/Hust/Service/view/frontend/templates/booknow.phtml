@@ -83,7 +83,8 @@ $hours = $block->getHours();
         'mage/calendar'
     ], function ($, $t) {
         $('#example-date').calendar({
-            dateFormat: "d/M/yy",
+            dateFormat: "y/m/d",
+            timeFormat: "HH:mm:ss",
             changeMonth: true,
             changeYear: true,
             showButtonPanel: true,

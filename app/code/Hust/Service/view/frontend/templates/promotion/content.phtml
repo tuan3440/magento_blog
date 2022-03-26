@@ -1,0 +1,18 @@
+<?php
+    $data = $block->getPromotion();
+    $a = 1;
+?>
+
+<div class="immu-cate">
+    <div class="immu-col">
+        <h1 class="imu-title"><?php echo __($data['name']); ?></h1>
+        <div class="imu-content-text-detail">
+            <?php echo __($data['description']); ?>
+        </div>
+    </div>
+
+    <div>
+        <a href="<?= $block->getUrl('bookings/index'); ?>">Booking Now</a>
+    </div>
+</div>
+

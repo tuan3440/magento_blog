@@ -63,7 +63,7 @@ class Form extends \Hust\Service\Block\Adminhtml\Filter\Form
                'title' => __('From'),
                'required' => true,
                'css_class' => 'admin__field-small',
-               'class' => 'admin__control-text'
+               'class' => 'admin__control-text',
            ]
        );
 

@@ -45,7 +45,7 @@ class ServiceRepository implements ServiceRepositoryInterface
             if ($service->getServiceId()) {
                 $service = $this->getById($service->getServiceId())->addData($service->getData());
             } else {
-                $service->getServiceId(null);
+                $service->setServiceId(null);
             }
             $this->serviceResource->save($service);
             unset($this->services[$service->getServiceId()]);
@@ -70,12 +70,12 @@ class ServiceRepository implements ServiceRepositoryInterface
     public function getById($serviceId)
     {
         if (!isset($this->services[$serviceId])) {
-            $services = $this->serviceFactory->create();
-            $this->serviceResource->load($services, $serviceId);
-            if (!$services->getServiceId()) {
+            $service = $this->serviceFactory->create();
+            $this->serviceResource->load($service, $serviceId);
+            if (!$service->getServiceId()) {
                 throw new NoSuchEntityException(__('Service with specified ID "%1" not found.', $serviceId));
             }
-            $this->services[$serviceId] = $services;
+            $this->services[$serviceId] = $service;
         }
         return $this->services[$serviceId];
     }
