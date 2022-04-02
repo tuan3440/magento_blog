@@ -5,7 +5,7 @@ $a = 1;
 <div class="carousel-wrap">
     <div class="owl-carousel">
         <?php foreach ($promotions as $promotion ):?>
-        <div class="item"><img src="<?= $block->getUrl().'pub/media/hust/service/'.$promotion['image'];?>"/></div>
+            <a href="<?= $block->getUrl('bookings/promotion/index/promotion_id/'.$promotion['promotion_id']);?>"><div class="item"><img src="<?= $block->getUrl().'pub/media/hust/service/'.$promotion['image'];?>"/></div></a>
         <?php endforeach;?>
     </div>
 </div>

@@ -5,6 +5,7 @@
 $locator = $block->getLocator();
 $serviceId = $block->getServiceId();
 $hours = $block->getHours();
+$charge = $block->getCharge();
 ?>
 <div class="container">
     <div class="title">Chọn thời gian và khung giờ sử dụng dịch vụ</div>
@@ -28,6 +29,7 @@ $hours = $block->getHours();
                 endforeach;
                 ?>
             </div>
+            <h2>Charge($) : <?= $charge?></h2>
             <button id="booking" class="booking">Book</button>
         </div>
     </div>
