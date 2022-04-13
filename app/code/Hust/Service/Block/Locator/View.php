@@ -8,6 +8,7 @@ use Hust\Service\Model\Repository\ServiceRepository;
 use Hust\Service\Model\Source\Hour;
 use Hust\Service\Model\Repository\PromotionRepository;
 use Hust\Service\Model\ResourceModel\Promotion;
+use Hust\Service\Model\ResourceModel\Booking\CollectionFactory;
 
 class View extends Template
 {
@@ -15,9 +16,11 @@ class View extends Template
     protected $hours;
     protected $promotion;
     protected $serviceRepo;
+    protected $bookingCollection;
     public function __construct(Template\Context $context,
                                 LocatorFactory $locatorFactory,
                                 ServiceRepository $serviceRepository,
+                                CollectionFactory $bookingCollection,
                                 Hour $hours,
                                 Promotion $promotion,
                                 array $data = [])
@@ -26,6 +29,7 @@ class View extends Template
         $this->locator = $locatorFactory;
         $this->hours = $hours;
         $this->serviceRepo = $serviceRepository;
+        $this->bookingCollection = $bookingCollection;
         parent::__construct($context, $data);
     }
 
@@ -45,7 +49,25 @@ class View extends Template
 
     public function getHours()
     {
-        return $this->hours->toArray();
+        $hoursList = [];
+        $locatorId = $this->getLocatorIdCurrent();
+        $locator = $this->locator->create()->load($locatorId);
+        $hours = $locator->getData('hours');
+        if ($hours != "") {
+            $hours = explode(',', $hours);
+        } else {
+            $hours = [];
+        }
+        $hourList = $this->hours->toArray();
+        foreach ($hourList as $key => $value) {
+            if (in_array($key, $hours)) {
+                $hoursList[$key] = [
+                     'value' => $value,
+                     'isAvailable' => 1
+                ];
+            }
+        }
+        return $hoursList;
     }
 
     public function getCharge()
@@ -56,5 +78,30 @@ class View extends Template
         $discount = $this->promotion->getDiscountByPromotion($serviceId);
         return (int)$charge*$discount;
 
+    }
+
+    public function getSlot()
+    {
+        $slots = [];
+        $hours = $this->getHours();
+        $serviceId = $this->getServiceIdCurrent();
+        $locatorId = $this->getLocatorIdCurrent();
+        $date = $this->getDateBooking();
+        $collection = $this->bookingCollection->create()->addFieldToFilter("booking_status", 1)
+            ->addFieldToFilter('service_id', $serviceId)
+            ->addFieldToFilter('date', $date)
+            ->addFieldToFilter('locator_id', $locatorId);
+        if ($collection->getItems() > 0) {
+            foreach ($collection->getItems() as $c) {
+                $slots[] = $c['booking_hour'];
+            }
+        }
+
+        foreach ($hours as $key => $value) {
+            if (in_array($key, $slots)) {
+                $hours[$key]['isAvailable'] = 0;
+            }
+        }
+        return $hours;
     }
 }

@@ -1,6 +1,0 @@
-<?xml version="1.0"?>
-<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Email:etc/email_templates.xsd">
-    <template id="notify_cutomer_cancel" label="This is email cancel" file="notify_cutomer_cancel.html" type="html" module="Dco_Service" area="frontend"/>
-    <template id="notify_cutomer_accept" label="This is email accept" file="notify_cutomer_accept.html" type="html" module="Dco_Service" area="frontend"/>
-    <template id="notify_cutomer_thankyou" label="This is email thank you" file="notify_cutomer_thankyou.html" type="html" module="Dco_Service" area="frontend"/>
-</config>

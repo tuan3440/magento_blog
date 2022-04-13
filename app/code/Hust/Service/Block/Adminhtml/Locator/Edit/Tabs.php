@@ -3,6 +3,7 @@
 namespace Hust\Service\Block\Adminhtml\Locator\Edit;
 
 use Hust\Service\Block\Adminhtml\Locator\Edit\Tab\Info;
+use Hust\Service\Block\Adminhtml\Locator\Edit\Tab\Hour;
 
 class Tabs extends \Magento\Backend\Block\Widget\Tabs
 {
@@ -34,10 +35,22 @@ class Tabs extends \Magento\Backend\Block\Widget\Tabs
         $this->addTab(
             'available_service',
             [
-                'label' => __('Available Services'),
-                'title' => __('Available Services'),
+                'label' => __('Available Service'),
+                'title' => __('Available Service'),
                 'url' => $this->getUrl('*/*/availableservices', ['_current' => true]),
                 'class' => 'ajax',
+                'active' => false
+            ]
+        );
+
+        $this->addTab(
+            'hour_service',
+            [
+                'label' => __('Hour'),
+                'title' => __('Hour'),
+                'content' => $this->getLayout()->createBlock(
+                    Hour::class
+                )->toHtml(),
                 'active' => false
             ]
         );

@@ -1,13 +1,42 @@
 <?php
-$hours = $block->getHourOption();
+//$hours = $block->getHourOption();
 $slots = $block->getSlot();
 ?>
-<select id="option" name="hour">
-    <?php foreach ($hours as $hour): ?>
-        <option value="<?= $hour['value']?>"><?= $hour['label'].' ('. $slots[$hour['value']].' slot)'?></option>
-    <?php endforeach;?>
-</select>
+<div class="select-hour">
+    <?php
+    foreach ($slots as $key => $value):
+        ?>
+        <button value="<?= $key ?>"
+                <?php if ($value['isAvailable'] == 1): ?>
+                class="o-active"
+                <?php endif; ?>
+                >
+           <h2><?= $value['value'] ?></h2>
+            <?php
+               if ($value['isAvailable'] == 1) {
+                   echo '<h3>Available</h3>';
+               } else {
+                   echo '<h3>Not Available</h3>';
+               }
+            ?>
+        </button>
+    <?php
+    endforeach;
+    ?>
+</div>
 
-<style>
+<script type="text/javascript">
+    require(['jquery', 'Magento_Ui/js/modal/modal', 'mage/mage'], function ($, modal) {
+        $(document).ready(function () {
 
-</style>
+            $('.select-hour button.o-active').on('click', function () {
+                $(".select-hour button").each(function () {
+                    $(this).removeClass('active');
+                });
+                $(this).addClass('active');
+            })
+        });
+    })
+</script>
+
+

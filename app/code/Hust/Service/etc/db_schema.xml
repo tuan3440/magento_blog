@@ -64,6 +64,7 @@
         <column xsi:type="varchar" name="country" length="255" nullable="false" comment="Country locator"/>
         <column xsi:type="varchar" name="phone" length="255" nullable="false" comment="Phone locator"/>
         <column xsi:type="varchar" name="email" length="255" nullable="false" comment="Email locator"/>
+        <column xsi:type="varchar" name="hours" length="255" nullable="false" comment="Hours"/>
         <column xsi:type="boolean" name="is_active" nullable="false" comment="Is Active" default="false"/>
         <column xsi:type="timestamp" name="created_at" on_update="false" nullable="false" default="CURRENT_TIMESTAMP"
                 comment="Created At"/>
@@ -113,6 +114,8 @@
         <column xsi:type="varchar" name="phone" comment="phone" length="255" nullable="false"/>
         <column xsi:type="varchar" name="email" comment="email" length="255" nullable="false"/>
         <column xsi:type="varchar" name="address" comment="address" length="255" nullable="false"/>
+        <column xsi:type="text" name="reason" comment="reason" nullable="true"/>
+        <column xsi:type="text" name="require" comment="require" nullable="true"/>
         <column xsi:type="date" name="date" comment="Date select" nullable="false" />
         <column xsi:type="timestamp" name="created_at" on_update="false" nullable="false" default="CURRENT_TIMESTAMP"
                 comment="Created At"/>

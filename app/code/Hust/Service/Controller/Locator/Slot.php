@@ -1,23 +1,15 @@
 <?php
-/**
- * Copyright © OpenTechiz, VietNam. All rights reserved.
- * See COPYING.txt for license details.
- * @package        OpenTechiz
- * @author         vuthuan <support@opentechiz.com>
- * @copyright      2021 Vu Thuan (03 2808 3090)
- */
 
-namespace Dco\Service\Controller\Locator;
+namespace Hust\Service\Controller\Locator;
 
-use Dco\Service\Api\LocatorRepositoryInterface;
+use Hust\Service\Api\LocatorRepositoryInterface;
 use Magento\Catalog\Model\ProductFactory;
 use Magento\Framework\App\Action\Action;
 use Magento\Framework\App\Action\Context;
 use Magento\Framework\App\ResponseInterface;
 use Magento\Framework\Controller\ResultFactory;
 use Magento\Framework\View\LayoutFactory;
-
-class Slot  extends Action
+class Slot extends Action
 {
     /**
      * @var LocatorRepositoryInterface
@@ -59,11 +51,11 @@ class Slot  extends Action
         $date = $this->getRequest()->getParam('date', 0);
         $serviceId = $this->getRequest()->getParam('service_id', 0);
         $locatorId = $this->getRequest()->getParam('locator_id', 0);
-        $response['slot'] = $layout->createBlock('Dco\Service\Block\Account\InformationCalendar')
+        $response['slot'] = $layout->createBlock('Hust\Service\Block\Locator\View')
             ->setDateBooking($date)
-            ->setServiceId($serviceId)
-            ->setLocatorId($locatorId)
-            ->setTemplate('Dco_Service::hour.phtml')->toHtml();
+            ->setServiceIdCurrent($serviceId)
+            ->setLocatorIdCurrent($locatorId)
+            ->setTemplate('Hust_Service::hour.phtml')->toHtml();
         $resultJson = $this->resultFactory->create(ResultFactory::TYPE_JSON);
         $resultJson->setData($response);
         return $resultJson;

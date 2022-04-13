@@ -158,6 +158,18 @@ class Infomation extends Generic
             ]
         );
 
+        $fieldGeneralInformation->addField(
+            'require',
+            'textarea',
+            [
+                'label' => __('Require of customer'),
+                'name' => 'require',
+                'required' => true,
+                'disabled' => true,
+                'value' => $bookingCurrent->getRequire()
+            ]
+        );
+
 //        $form->setUseContainer(true);
         $this->setForm($form);
 
