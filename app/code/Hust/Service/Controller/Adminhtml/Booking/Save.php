@@ -37,6 +37,7 @@ class Save extends Booking
             try {
                 $bookingRepo = $this->getBookingRepository()->getById($data['booking_id']);
                 $bookingRepo->setBookingStatus($data['booking_status']);
+                $bookingRepo->setReason($data['reason']);
                 if ($data['booking_status'] == 3) {
                     $this->saveBookingSale($bookingRepo);
                 }

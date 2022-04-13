@@ -2,6 +2,7 @@
 
 namespace Hust\Service\Block\Adminhtml\Booking\Edit\Tab;
 
+use Magento\Backend\Block\Widget\Form\Element\Dependence;
 use Magento\Backend\Block\Widget\Form\Generic;
 use Hust\Service\Model\ServiceRegistry;
 use Hust\Service\Helper\Data;
@@ -44,23 +45,13 @@ class Setting extends Generic
         $form = $this->_formFactory->create();
         $bookingCurrent = $this->serviceRegistry->registry('booking_current');
         $fieldGeneralInformation = $form->addFieldset(
-            'infomation_form',
+            'setting_form',
             [
                 'legend' => __('Setting')
             ]
         );
 
-        $fieldGeneralInformation->addField(
-            'employee_id',
-            'select',
-            [
-                'label' => __('Employee'),
-                'name' => 'employee_id',
-                'required' => true,
-                'value' => $this->helper->getEmployeeOfBooking($bookingCurrent->getBookingId()) ?? '' ,
-                'values' => $this->helper->getListEmployeeAvailable()
-            ]
-        );
+
 
         $fieldGeneralInformation->addField(
             'booking_status',
@@ -70,9 +61,48 @@ class Setting extends Generic
                 'name' => 'booking_status',
                 'required' => true,
                 'value' => $bookingCurrent->getBookingStatus() ,
-                'values' => $this->bookingStatus->toArray()
+                'values' => $this->bookingStatus->toArray(),
+
             ]
         );
+
+        $fieldGeneralInformation->addField(
+            'employee_id',
+            'select',
+            [
+                'label' => __('Employee'),
+                'name' => 'employee_id',
+                'value' => $this->helper->getEmployeeOfBooking($bookingCurrent->getBookingId()) ?? '' ,
+                'values' => $this->helper->getListEmployeeAvailable(),
+                'display' => 'none'
+            ]
+        );
+
+
+
+        $fieldGeneralInformation->addField(
+            'reason',
+            'textarea',
+            [
+                'label' => __('Reason'),
+                'name' => 'reason',
+                'value' => $bookingCurrent->getReason(),
+                'display' => 'none'
+            ]
+        );
+        $htmlIdPrefix = 'booking_setting_';
+
+//        $this->setChild(
+//            'form_after',
+//            $this->getLayout()->createBlock(Dependence::class)
+//                ->addFieldMap("{$htmlIdPrefix}booking_status", 'booking_status')
+//                ->addFieldMap("{$htmlIdPrefix}employee_id", 'employee_id')
+//                ->addFieldMap("{$htmlIdPrefix}reason", 'reason')
+//                ->addFieldDependence('employee_id', 'booking_status', '1')
+//                ->addFieldDependence('reason', 'booking_status', '2')
+//                ->addFieldDependence('reason', 'booking_status', '4')
+//
+//        );
 
 //        $form->setUseContainer(true);
         $this->setForm($form);
