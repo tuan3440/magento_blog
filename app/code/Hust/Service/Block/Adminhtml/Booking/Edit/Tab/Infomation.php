@@ -164,7 +164,6 @@ class Infomation extends Generic
             [
                 'label' => __('Require of customer'),
                 'name' => 'require',
-                'required' => true,
                 'disabled' => true,
                 'value' => $bookingCurrent->getRequire()
             ]

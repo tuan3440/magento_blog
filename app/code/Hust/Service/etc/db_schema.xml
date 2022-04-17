@@ -80,6 +80,7 @@
     <table name="hust_service_locator" resource="default" engine="innodb" comment="hust_service_locator">
         <column xsi:type="int" name="service_id" padding="10" unsigned="true" comment="Service Id"/>
         <column xsi:type="int" name="locator_id" padding="10" unsigned="true" comment="Locator Id"/>
+        <column xsi:type="int" name="slot" padding="10" unsigned="true" comment="Slot" nullable="false" default="1"/>
         <constraint
             xsi:type="foreign"
             referenceId="hust_service_locator_hust_service_service_id"

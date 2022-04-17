@@ -73,7 +73,12 @@ class Setting extends Generic
                 'label' => __('Employee'),
                 'name' => 'employee_id',
                 'value' => $this->helper->getEmployeeOfBooking($bookingCurrent->getBookingId()) ?? '' ,
-                'values' => $this->helper->getListEmployeeAvailable(),
+                'values' => $this->helper->getListEmployeeAvailable(
+                    $bookingCurrent->getLocatorId(),
+                    $bookingCurrent->getServiceId(),
+                    $bookingCurrent->getBookingHour(),
+                    $bookingCurrent->getDate()
+                ),
                 'display' => 'none'
             ]
         );

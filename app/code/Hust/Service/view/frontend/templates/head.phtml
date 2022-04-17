@@ -2,6 +2,7 @@
 $promotions = $block->getAllPromotion();
 $a = 1;
 ?>
+<?php if ($promotions):?>
 <div class="carousel-wrap">
     <div class="owl-carousel">
         <?php foreach ($promotions as $promotion ):?>
@@ -9,6 +10,7 @@ $a = 1;
         <?php endforeach;?>
     </div>
 </div>
+<?php endif;?>
 
 
 <script>

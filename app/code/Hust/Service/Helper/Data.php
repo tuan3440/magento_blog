@@ -9,26 +9,29 @@ use Magento\Catalog\Model\ProductRepository;
 use Magento\Catalog\Helper\Image;
 use Hust\Service\Model\Repository\EmployeeRepository;
 use Hust\Service\Model\ResourceModel\Booking;
+use Hust\Service\Model\ResourceModel\Employee;
 
 class Data extends AbstractHelper
 {
     public $productRepository;
     private $imageProvider;
     private $employeeRepo;
-    private $bookingRepo;
-
+    private $bookingResource;
+    private $employeeResource;
    public function __construct(
        Context $context,
        ProductRepository $productRepository,
        EmployeeRepository $employeeRepo,
        Image $imageProvider,
-       Booking $bookingRepo
+       Booking $bookingResource,
+       Employee $employeeResource
    )
    {
        $this->productRepository = $productRepository;
        $this->imageProvider = $imageProvider;
        $this->employeeRepo = $employeeRepo;
-       $this->bookingRepo = $bookingRepo;
+       $this->bookingResource = $bookingResource;
+       $this->employeeResource = $employeeResource;
        parent::__construct($context);
    }
 
@@ -73,20 +76,21 @@ class Data extends AbstractHelper
        return $this->productRepository->getById($item['product_id']);
    }
 
-   public function getListEmployeeAvailable()
-   {
-       $employees = $this->employeeRepo->getListEmployee()->getItems();
-       $data = [];
-       $data[''] = __('Select employee');
-
-       foreach ($employees as $employee) {
-           $data[$employee->getData('employee_id')] = __($employee->getData('first_name') . ' ' . $employee->getData('last_name'));
-       }
-       return $data;
-   }
+    public function getListEmployeeAvailable($locatorId, $serviceId, $booking_hour, $date)
+    {
+        $employees = $this->employeeResource->getEmployeeOfLocatorAndService($locatorId, $serviceId);
+        $data = [];
+        $data[''] = __('Select employee');
+        $employeeNotAvailable = $this->bookingResource->getEmployeeNotAvailable($locatorId, $serviceId, $booking_hour, $date);
+        foreach ($employees as $employee) {
+            if (!in_array($employee['employee_id'], $employeeNotAvailable))
+            $data[$employee['employee_id']] = __($employee['first_name'] . ' ' . $employee['last_name']);
+        }
+        return $data;
+    }
 
    public function getEmployeeOfBooking($bookingId)
    {
-       return $this->bookingRepo->getEmployeeBooking($bookingId);
+       return $this->bookingResource->getEmployeeBooking($bookingId);
    }
 }

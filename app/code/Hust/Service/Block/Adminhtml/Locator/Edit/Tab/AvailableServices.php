@@ -83,17 +83,27 @@ class AvailableServices extends Extended implements TabInterface
                 'column_css_class' => 'col-name',
             ]
         );
-        $this->addColumn(
-            'is_active',
-            [
-                'header' => __('Status'),
-                'index' => 'is_active',
-                'type' => 'options',
-                'options' => $this->status->toArray(),
-                'header_css_class' => 'col-status',
-                'column_css_class' => 'col-status',
-            ]
-        );
+
+        $this->addColumn('slot', [
+            'header' => __('Slot'),
+            'name' => 'slot',
+            'width' => 60,
+            'type' => 'number',
+            'validate_class' => 'validate-number',
+            'index' => 'slot',
+            'editable' => true,
+        ]);
+//        $this->addColumn(
+//            'is_active',
+//            [
+//                'header' => __('Status'),
+//                'index' => 'is_active',
+//                'type' => 'options',
+//                'options' => $this->status->toArray(),
+//                'header_css_class' => 'col-status',
+//                'column_css_class' => 'col-status',
+//            ]
+//        );
 
         return $this;
     }

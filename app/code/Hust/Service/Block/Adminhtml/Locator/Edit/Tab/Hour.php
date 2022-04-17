@@ -42,6 +42,7 @@ class Hour extends Generic
             [
                 'values' => $this->hour->toOptionArray(),
                 'name' => 'hours[]',
+                'required' => true,
                 'label' => __('Hours'),
                 'title' => __('Hours'),
                 'value' => $model->getData('hours')
