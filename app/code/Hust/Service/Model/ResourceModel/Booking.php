@@ -36,7 +36,8 @@ class Booking extends AbstractDb
                 ['hust_booking' => $this->getTable('hust_booking')]
             )->joinLeft(
                 ['hust_booking_employee' => $this->getTable('hust_booking_employee')],
-                'hust_booking.booking_id = hust_booking_employee.booking_id'
+                'hust_booking.booking_id = hust_booking_employee.booking_id',
+                ['hust_booking_employee.employee_id']
             )->where(
                 'hust_booking.locator_id = '.$locatorId
             )->where(
@@ -48,9 +49,11 @@ class Booking extends AbstractDb
             )->where(
                 'hust_booking.booking_status = 1'
             );
-//        echo $select->__toString();
-//        die;
-        $data = $this->getConnection()->fetchCol($select, ['employee_id']);
-        return $data;
+        $result = [];
+        $data = $this->getConnection()->fetchAll($select);
+        foreach ($data as $x) {
+            $result[] = $x['employee_id'];
+        }
+        return $result;
     }
 }

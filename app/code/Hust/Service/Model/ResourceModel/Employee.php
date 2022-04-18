@@ -21,22 +21,21 @@ class Employee extends AbstractDb
 
     public function getEmployeeOfLocatorAndService($locatorId, $serviceId)
     {
-        $select = $this->getConnection()->select()
-            ->from(
-                ['hust_employee' => $this->getTable('hust_employee')]
-            )->joinLeft(
-                ['hust_employee_locator' => $this->getTable('hust_employee_locator')],
-                'hust_employee_locator.locator_id = '.$locatorId
-            )->joinLeft(
-                ['hust_employee_service' => $this->getTable('hust_employee_service')],
-                'hust_employee_service.service_id = '.$serviceId
-            );
-//        echo $select->__toString();
-//        die;
-        $data = $this->getConnection()->fetchAll($select);
-//        print_r($data);
-//        die;
-        return $data;
+        $objectManager = \Magento\Framework\App\ObjectManager::getInstance();
+        $resource = $objectManager->get('Magento\Framework\App\ResourceConnection');
+        $connection = $resource->getConnection();
+        $sql = "SELECT DISTINCT hust_employee_locator.employee_id FROM hust_employee_locator, hust_employee_service
+WHERE hust_employee_locator.locator_id = " . $locatorId . " AND hust_employee_service.service_id = " . $serviceId;
+        $result = $connection->fetchAll($sql);
+        $employeeIds = [];
+        foreach ($result as $r) {
+            $employeeIds[] = $r['employee_id'];
+        }
+        $employeeIdsString = implode(',', $employeeIds);
+
+        $sql = "SELECT * FROM hust_employee WHERE employee_id IN (".$employeeIdsString.")";
+        $result2 = $connection->fetchAll($sql);
+        return $result2;
     }
 
 
