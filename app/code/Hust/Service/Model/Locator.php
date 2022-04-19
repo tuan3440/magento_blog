@@ -131,7 +131,7 @@ class Locator extends AbstractModel implements IdentityInterface, LocatorInterfa
         $tbl = $this->_resource->getTable('hust_service_locator');
         $select = $this->_resource->getConnection()->select()->from(
             $tbl,
-            ['service_id']
+            ['service_id', 'slot']
         )
             ->where(
                 'locator_id = ?',

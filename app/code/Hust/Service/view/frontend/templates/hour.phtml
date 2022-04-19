@@ -7,14 +7,14 @@ $slots = $block->getSlot();
     foreach ($slots as $key => $value):
         ?>
         <button value="<?= $key ?>"
-                <?php if ($value['isAvailable'] == 1): ?>
+                <?php if ($value['slot'] >= 1): ?>
                 class="o-active"
                 <?php endif; ?>
                 >
            <h2><?= $value['value'] ?></h2>
             <?php
-               if ($value['isAvailable'] == 1) {
-                   echo '<h3>Available</h3>';
+               if ($value['slot'] >= 1) {
+                   echo '<h3>Available('.$value['slot'].' slot)</h3>';
                } else {
                    echo '<h3>Not Available</h3>';
                }

@@ -14,4 +14,29 @@ class Collection extends AbstractCollection
     {
         $this->_init(Service::class, ResourceService::class);
     }
+
+    public function getServiceSlot()
+    {
+        $this->getSelect()->where("main_table.is_active=1");
+        return $this;
+    }
+
+    public function joinTableRelation($table = '', $condition = '', $columns = [], $joinType = 'join')
+    {
+        if ($table && $condition) {
+            $this->getSelect()->distinct(true)->$joinType(
+                ['tableAlias' => $this->getTable($table)],
+                $condition,
+                $columns
+            );
+        }
+        return $this;
+    }
+
+    public function getNumberSlot($locatorId, $serviceId)
+    {
+        $select = "SELECT hust_service_locator.slot FROM hust_service_locator WHERE hust_service_locator.service_id=".$serviceId." AND hust_service_locator.locator_id=".$locatorId;
+        $result = $this->getConnection()->fetchOne($select);
+        return $result;
+    }
 }

@@ -9,6 +9,7 @@ use Hust\Service\Model\Source\Hour;
 use Hust\Service\Model\Repository\PromotionRepository;
 use Hust\Service\Model\ResourceModel\Promotion;
 use Hust\Service\Model\ResourceModel\Booking\CollectionFactory;
+use Hust\Service\Model\ResourceModel\Service\CollectionFactory as ServiceCollection;
 
 class View extends Template
 {
@@ -17,10 +18,13 @@ class View extends Template
     protected $promotion;
     protected $serviceRepo;
     protected $bookingCollection;
+    protected $serviceCollection;
+
     public function __construct(Template\Context $context,
                                 LocatorFactory $locatorFactory,
                                 ServiceRepository $serviceRepository,
                                 CollectionFactory $bookingCollection,
+                                ServiceCollection $serviceCollection,
                                 Hour $hours,
                                 Promotion $promotion,
                                 array $data = [])
@@ -30,6 +34,7 @@ class View extends Template
         $this->hours = $hours;
         $this->serviceRepo = $serviceRepository;
         $this->bookingCollection = $bookingCollection;
+        $this->serviceCollection = $serviceCollection;
         parent::__construct($context, $data);
     }
 
@@ -51,6 +56,8 @@ class View extends Template
     {
         $hoursList = [];
         $locatorId = $this->getLocatorIdCurrent();
+        $serviceId = $this->getServiceIdCurrent();
+        $slots = $this->serviceCollection->create()->getNumberSlot($locatorId, $serviceId);
         $locator = $this->locator->create()->load($locatorId);
         $hours = $locator->getData('hours');
         if ($hours != "") {
@@ -63,7 +70,8 @@ class View extends Template
             if (in_array($key, $hours)) {
                 $hoursList[$key] = [
                      'value' => $value,
-                     'isAvailable' => 1
+                     'slot' => $slots,
+//                     'isAvailable' => 1
                 ];
             }
         }
@@ -99,7 +107,7 @@ class View extends Template
 
         foreach ($hours as $key => $value) {
             if (in_array($key, $slots)) {
-                $hours[$key]['isAvailable'] = 0;
+                $hours[$key]['slot'] = $hours[$key]['slot'] - 1;
             }
         }
         return $hours;

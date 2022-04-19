@@ -45,7 +45,7 @@ class AvailableServices extends Extended implements TabInterface
 
     protected function _prepareCollection()
     {
-        $collection = $this->collectionFactory->create()->addFieldToFilter('is_active', 1);
+        $collection = $this->collectionFactory->create()->getServiceSlot();
         $this->setCollection($collection);
         return parent::_prepareCollection();
     }
@@ -91,7 +91,7 @@ class AvailableServices extends Extended implements TabInterface
             'type' => 'number',
             'validate_class' => 'validate-number',
             'index' => 'slot',
-            'editable' => true,
+            'editable' => true
         ]);
 //        $this->addColumn(
 //            'is_active',
@@ -131,30 +131,10 @@ class AvailableServices extends Extended implements TabInterface
 //        return $products;
         $locator = $this->getLocator();
         $selected = $locator->getServicesWithPosition($locator);
-        foreach ($selected as $service) {
-            $services[$service['service_id']] = ['service_id' => $service['service_id']];
-        }
+        foreach ($selected as $key => $value) {
+            $selected[$key] = ['slot' => $value];        }
         return $services;
     }
-
-//    protected function _getSelectedServices()
-//    {
-//        $locator = $this->getLocator();
-//        return $locator->getServices($locator);
-//        $services = $this->getLocatorServices();
-//        if (!$services) {
-//            $services = array_keys($this->getSelectedServices());
-//            return $services;
-//        }
-//        return $services;
-//    }
-
-//    public function getSelectedServices()
-//    {
-//        $locator = $this->getLocator();
-//        $selected = $locator->getServicesWithPosition($locator);
-//        return $selected;
-//    }
 
     protected function getLocator()
     {

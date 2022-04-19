@@ -14,4 +14,17 @@ class Collection extends AbstractCollection
     {
         $this->_init(Locator::class, ResourceLocator::class);
     }
+
+    public function joinTableRelation($table = '', $condition = '', $columns = [], $joinType = 'join')
+    {
+        if ($table && $condition) {
+            $this->getSelect()->$joinType(
+                ['tableAlias' => $this->getTable($table)],
+                $condition,
+                $columns
+            );
+        }
+
+        return $this;
+    }
 }

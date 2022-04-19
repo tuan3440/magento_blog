@@ -86,10 +86,11 @@ class Save extends Locator
 
                 if ($newServices) {
                     $data = [];
-                    foreach ($newServices as $service_id) {
+                    foreach ($newServices as $key => $value) {
                         $data[] = [
-                            'service_id' => $service_id,
+                            'service_id' => $key,
                             'locator_id' => $model->getId(),
+                            'slot' => $value['slot']
                         ];
                     }
                     $connection->insertMultiple($table, $data);
