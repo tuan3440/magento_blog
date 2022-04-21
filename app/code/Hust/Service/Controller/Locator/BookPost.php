@@ -40,6 +40,7 @@ class BookPost extends Index
         if ($data) {
             try {
                 $model = $this->bookingFactory->create();
+                $data['admin_notification'] = 1;
                 $model->addData($data);
 //                $stringDate = $model->getData('date');
 //                $time_input = strtotime($stringDate);

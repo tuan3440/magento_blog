@@ -118,6 +118,7 @@
         <column xsi:type="text" name="reason" comment="reason" nullable="true"/>
         <column xsi:type="text" name="require" comment="require" nullable="true"/>
         <column xsi:type="date" name="date" comment="Date select" nullable="false" />
+        <column xsi:type="smallint" name="admin_notification" unsigned="true" padding="5" nullable="false" default="0" comment="Notification flag for admin"/>
         <column xsi:type="timestamp" name="created_at" on_update="false" nullable="false" default="CURRENT_TIMESTAMP"
                 comment="Created At"/>
         <column xsi:type="timestamp" name="updated_at" on_update="true" nullable="false" default="CURRENT_TIMESTAMP"
