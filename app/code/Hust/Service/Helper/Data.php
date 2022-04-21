@@ -82,10 +82,13 @@ class Data extends AbstractHelper
         $data = [];
         $data[''] = __('Select employee');
         $employeeNotAvailable = $this->bookingResource->getEmployeeNotAvailable($locatorId, $serviceId, $booking_hour, $date);
-        foreach ($employees as $employee) {
-            if (!in_array($employee['employee_id'], $employeeNotAvailable))
-            $data[$employee['employee_id']] = __($employee['first_name'] . ' ' . $employee['last_name']);
+        if ($employees) {
+            foreach ($employees as $employee) {
+                if (!in_array($employee['employee_id'], $employeeNotAvailable))
+                    $data[$employee['employee_id']] = __($employee['first_name'] . ' ' . $employee['last_name']);
+            }
         }
+
         return $data;
     }
 

@@ -27,15 +27,19 @@ class Employee extends AbstractDb
         $sql = "SELECT DISTINCT hust_employee_locator.employee_id FROM hust_employee_locator, hust_employee_service
 WHERE hust_employee_locator.locator_id = " . $locatorId . " AND hust_employee_service.service_id = " . $serviceId;
         $result = $connection->fetchAll($sql);
-        $employeeIds = [];
-        foreach ($result as $r) {
-            $employeeIds[] = $r['employee_id'];
-        }
-        $employeeIdsString = implode(',', $employeeIds);
+        if ($result) {
+            $employeeIds = [];
+            foreach ($result as $r) {
+                $employeeIds[] = $r['employee_id'];
+            }
+            $employeeIdsString = implode(',', $employeeIds);
 
-        $sql = "SELECT * FROM hust_employee WHERE employee_id IN (".$employeeIdsString.")";
-        $result2 = $connection->fetchAll($sql);
-        return $result2;
+            $sql = "SELECT * FROM hust_employee WHERE employee_id IN (".$employeeIdsString.")";
+            $result2 = $connection->fetchAll($sql);
+            return $result2;
+        }
+
+        return null;
     }
 
 
