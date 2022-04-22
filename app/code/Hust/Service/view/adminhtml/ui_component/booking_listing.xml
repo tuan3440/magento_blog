@@ -146,21 +146,21 @@
             </argument>
         </column>
 
-<!--        <column name="employee_id">-->
-<!--            <argument name="data" xsi:type="array">-->
-<!--                <item name="config" xsi:type="array">-->
-<!--                    <item name="label" xsi:type="string" translate="true">Employee</item>-->
-<!--                    <item name="filter" xsi:type="string">select</item>-->
-<!--                    <item name="component" xsi:type="string">Magento_Ui/js/grid/columns/select</item>-->
-<!--                    <item name="editor" xsi:type="array">-->
-<!--                        <item name="editorType" xsi:type="string">select</item>-->
-<!--                    </item>-->
-<!--                    <item name="dataType" xsi:type="string">select</item>-->
-<!--                    <item name="sortOrder" xsi:type="number">60</item>-->
-<!--                </item>-->
-<!--                <item name="options" xsi:type="object">Hust\Service\Ui\Component\Form\Employee\ListEmployee</item>-->
-<!--            </argument>-->
-<!--        </column>-->
+        <column name="employee_id">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="label" xsi:type="string" translate="true">Employee</item>
+                    <item name="filter" xsi:type="string">select</item>
+                    <item name="component" xsi:type="string">Magento_Ui/js/grid/columns/select</item>
+                    <item name="editor" xsi:type="array">
+                        <item name="editorType" xsi:type="string">select</item>
+                    </item>
+                    <item name="dataType" xsi:type="string">select</item>
+                    <item name="sortOrder" xsi:type="number">60</item>
+                </item>
+                <item name="options" xsi:type="object">Hust\Service\Ui\Component\Form\Employee\ListEmployee</item>
+            </argument>
+        </column>
 
         <column name="service_id" class="Hust\Service\Ui\Component\Listing\Columns\Column\ServiceInfo">
             <argument name="data" xsi:type="array">

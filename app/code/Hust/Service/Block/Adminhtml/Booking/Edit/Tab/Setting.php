@@ -7,7 +7,7 @@ use Magento\Backend\Block\Widget\Form\Generic;
 use Hust\Service\Model\ServiceRegistry;
 use Hust\Service\Helper\Data;
 use Hust\Service\Model\Source\BookingStatus;
-
+use Magento\Config\Model\Config\Structure\Element\Dependency\Field;
 class Setting extends Generic
 {
     protected $serviceRegistry;
@@ -43,6 +43,8 @@ class Setting extends Generic
 //            ]
 //        );
         $form = $this->_formFactory->create();
+        $htmlIdPrefix = 'booking_setting_';
+        $form->setHtmlIdPrefix($htmlIdPrefix);
         $bookingCurrent = $this->serviceRegistry->registry('booking_current');
         $fieldGeneralInformation = $form->addFieldset(
             'setting_form',
@@ -95,19 +97,21 @@ class Setting extends Generic
                 'display' => 'none'
             ]
         );
-        $htmlIdPrefix = 'booking_setting_';
 
-//        $this->setChild(
-//            'form_after',
-//            $this->getLayout()->createBlock(Dependence::class)
-//                ->addFieldMap("{$htmlIdPrefix}booking_status", 'booking_status')
-//                ->addFieldMap("{$htmlIdPrefix}employee_id", 'employee_id')
-//                ->addFieldMap("{$htmlIdPrefix}reason", 'reason')
-//                ->addFieldDependence('employee_id', 'booking_status', '1')
-//                ->addFieldDependence('reason', 'booking_status', '2')
+
+        $this->setChild(
+            'form_after',
+            $this->getLayout()->createBlock(Dependence::class)
+                ->addFieldMap("{$htmlIdPrefix}booking_status", 'booking_status')
+                ->addFieldMap("{$htmlIdPrefix}employee_id", 'employee_id')
+                ->addFieldMap("{$htmlIdPrefix}reason", 'reason')
+                ->addFieldDependence('employee_id', 'booking_status', '1')
+                ->addFieldDependence('reason', 'booking_status', new Field([
+                    'separator'=> ',',
+                    'value'=>'2,4'
+                ]))
 //                ->addFieldDependence('reason', 'booking_status', '4')
-//
-//        );
+        );
 
 //        $form->setUseContainer(true);
         $this->setForm($form);
