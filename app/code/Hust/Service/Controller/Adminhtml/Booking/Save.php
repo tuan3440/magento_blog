@@ -12,10 +12,12 @@ use Magento\Framework\App\ResponseInterface;
 use Magento\Framework\View\Result\LayoutFactory;
 use Magento\Framework\View\Result\PageFactory;
 use Hust\Service\Model\Repository\ServiceRepository;
+use Hust\Service\Helper\Mail;
 
 class Save extends Booking
 {
     private $serviceRepo;
+    private $mail;
     public function __construct(
         Context $context,
         PageFactory $resultPageFactory,
@@ -23,10 +25,12 @@ class Save extends Booking
         BookingRepository $bookingRepository,
         ServiceRegistry $serviceRegistry,
         LayoutFactory $layoutFactory,
-        ServiceRepository $serviceRepo
+        ServiceRepository $serviceRepo,
+        Mail $mail
     )
     {
         $this->serviceRepo = $serviceRepo;
+        $this->mail = $mail;
         parent::__construct($context, $resultPageFactory, $bookingFactory, $bookingRepository, $serviceRegistry, $layoutFactory);
     }
 
@@ -37,16 +41,28 @@ class Save extends Booking
             try {
                 $bookingRepo = $this->getBookingRepository()->getById($data['booking_id']);
                 $bookingRepo->setBookingStatus($data['booking_status']);
-                $bookingRepo->setReason($data['reason']);
+                if (isset($data['reason']))
+                    $bookingRepo->setReason($data['reason']);
                 if ($data['booking_status'] == 3) {
+                    $this->sendMailSuccess($data)
                     $this->saveBookingSale($bookingRepo);
                 }
+                if ($data['booking_status'] == 2) {
+                    $this->sendMailCancel($data);
+                }
+                if ($data['booking_status'] == 1) {
+                    $this->sendMailAcept($data);
+                }
+                if ($data['booking_status'] == 4) {
+                    $this->sendMailBoom($data);
+                }
                 $this->getBookingRepository()->save($bookingRepo);
-                $this->saveBookingEmployee($data);
+                if (isset($data['employee_id']))
+                    $this->saveBookingEmployee($data);
                 $this->messageManager->addSuccessMessage(__('You saved the item.'));
 
             } catch (\Exception $e) {
-                $this->messageManager->addExceptionMessage($e, __('Something went wrong while saving the services.'));
+                $this->messageManager->addExceptionMessage($e, __('Something went wrong while saving the booking.'));
             }
         }
         $this->_redirect('*/*/edit', ['booking_id' => $data['booking_id']]);
@@ -69,7 +85,7 @@ class Save extends Booking
             ];
             $connection->insert($table, $data);
         } catch (\Exception $e) {
-            $this->messageManager->addExceptionMessage($e, __('Something went wrong while saving the services.'));
+            $this->messageManager->addExceptionMessage($e, __('Something went wrong while saving the booking.'));
         }
     }
 
@@ -92,7 +108,27 @@ class Save extends Booking
             ];
             $connection->insert($table, $data);
         } catch (\Exception $e) {
-            $this->messageManager->addExceptionMessage($e, __('Something went wrong while saving the services.'));
+            $this->messageManager->addExceptionMessage($e, __('Something went wrong while saving the booking.'));
         }
+    }
+
+    private function sendMailCancel($data)
+    {
+
+    }
+
+    private function sendMailAcept($data)
+    {
+
+    }
+
+    private function sendMailSuccess($data)
+    {
+
+    }
+
+    private function sendMailBoom($data)
+    {
+
     }
 }

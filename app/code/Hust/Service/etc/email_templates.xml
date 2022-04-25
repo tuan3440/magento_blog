@@ -1,0 +1,8 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Email:etc/email_templates.xsd">
+    <template id="notify_cutomer_accept" label="Email accept" file="notify_cutomer_accept.html" type="html" module="Hust_Service" area="frontend"/>
+    <template id="notify_cutomer_cancel" label="Email cancel" file="notify_cutomer_cancel.html" type="html" module="Hust_Service" area="frontend"/>
+    <template id="notify_cutomer_thankyou" label="Email thank you" file="notify_cutomer_thankyou.html" type="html" module="Hust_Service" area="frontend"/>
+    <template id="notify_cutomer_boom" label="Email boom" file="notify_cutomer_boom.html" type="html" module="Hust_Service" area="frontend"/>
+    <template id="notify_cutomer_waiting" label="Email waiting" file="notify_cutomer_waiting.html" type="html" module="Hust_Service" area="frontend"/>
+</config>
