@@ -26,16 +26,16 @@ class Infomation extends Generic
 
     protected function _prepareForm()
     {
-//        $form = $this->_formFactory->create(
-//            [
-//                'data' => [
-//                    'id' => 'edit_form',
-//                    'action' => $this->getUrl('*/*/save', ['booking_id' => $this->getRequest()->getParam('id')]),
-//                    'method' => 'post',
-//                    'enctype' => 'multipart/form-data'
-//                ]
-//            ]
-//        );
+        $form = $this->_formFactory->create(
+            [
+                'data' => [
+                    'id' => 'edit_form',
+                    'action' => $this->getUrl('*/*/save', ['booking_id' => $this->getRequest()->getParam('id')]),
+                    'method' => 'post',
+                    'enctype' => 'multipart/form-data'
+                ]
+            ]
+        );
         $form = $this->_formFactory->create();
 
         $bookingCurrent = $this->serviceRegistry->registry('booking_current');

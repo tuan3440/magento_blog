@@ -44,18 +44,19 @@ class Save extends Booking
                 if (isset($data['reason']))
                     $bookingRepo->setReason($data['reason']);
                 if ($data['booking_status'] == 3) {
-                    $this->sendMailSuccess($data);
+                    $datax = (array) $bookingRepo;
+                    $this->sendMailSuccess($bookingRepo->getData('email'));
                     $this->saveBookingSale($bookingRepo);
                 }
                 if ($data['booking_status'] == 2) {
-                    $this->sendMailCancel($data);
+                    $this->sendMailCancel(['reason' => $bookingRepo->getData('reason')], $bookingRepo->getData('email'));
                 }
                 if ($data['booking_status'] == 1) {
                     $this->sendMailAcept($data);
                 }
-                if ($data['booking_status'] == 4) {
-                    $this->sendMailBoom($data);
-                }
+//                if ($data['booking_status'] == 4) {
+//                    $this->sendMailBoom($data);
+//                }
                 $this->getBookingRepository()->save($bookingRepo);
                 if (isset($data['employee_id']))
                     $this->saveBookingEmployee($data);
@@ -112,9 +113,9 @@ class Save extends Booking
         }
     }
 
-    private function sendMailCancel($data)
+    private function sendMailCancel($data, $email)
     {
-
+        $this->mail->sendEmail("notify_cutomer_cancel", $data, $email);
     }
 
     private function sendMailAcept($data)
@@ -122,9 +123,9 @@ class Save extends Booking
 
     }
 
-    private function sendMailSuccess($data)
+    private function sendMailSuccess($email)
     {
-        $this->mail->sendEmail("notify_cutomer_thankyou", $data, $data['email']);
+        $this->mail->sendEmail("notify_cutomer_thankyou", [], $email);
     }
 
     private function sendMailBoom($data)

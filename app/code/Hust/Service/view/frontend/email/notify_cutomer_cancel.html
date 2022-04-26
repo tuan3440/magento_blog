@@ -1,5 +1,7 @@
+<!--@subject {{trans "Notify from Spa BK"}} @-->
 {{template config_path="design/email/header_template"}}
 <table>
-    <tr>{{ trans 'Your booking spa is canceled because you have not followed our process or full slot.Please booking calendar again! Thank you' | raw}}</tr>
+    <tr>Your booking spa is canceled</tr>
+    <tr>Reason : <strong>{{var data.reason}}</strong></tr>
 </table>
 {{template config_path="design/email/footer_template"}}
