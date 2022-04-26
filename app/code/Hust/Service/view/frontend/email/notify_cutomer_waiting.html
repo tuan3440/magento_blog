@@ -1,5 +1,17 @@
+
+<!--@subject {{trans "Booking waiting"}} @-->
+
+
 {{template config_path="design/email/header_template"}}
+
 <table>
-    <tr>tuandz</tr>
+    <tr>
+        <td>{{trans "Thank you " }}<strong>{{var data.name}}</strong></td>
+    </tr>
+    <tr>
+        <td>{{trans "Cảm ơn bạn đã đặt lịch làm đẹp tại cửa hàng của chúng tôi, nhân viên của tôi sẽ liên hệ với bạn qua số điện thoại mà bạn cung cấp để xác nhận và đặt lịch thành công cho bạn."}}</td>
+    </tr>
 </table>
+
+
 {{template config_path="design/email/footer_template"}}

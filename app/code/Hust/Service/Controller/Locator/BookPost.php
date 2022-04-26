@@ -48,7 +48,7 @@ class BookPost extends Index
                 $model->addData($data);
                 $this->bookingRepo->save($model);
                 $this->sendMailWaiting($model);
-                $this->messageManager->addSuccessMessage(__('You book successful.'));
+                $this->messageManager->addSuccessMessage(__('You book successful. Please check email!'));
             } catch (LocalizedException $e) {
 
             }

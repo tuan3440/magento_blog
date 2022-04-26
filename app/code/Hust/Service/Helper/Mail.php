@@ -3,6 +3,7 @@
 namespace Hust\Service\Helper;
 
 use Magento\Framework\App\Helper\Context;
+use Magento\Framework\DataObject;
 use Magento\Framework\Translate\Inline\StateInterface;
 use Magento\Framework\Escaper;
 use Magento\Framework\Mail\Template\TransportBuilder;
@@ -43,7 +44,7 @@ class Mail extends \Magento\Framework\App\Helper\AbstractHelper
                         'store' => \Magento\Store\Model\Store::DEFAULT_STORE_ID,
                     ]
                 )
-                ->setTemplateVars($variables)
+                ->setTemplateVars(['data' => new DataObject($variables)])
                 ->setFrom($sender)
                 ->addTo($receiverMail)
                 ->getTransport();

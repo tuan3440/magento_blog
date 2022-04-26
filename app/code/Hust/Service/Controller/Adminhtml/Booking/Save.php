@@ -44,7 +44,7 @@ class Save extends Booking
                 if (isset($data['reason']))
                     $bookingRepo->setReason($data['reason']);
                 if ($data['booking_status'] == 3) {
-                    $this->sendMailSuccess($data)
+                    $this->sendMailSuccess($data);
                     $this->saveBookingSale($bookingRepo);
                 }
                 if ($data['booking_status'] == 2) {
@@ -124,7 +124,7 @@ class Save extends Booking
 
     private function sendMailSuccess($data)
     {
-
+        $this->mail->sendEmail("notify_cutomer_thankyou", $data, $data['email']);
     }
 
     private function sendMailBoom($data)
