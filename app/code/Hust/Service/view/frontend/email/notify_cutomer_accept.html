@@ -2,14 +2,16 @@
 
 {{template config_path="design/email/header_template"}}
 <table>
-    <tr>Hi {{trans  "%name" name=$nameCustomer}}</tr>
+    <td>{{trans "Thank you " }}<strong>{{var data.name}}</strong></td>
+
+    <tr>Hi {{var data.name}}</tr>
     <tr>Thank you for booking calendar apa in my store. Booking calendar is accepted</tr>
     <tr>This is information:</tr>
-    <tr>{{trans "Name service : %nameService" nameService=$service.name}}</tr>
-    <tr>{{trans "Price service : %priceService" priceService=$service.price}}</tr>
-    <tr>{{trans "Locator : %nameLocator" nameLocator=$locator.name}}</tr>
-    <tr>{{trans "Address : %addressLocator" addressLocator=$locator.address}}</tr>
-    <tr>{{trans "Time : %hour, %date" hour=$hour, date = $date}}</tr>
+    <tr>Name service : <strong>{{var data.serviceName}}</strong></tr>
+    <tr>Locator : <strong>{{var data.locatorName}}</strong></tr>
+    <tr>Address : <strong>{{var data.address}}</strong></tr>
+    <tr>Date : <strong>{{var data.date}}</strong></tr>
+    <tr>Hour : <strong>{{var data.hour}}</strong></tr>
     <tr>We wait you</tr>
 </table>
 {{template config_path="design/email/footer_template"}}

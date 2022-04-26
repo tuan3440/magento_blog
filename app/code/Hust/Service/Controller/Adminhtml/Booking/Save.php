@@ -13,11 +13,15 @@ use Magento\Framework\View\Result\LayoutFactory;
 use Magento\Framework\View\Result\PageFactory;
 use Hust\Service\Model\Repository\ServiceRepository;
 use Hust\Service\Helper\Mail;
+use Hust\Service\Model\Repository\LocatorRepository;
+use Hust\Service\Model\Source\Hour;
 
 class Save extends Booking
 {
     private $serviceRepo;
+    private $locatorRepo;
     private $mail;
+    private $hour;
     public function __construct(
         Context $context,
         PageFactory $resultPageFactory,
@@ -26,11 +30,15 @@ class Save extends Booking
         ServiceRegistry $serviceRegistry,
         LayoutFactory $layoutFactory,
         ServiceRepository $serviceRepo,
-        Mail $mail
+        LocatorRepository $locatorRepo,
+        Mail $mail,
+        Hour $hour
     )
     {
         $this->serviceRepo = $serviceRepo;
         $this->mail = $mail;
+        $this->locatorRepo = $locatorRepo;
+        $this->hour = $hour;
         parent::__construct($context, $resultPageFactory, $bookingFactory, $bookingRepository, $serviceRegistry, $layoutFactory);
     }
 
@@ -52,7 +60,7 @@ class Save extends Booking
                     $this->sendMailCancel(['reason' => $bookingRepo->getData('reason')], $bookingRepo->getData('email'));
                 }
                 if ($data['booking_status'] == 1) {
-                    $this->sendMailAcept($data);
+                    $this->sendMailAcept($bookingRepo);
                 }
 //                if ($data['booking_status'] == 4) {
 //                    $this->sendMailBoom($data);
@@ -120,7 +128,28 @@ class Save extends Booking
 
     private function sendMailAcept($data)
     {
+        $dataformat = $this->convertData($data);
+        $this->mail->sendEmail("notify_cutomer_accept", $dataformat, $data->getData('email'));
+    }
 
+    private function convertData($data)
+    {
+        $name = $data->getData('name');
+        $serviceId = $data->getData('service_id');
+        $locatorId = $data->getData('locator_id');
+        $hours = $this->hour->toArray();
+        $hourId = $data->getData('booking_hour');
+        $date = $data->getData('date');
+        $locator = $this->locatorRepo->getById($locatorId);
+        $service = $this->serviceRepo->getById($serviceId);
+        return [
+            'name' => $name,
+            'serviceName' => $service->getData('name'),
+            'locatorName' => $locator->getData('name'),
+            'address' => $locator->getData('address'),
+            'date'=> $data->getData('date'),
+            'hour'=> $hours[$hourId]
+        ];
     }
 
     private function sendMailSuccess($email)
