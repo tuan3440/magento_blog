@@ -110,10 +110,11 @@ class AvailableServices extends Extended implements TabInterface
 
     protected function _getSelectedServices()
     {
-        $services = $this->getLocatorServices();
-        if (!is_array($services)) {
-            $services = array_keys($this->getSelectedServices());
-        }
+        $locator = $this->getLocator();
+        $services = $locator->getServicesWithPosition($locator);
+//        if (!is_array($services)) {
+//            $services = array_keys($this->getSelectedServices());
+//        }
         return $services;
     }
 
@@ -131,9 +132,11 @@ class AvailableServices extends Extended implements TabInterface
 //        return $products;
         $locator = $this->getLocator();
         $selected = $locator->getServicesWithPosition($locator);
-        foreach ($selected as $key => $value) {
-            $selected[$key] = ['slot' => $value];        }
+        foreach ($selected as $service) {
+            $services[$service['service_id']] = ['slot' => $service['slot']];
+        }
         return $services;
+//        return $selected;
     }
 
     protected function getLocator()
