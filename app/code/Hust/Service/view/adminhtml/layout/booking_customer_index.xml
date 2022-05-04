@@ -1,0 +1,10 @@
+<?xml version="1.0"?>
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <body>
+        <referenceContainer name="content">
+            <block class="Hust\Service\Block\Adminhtml\Customer" name="customer.booking.block">
+                <block class="Hust\Service\Block\Adminhtml\Customer\Grid" name="customer.booking.grid" />
+            </block>
+        </referenceContainer>
+    </body>
+</page>

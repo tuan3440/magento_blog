@@ -113,7 +113,10 @@ class Save extends Booking
                 'service_id' => $serviceId,
                 'locator_id' => $locatorId,
                 'date' => $date,
-                'charge' => $charge
+                'charge' => $charge,
+                'phone' => $bookingRepo->getData('phone'),
+                'email' => $bookingRepo->getData('email'),
+                'name' => $bookingRepo->getData('name')
             ];
             $connection->insert($table, $data);
         } catch (\Exception $e) {
