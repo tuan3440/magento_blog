@@ -288,7 +288,7 @@
                 <item name="config" xsi:type="array">
                     <item name="additionalClasses" xsi:type="string">admin__field-wide</item>
                     <item name="componentType" xsi:type="string">dynamicRows</item>
-                    <item name="component" xsi:type="string">Amasty_Blog/js/dynamic-rows/dynamic-rows-grid</item>
+                    <item name="component" xsi:type="string">Hust_Service/js/dynamic-rows/dynamic-rows-grid</item>
                     <item name="template" xsi:type="string">ui/dynamic-rows/templates/grid</item>
                     <item name="recordTemplate" xsi:type="string">record</item>
                     <item name="addButton" xsi:type="boolean">false</item>
@@ -326,7 +326,7 @@
             <container name="record">
                 <argument name="data" xsi:type="array">
                     <item name="config" xsi:type="array">
-                        <item name="component" xsi:type="string">Amasty_Blog/js/dynamic-rows/record</item>
+                        <item name="component" xsi:type="string">Hust_Service/js/dynamic-rows/record</item>
                         <item name="isTemplate" xsi:type="boolean">true</item>
                         <item name="positionProvider" xsi:type="string">amasty_blog_position</item>
                         <item name="is_collection" xsi:type="boolean">true</item>
@@ -379,7 +379,7 @@
                             <item name="fit" xsi:type="boolean">true</item>
                             <item name="formElement" xsi:type="string">select</item>
                             <item name="elementTmpl" xsi:type="string">ui/dynamic-rows/cells/text</item>
-                            <item name="component" xsi:type="string">Amasty_Blog/js/dynamic-rows/element/select-label</item>
+                            <item name="component" xsi:type="string">Hust_Service/js/dynamic-rows/element/select-label</item>
                             <item name="dataType" xsi:type="string">text</item>
                             <item name="dataScope" xsi:type="string">visibility</item>
                             <item name="label" xsi:type="string" translate="true">Visibility</item>
@@ -394,7 +394,7 @@
                             <item name="fit" xsi:type="boolean">true</item>
                             <item name="formElement" xsi:type="string">select</item>
                             <item name="elementTmpl" xsi:type="string">ui/dynamic-rows/cells/text</item>
-                            <item name="component" xsi:type="string">Amasty_Blog/js/dynamic-rows/element/select-label</item>
+                            <item name="component" xsi:type="string">Hust_Service/js/dynamic-rows/element/select-label</item>
                             <item name="dataType" xsi:type="string">text</item>
                             <item name="dataScope" xsi:type="string">status</item>
                             <item name="label" xsi:type="string" translate="true">Status</item>
@@ -409,7 +409,7 @@
                             <item name="fit" xsi:type="boolean">true</item>
                             <item name="formElement" xsi:type="string">select</item>
                             <item name="elementTmpl" xsi:type="string">ui/dynamic-rows/cells/text</item>
-                            <item name="component" xsi:type="string">Amasty_Blog/js/dynamic-rows/element/multiselect</item>
+                            <item name="component" xsi:type="string">Hust_Service/js/dynamic-rows/element/multiselect</item>
                             <item name="dataType" xsi:type="string">text</item>
                             <item name="dataScope" xsi:type="string">websites</item>
                             <item name="label" xsi:type="string" translate="true">Websites</item>
