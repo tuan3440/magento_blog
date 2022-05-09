@@ -8,6 +8,7 @@
         <add id="Hust_Service::hust_employee" title="Employee" module="Hust_Service" sortOrder="30" action="booking/employee" parent="Hust_Service::booking_system" resource="Hust_Service::hust_employee" />
         <add id="Hust_Service::hust_promotion" title="Promotion" module="Hust_Service" sortOrder="40" action="booking/promotion" parent="Hust_Service::booking_system" resource="Hust_Service::hust_promotion" />
         <add id="Hust_Service::hust_booking" title="Booking" module="Hust_Service" sortOrder="50" action="booking/booking" parent="Hust_Service::booking_system" resource="Hust_Service::hust_booking" />
+        <add id="Hust_Service::hust_schedule" title="Schedule" module="Hust_Service" sortOrder="55" action="booking/schedule" parent="Hust_Service::booking_system" resource="Hust_Service::hust_schedule" />
         <add id="Hust_Service::hust_report" title="Report Sale" module="Hust_Service" sortOrder="70" action="booking/report" parent="Hust_Service::booking_system" resource="Hust_Service::hust_report" />
         <add id="Hust_Service::hust_booking_customer" title="Customer" module="Hust_Service" sortOrder="60" action="booking/customer" parent="Hust_Service::booking_system" resource="Hust_Service::hust_booking_customer" />
     </menu>
