@@ -8,7 +8,7 @@ $data = $block->getAllService();
 </div>
 <?php if ($data): ?>
     <div class="carousel-wrap">
-        <div class="owl-carousel">
+        <div class="owl-carousel-service">
             <?php foreach ($data as $d): ?>
             <div>
                 <a href="<?= $d['url'] ?>">
@@ -24,7 +24,7 @@ $data = $block->getAllService();
 <script>
     require(['jquery', 'owlcarousel'], function ($) {
         $(document).ready(function () {
-            $('.owl-carousel').owlCarousel({
+            $('.owl-carousel-service').owlCarousel({
                 loop: true,
                 margin: 30,
                 nav: true,
