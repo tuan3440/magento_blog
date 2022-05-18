@@ -117,32 +117,32 @@ class ListServices extends Template
     /**
      * {@inheritdoc}
      */
-    protected function _prepareLayout()
-    {
-        $this->_addBreadcrumbs();
-
-        return parent::_prepareLayout();
-    }
-
-    private function _addBreadcrumbs()
-    {
-        if ($breadcrumbsBlock = $this->getLayout()->getBlock('breadcrumbs')) {
-            $breadcrumbsBlock->addCrumb(
-                'home',
-                [
-                    'label' => __('Home'),
-                    'title' => __('Go to Home Page'),
-                    'link' => $this->_storeManager->getStore()->getBaseUrl()
-                ]
-            );
-
-            $breadcrumbsBlock->addCrumb(
-                'warehouse',
-                [
-                    'label' => __('Booking'),
-                ]
-            );
-        }
-    }
+//    protected function _prepareLayout()
+//    {
+//        $this->_addBreadcrumbs();
+//
+//        return parent::_prepareLayout();
+//    }
+//
+//    private function _addBreadcrumbs()
+//    {
+//        if ($breadcrumbsBlock = $this->getLayout()->getBlock('breadcrumbs')) {
+//            $breadcrumbsBlock->addCrumb(
+//                'home',
+//                [
+//                    'label' => __('Home'),
+//                    'title' => __('Go to Home Page'),
+//                    'link' => $this->_storeManager->getStore()->getBaseUrl()
+//                ]
+//            );
+//
+//            $breadcrumbsBlock->addCrumb(
+//                'warehouse',
+//                [
+//                    'label' => __('Booking'),
+//                ]
+//            );
+//        }
+//    }
 }
 
