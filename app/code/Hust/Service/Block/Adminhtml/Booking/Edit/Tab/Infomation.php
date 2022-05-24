@@ -105,7 +105,7 @@ class Infomation extends Generic
                 'name' => 'phone',
                 'required' => true,
                 'disabled' => true,
-                'value' => $bookingCurrent->getAge()
+                'value' => $bookingCurrent->getPhone()
             ]
         );
 
@@ -117,7 +117,7 @@ class Infomation extends Generic
                 'name' => 'address',
                 'required' => true,
                 'disabled' => true,
-                'value' => $bookingCurrent->getAge()
+                'value' => $bookingCurrent->getAddress()
             ]
         );
 
@@ -129,7 +129,7 @@ class Infomation extends Generic
                 'name' => 'email',
                 'required' => true,
                 'disabled' => true,
-                'value' => $bookingCurrent->getAge()
+                'value' => $bookingCurrent->getEmail()
             ]
         );
 

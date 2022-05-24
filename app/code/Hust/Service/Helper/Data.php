@@ -76,7 +76,7 @@ class Data extends AbstractHelper
        return $this->productRepository->getById($item['product_id']);
    }
 
-    public function getListEmployeeAvailable($locatorId, $serviceId, $booking_hour, $date)
+    public function getListEmployeeAvailable($locatorId, $serviceId, $booking_hour, $date, $bookingStatus)
     {
         $employees = $this->employeeResource->getEmployeeOfLocatorAndService($locatorId, $serviceId);
         $data = [];
@@ -84,7 +84,7 @@ class Data extends AbstractHelper
         $employeeNotAvailable = $this->bookingResource->getEmployeeNotAvailable($locatorId, $serviceId, $booking_hour, $date);
         if ($employees) {
             foreach ($employees as $employee) {
-                if (!in_array($employee['employee_id'], $employeeNotAvailable))
+                if (!in_array($employee['employee_id'], $employeeNotAvailable) || $bookingStatus == 1)
                     $data[$employee['employee_id']] = __($employee['first_name'] . ' ' . $employee['last_name']);
             }
         }

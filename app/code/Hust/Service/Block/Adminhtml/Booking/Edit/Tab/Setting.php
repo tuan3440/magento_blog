@@ -79,7 +79,8 @@ class Setting extends Generic
                     $bookingCurrent->getLocatorId(),
                     $bookingCurrent->getServiceId(),
                     $bookingCurrent->getBookingHour(),
-                    $bookingCurrent->getDate()
+                    $bookingCurrent->getDate(),
+                    $bookingCurrent->getBookingStatus()
                 ),
                 'display' => 'none'
             ]
