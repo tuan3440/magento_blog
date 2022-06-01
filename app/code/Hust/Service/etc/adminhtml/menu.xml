@@ -11,5 +11,6 @@
         <add id="Hust_Service::hust_schedule" title="Schedule" module="Hust_Service" sortOrder="55" action="booking/schedule" parent="Hust_Service::booking_system" resource="Hust_Service::hust_schedule" />
         <add id="Hust_Service::hust_report" title="Report Sale" module="Hust_Service" sortOrder="70" action="booking/report" parent="Hust_Service::booking_system" resource="Hust_Service::hust_report" />
         <add id="Hust_Service::hust_booking_customer" title="Customer" module="Hust_Service" sortOrder="60" action="booking/customer" parent="Hust_Service::booking_system" resource="Hust_Service::hust_booking_customer" />
+        <add id="Hust_Service::hust_employee_report" title="Report Employee" module="Hust_Service" sortOrder="75" action="booking/employeereport" parent="Hust_Service::booking_system" resource="Hust_Service::hust_employee_report" />
     </menu>
 </config>

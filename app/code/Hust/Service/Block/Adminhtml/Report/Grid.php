@@ -85,8 +85,9 @@ class Grid extends \Magento\Backend\Block\Widget\Grid\Extended
             if ($service = $params->getServiceId()) {
                 $collection->addFieldToFilter('service_id', ['in' => $service]);
             }
-//            echo $collection->getSelect()->__toString();
-//            die;
+            $collection->getSelect()->columns([
+                'charge' => new Zend_Db_Expr('SUM(charge)'),
+            ]);
         }
         else {
             $collection->getSelect()->where('main_table.id =?', 0);
@@ -182,12 +183,6 @@ class Grid extends \Magento\Backend\Block\Widget\Grid\Extended
                 'column_css_class' => 'col-period'
             ]
         );
-        $this->addColumn('id', [
-            'header'=> __('Order Booking'),
-            'type'  => 'number',
-            'sortable'  => false,
-            'index' => 'id',
-        ]);
 
         $this->addColumn('charge', [
             'header' => __('Charge'),

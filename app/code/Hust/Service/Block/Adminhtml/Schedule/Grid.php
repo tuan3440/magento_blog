@@ -113,4 +113,14 @@ class Grid extends \Magento\Backend\Block\Widget\Grid\Extended
 
         return parent::_prepareColumns();
     }
+
+    public function getRowUrl($row)
+    {
+//        $productId = $this->getRequest()->getParam('id');
+//        $storeId = $this->getRequest()->getParam('store', 0);
+//        if ($storeId) {
+//            $storeId = $this->_storeManager->getStore($storeId)->getId();
+//        }
+        return $this->getUrl('booking/booking/edit', ['booking_id' => $row->getData('booking_id')]);
+    }
 }

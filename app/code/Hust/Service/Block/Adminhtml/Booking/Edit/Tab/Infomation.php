@@ -64,7 +64,6 @@ class Infomation extends Generic
                 'label' => __('Name'),
                 'name' => 'name',
                 'required' => true,
-                'disabled' => true,
                 'value' => $bookingCurrent->getName()
             ]
         );
@@ -76,7 +75,6 @@ class Infomation extends Generic
                 'label' => __('Age'),
                 'name' => 'age',
                 'required' => true,
-                'disabled' => true,
                 'value' => $bookingCurrent->getAge()
             ]
         );
@@ -88,7 +86,6 @@ class Infomation extends Generic
                 'label' => __('Gender'),
                 'name' => 'gender',
                 'required' => true,
-                'disabled' => true,
                 'value' => $bookingCurrent->getGender(),
                 'values' => [
                     0 => __('Male'),
@@ -104,7 +101,6 @@ class Infomation extends Generic
                 'label' => __('Phone'),
                 'name' => 'phone',
                 'required' => true,
-                'disabled' => true,
                 'value' => $bookingCurrent->getPhone()
             ]
         );
@@ -116,7 +112,6 @@ class Infomation extends Generic
                 'label' => __('Address'),
                 'name' => 'address',
                 'required' => true,
-                'disabled' => true,
                 'value' => $bookingCurrent->getAddress()
             ]
         );
@@ -128,7 +123,6 @@ class Infomation extends Generic
                 'label' => __('Email'),
                 'name' => 'email',
                 'required' => true,
-                'disabled' => true,
                 'value' => $bookingCurrent->getEmail()
             ]
         );
@@ -140,7 +134,6 @@ class Infomation extends Generic
                 'label' => __('Date'),
                 'name' => 'date',
                 'required' => true,
-                'disabled' => true,
                 'value' => $bookingCurrent->getDate()
             ]
         );
@@ -152,7 +145,6 @@ class Infomation extends Generic
                 'label' => __('Hour'),
                 'name' => 'booking_hour',
                 'required' => true,
-                'disabled' => true,
                 'value' => $bookingCurrent->getBookingHour(),
                 'values' => $this->hour->toArray()
             ]
@@ -164,7 +156,6 @@ class Infomation extends Generic
             [
                 'label' => __('Require of customer'),
                 'name' => 'require',
-                'disabled' => true,
                 'value' => $bookingCurrent->getRequire()
             ]
         );

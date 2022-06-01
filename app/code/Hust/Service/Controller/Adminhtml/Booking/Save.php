@@ -15,6 +15,8 @@ use Hust\Service\Model\Repository\ServiceRepository;
 use Hust\Service\Helper\Mail;
 use Hust\Service\Model\Repository\LocatorRepository;
 use Hust\Service\Model\Source\Hour;
+use Hust\Service\Helper\Data;
+
 
 class Save extends Booking
 {
@@ -22,6 +24,7 @@ class Save extends Booking
     private $locatorRepo;
     private $mail;
     private $hour;
+    private $helper;
     public function __construct(
         Context $context,
         PageFactory $resultPageFactory,
@@ -32,13 +35,15 @@ class Save extends Booking
         ServiceRepository $serviceRepo,
         LocatorRepository $locatorRepo,
         Mail $mail,
-        Hour $hour
+        Hour $hour,
+        Data $helper
     )
     {
         $this->serviceRepo = $serviceRepo;
         $this->mail = $mail;
         $this->locatorRepo = $locatorRepo;
         $this->hour = $hour;
+        $this->helper = $helper;
         parent::__construct($context, $resultPageFactory, $bookingFactory, $bookingRepository, $serviceRegistry, $layoutFactory);
     }
 
@@ -100,6 +105,7 @@ class Save extends Booking
 
     private function saveBookingSale($bookingRepo)
     {
+        $bookingId = $bookingRepo->getData('booking_id');
         $serviceId = $bookingRepo->getData('service_id');
         $locatorId = $bookingRepo->getData('locator_id');
         $date = $bookingRepo->getData('date');
@@ -116,7 +122,8 @@ class Save extends Booking
                 'charge' => $charge,
                 'phone' => $bookingRepo->getData('phone'),
                 'email' => $bookingRepo->getData('email'),
-                'name' => $bookingRepo->getData('name')
+                'name' => $bookingRepo->getData('name'),
+                'employee_id' => $this->helper->getEmployeeOfBooking($bookingId)
             ];
             $connection->insert($table, $data);
         } catch (\Exception $e) {

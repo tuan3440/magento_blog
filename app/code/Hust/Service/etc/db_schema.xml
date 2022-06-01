@@ -243,6 +243,7 @@
                 identity="true"/>
         <column xsi:type="int" name="service_id" padding="10" unsigned="true" comment="Service Id"/>
         <column xsi:type="int" name="locator_id" padding="10" unsigned="true" comment="Locator Id"/>
+        <column xsi:type="int" name="employee_id" padding="10" unsigned="true" comment="Employee Id"/>
         <column xsi:type="varchar" name="name" comment="Name" nullable="false" length="255" />
         <column xsi:type="varchar" name="phone" comment="phone" length="255" nullable="false"/>
         <column xsi:type="varchar" name="email" comment="email" length="255" nullable="false"/>
@@ -267,6 +268,15 @@
             column="locator_id"
             referenceTable="hust_locator"
             referenceColumn="locator_id"
+            onDelete="CASCADE"
+        />
+        <constraint
+            xsi:type="foreign"
+            referenceId="hust_booking_sale_hust_employee_employee_id"
+            table="hust_booking_sale"
+            column="employee_id"
+            referenceTable="hust_employee"
+            referenceColumn="employee_id"
             onDelete="CASCADE"
         />
     </table>
