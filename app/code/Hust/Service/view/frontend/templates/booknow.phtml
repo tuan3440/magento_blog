@@ -32,14 +32,6 @@ $charge = $block->getCharge();
     </div>
 </div>
 
-<script type="text/x-magento-init">
-    {
-        "#form-booking": {
-            "validation": {}
-        }
-    }
-</script>
-
 <script type="text/javascript">
     require([
         'jquery',
@@ -100,7 +92,7 @@ $charge = $block->getCharge();
         background-color: #45c3d2;
     }
 
-    .active {
+    .active-hour {
         background-color: #c34706 !important;
     }
 
@@ -120,7 +112,8 @@ $charge = $block->getCharge();
             showButtonPanel: true,
             currentText: $t('Go Today'),
             closeText: $t('Close'),
-            showWeek: true
+            showWeek: true,
+            minDate: new Date()
         });
     })
 </script>
@@ -141,13 +134,13 @@ $charge = $block->getCharge();
         <div class="field">
             <label class="label">Name</label>
             <div class="control">
-                <input type="text" name="name" />
+                <input type="text" name="name" data-validate='{"required":true}'/>
             </div>
         </div>
         <div class="field">
             <label class="label">Age</label>
             <div class="control">
-                <input type="text" name="age" />
+                <input type="text" name="age" data-validate='{"required":true}'/>
             </div>
         </div>
         <div class="field">
@@ -162,34 +155,52 @@ $charge = $block->getCharge();
         <div class="field">
             <label class="label">Phone</label>
             <div class="control">
-                <input type="text" name="phone">
+                <input type="text" name="phone" data-validate='{"required":true}'>
             </div>
         </div>
         <div class="field">
             <label class="label">Address</label>
             <div class="control">
-                <input type="text" name="address" />
+                <input type="text" name="address" data-validate='{"required":true}'/>
             </div>
         </div>
         <div class="field">
-            <label class="label">Emall</label>
+            <label class="label">Email</label>
             <div class="control">
-                <input type="text" name="email" />
+                <input type="text" name="email" data-validate="{required:true, 'validate-email':true}"/>
             </div>
         </div>
     </form>
 </div>
+
+<script type="text/x-magento-init">
+    {
+        "#form-validate": {
+            "validation": {}
+        }
+    }
+</script>
 
 <script type="text/javascript">
     require(['jquery', 'Magento_Ui/js/modal/modal', 'mage/mage'], function ($, modal) {
         $(document).ready(function () {
             $('#booking').on('click', function () {
                 let date = $('#example-date').val();
+                if (date == "") {
+                    alert("Bạn chưa chọn ngày");
+                    return;
+                }
+                let hour = $('button.active-hour h2').text();
+                if (hour == "") {
+                    alert("Bạn chưa chọn khung giờ");
+                    return;
+                }
                 console.log("aa" + date);
+                console.log("aa" + hour);
                 $('.data-date').text($('#example-date').val());
-                $('.data-hour').text($('button.active h2').text());
+                $('.data-hour').text($('button.active-hour h2').text());
                 $('input[name="date"]').val($('#example-date').val());
-                $('input[name="booking_hour"]').val($('button.active').val());
+                $('input[name="booking_hour"]').val($('button.active-hour').val());
                 $('input[name="require"]').val($('textarea').val());
                 var options = {
                     type: 'popup',
@@ -219,9 +230,9 @@ $charge = $block->getCharge();
 
             $('.select-hour button').on('click', function () {
                 $(".select-hour button").each(function () {
-                    $(this).removeClass('active');
+                    $(this).removeClass('active-hour');
                 });
-                $(this).addClass('active');
+                $(this).addClass('active-hour');
             })
         });
     })

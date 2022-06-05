@@ -95,7 +95,7 @@ class View extends Template
         $serviceId = $this->getServiceIdCurrent();
         $locatorId = $this->getLocatorIdCurrent();
         $date = $this->getDateBooking();
-        $collection = $this->bookingCollection->create()->addFieldToFilter("booking_status", 1)
+        $collection = $this->bookingCollection->create()->addFieldToFilter("booking_status", 0)
             ->addFieldToFilter('service_id', $serviceId)
             ->addFieldToFilter('date', $date)
             ->addFieldToFilter('locator_id', $locatorId);
