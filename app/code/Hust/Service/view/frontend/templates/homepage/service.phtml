@@ -10,9 +10,9 @@ $data = $block->getAllService();
     <div class="carousel-wrap">
         <div class="owl-carousel-service">
             <?php foreach ($data as $d): ?>
-            <div>
+            <div style="width: 200px;height: 300px">
                 <a href="<?= $d['url'] ?>">
-                    <div class="item"><img src="<?= $d['image']; ?>"/></div>
+                    <div class="item"><img src="<?= $d['image']; ?>" /></div>
                 </a>
                 <h2><?= $d['title']?></h2>
             </div>

@@ -43,17 +43,6 @@ class Tabs extends \Magento\Backend\Block\Widget\Tabs
             ]
         );
 
-        $this->addTab(
-            'hour_service',
-            [
-                'label' => __('Hour'),
-                'title' => __('Hour'),
-                'content' => $this->getLayout()->createBlock(
-                    Hour::class
-                )->toHtml(),
-                'active' => false
-            ]
-        );
 
         return parent::_beforeToHtml();
     }
