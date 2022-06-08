@@ -21,4 +21,19 @@ class Grid extends SearchResult
     ) {
         parent::__construct($entityFactory, $logger, $fetchStrategy, $eventManager, $mainTable, $resourceModel);
     }
+
+    protected function _initSelect()
+    {
+        $this->addFilterToMap('employee_id', 'main_table.employee_id');
+        // Join the 2nd Table
+        $this->getSelect()
+            ->joinLeft(
+                ['hust_employee_locator' => $this->getConnection()->getTableName('hust_employee_locator')],
+                'main_table.employee_id = hust_employee_locator.employee_id',
+                ['hust_employee_locator.locator_id']
+            );
+        parent::_initSelect();
+
+        return $this;
+    }
 }

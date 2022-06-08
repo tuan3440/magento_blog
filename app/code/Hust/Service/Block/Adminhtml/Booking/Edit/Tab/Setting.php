@@ -101,13 +101,17 @@ class Setting extends Generic
         );
 
 
+
         $this->setChild(
             'form_after',
             $this->getLayout()->createBlock(Dependence::class)
                 ->addFieldMap("{$htmlIdPrefix}booking_status", 'booking_status')
                 ->addFieldMap("{$htmlIdPrefix}employee_id", 'employee_id')
                 ->addFieldMap("{$htmlIdPrefix}reason", 'reason')
-                ->addFieldDependence('employee_id', 'booking_status', '1')
+                ->addFieldDependence('employee_id', 'booking_status', new Field([
+                    'separator'=> ',',
+                    'value'=>'1,3'
+                ]))
                 ->addFieldDependence('reason', 'booking_status', new Field([
                     'separator'=> ',',
                     'value'=>'2,4'
