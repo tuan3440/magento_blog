@@ -82,7 +82,8 @@ class Setting extends Generic
                     $bookingCurrent->getDate(),
                     $bookingCurrent->getBookingStatus()
                 ),
-                'display' => 'none'
+                'display' => 'none',
+                'note' => __('you should choose in order from top to bottom')
             ]
         );
 

@@ -4,7 +4,8 @@ namespace Hust\Service\Model\ResourceModel;
 
 use Magento\Framework\Model\ResourceModel\Db\AbstractDb;
 use Magento\Framework\Model\ResourceModel\Db\Context;
-
+use Zend_Db_Expr;
+use Zend_Db_Select;
 class Booking extends AbstractDb
 {
     const TABLE_NAME = 'hust_booking';
@@ -41,8 +42,6 @@ class Booking extends AbstractDb
             )->where(
                 'hust_booking.locator_id = '.$locatorId
             )->where(
-                'hust_booking.service_id = '.$serviceId
-            )->where(
                 'hust_booking.booking_hour = '.$booking_hour
             )->where(
                 "hust_booking.date = '".$date."'"
@@ -56,4 +55,33 @@ class Booking extends AbstractDb
         }
         return $result;
     }
+
+    public function getEmployeesByDate($locatorId, $serviceId, $date)
+    {
+        $select = $this->getConnection()->select()
+            ->from(
+                ['hust_booking' => $this->getTable('hust_booking')]
+            )->joinLeft(
+                ['hust_booking_employee' => $this->getTable('hust_booking_employee')],
+                'hust_booking.booking_id = hust_booking_employee.booking_id',
+                ['hust_booking_employee.employee_id']
+            )->reset(Zend_Db_Select::COLUMNS)
+            ->columns([
+                'employee_id' => 'hust_booking_employee.employee_id',
+                'count' => new Zend_Db_Expr('count(*)')
+            ])
+            ->where(
+                'hust_booking.locator_id = '.$locatorId
+            )
+            ->where(
+                "hust_booking.date = '".$date."'"
+            )->where(
+                'hust_booking.booking_status = 1'
+            )->group('employee_id')
+            ->order('count asc');
+        $data = $this->getConnection()->fetchAll($select);
+        return $data;
+    }
+
+
 }
