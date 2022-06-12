@@ -9,12 +9,12 @@ class PrintAction extends Booking
 {
    public function execute()
    {
-       $booking = $this->getRequest()->getParam("booking");
+       $bookingId = $this->getRequest()->getParam("booking");
        $mpdf = new \Mpdf\Mpdf();
        $content = "";
        $blockPdf = $this->_view->getLayout()->createBlock(Pdf::class)
            ->setTemplate("Hust_Service::booking/invoice.phtml")
-           ->assign("booking", $booking);
+           ->assign("bookingId", $bookingId);
        $content .= $blockPdf->toHtml();
        $mpdf = new \Mpdf\Mpdf([
                'tempDir' => '/tmp',
@@ -22,14 +22,15 @@ class PrintAction extends Booking
                'format' => 'A4',
                'default_font' => 'Arial',
                'orientation' => 'P',
-               'margin_left' => 0,
-               'margin_right' => 0,
-               'margin_top' => 0,
-               'margin_bottom' => 0,
-               'margin_header' => 0,
-               'margin_footer' => 0,
+               'margin_left' => 20,
+               'margin_right' => 20,
+               'margin_top' => 20,
+               'margin_bottom' => 20,
+               'margin_header' => 20,
+               'margin_footer' => 20,
            ]
        );
+       $mpdf->showImageErrors = true;
        $mpdf->SetDisplayMode('fullpage');
        $mpdf->WriteHTML($content);
        $mpdf->Output();
