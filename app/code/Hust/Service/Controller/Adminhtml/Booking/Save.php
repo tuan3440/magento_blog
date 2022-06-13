@@ -17,7 +17,6 @@ use Hust\Service\Model\Repository\LocatorRepository;
 use Hust\Service\Model\Source\Hour;
 use Hust\Service\Helper\Data;
 
-
 class Save extends Booking
 {
     private $serviceRepo;
@@ -58,7 +57,7 @@ class Save extends Booking
                     $bookingRepo->setReason($data['reason']);
                 if ($data['booking_status'] == 3) {
                     $datax = (array) $bookingRepo;
-                    $this->sendMailSuccess($bookingRepo->getData('email'));
+                    $this->sendMailSuccess($bookingRepo->getData('email'), $bookingRepo->getData('service_id'));
                     $this->saveBookingSale($bookingRepo);
                 }
                 if ($data['booking_status'] == 2) {
@@ -162,9 +161,12 @@ class Save extends Booking
         ];
     }
 
-    private function sendMailSuccess($email)
+    private function sendMailSuccess($email, $service_id)
     {
-        $this->mail->sendEmail("notify_cutomer_thankyou", [], $email);
+        $url = $this->helper->getUrlReview($service_id);
+        $this->mail->sendEmail("notify_cutomer_thankyou", [
+            'urlReview' => $url
+        ], $email);
     }
 
     private function sendMailBoom($data)

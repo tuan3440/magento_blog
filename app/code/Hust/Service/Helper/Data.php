@@ -18,15 +18,19 @@ class Data extends AbstractHelper
     private $employeeRepo;
     private $bookingResource;
     private $employeeResource;
-   public function __construct(
+    protected $_storeManager;
+
+    public function __construct(
        Context $context,
        ProductRepository $productRepository,
        EmployeeRepository $employeeRepo,
        Image $imageProvider,
        Booking $bookingResource,
-       Employee $employeeResource
+       Employee $employeeResource,
+       \Magento\Store\Model\StoreManagerInterface $storeManager
    )
    {
+       $this->_storeManager = $storeManager;
        $this->productRepository = $productRepository;
        $this->imageProvider = $imageProvider;
        $this->employeeRepo = $employeeRepo;
@@ -108,5 +112,10 @@ class Data extends AbstractHelper
    public function getEmployeeOfBooking($bookingId)
    {
        return $this->bookingResource->getEmployeeBooking($bookingId);
+   }
+
+   public function getUrlReview($service_id)
+   {
+       return $this->_storeManager->getStore()->getBaseUrl()."bookings/servicereview/index/service_id/".$service_id;
    }
 }

@@ -298,4 +298,22 @@
             <column name="promotion_id"/>
         </constraint>
     </table>
+    <table name="hust_booking_review" resource="default" engine="innodb" comment="hust_booking_review">
+        <column xsi:type="int" name="review_id" comment="Id" unsigned="true" padding="10" nullable="false"
+                identity="true"/>
+        <column xsi:type="int" name="point" comment="Point" unsigned="true" nullable="true" />
+        <column xsi:type="int" name="service_id" comment="Service Id" unsigned="true" nullable="true" />
+        <constraint xsi:type="primary" referenceId="PRIMARY">
+            <column name="review_id"/>
+        </constraint>
+        <constraint
+            xsi:type="foreign"
+            referenceId="hust_booking_review_hust_service_service_id"
+            table="hust_booking_review"
+            column="service_id"
+            referenceTable="hust_service"
+            referenceColumn="service_id"
+            onDelete="CASCADE"
+        />
+    </table>
 </schema>
