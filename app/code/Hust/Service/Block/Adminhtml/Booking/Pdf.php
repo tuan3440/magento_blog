@@ -97,4 +97,11 @@ class Pdf extends \Magento\Framework\View\Element\Template
         $name = $service->getData("name");
         return $name;
     }
+
+    public function getCharge($bookingId)
+    {
+        $booking = $this->getBooking($bookingId);
+        $charge = $booking->getData("charge");
+        return $charge;
+    }
 }

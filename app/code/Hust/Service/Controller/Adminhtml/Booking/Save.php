@@ -110,7 +110,7 @@ class Save extends Booking
         $locatorId = $bookingRepo->getData('locator_id');
         $date = $bookingRepo->getData('date');
         $service = $this->serviceRepo->getById($serviceId);
-        $charge = $service->getCharge();
+        $charge = $bookingRepo->getData("charge");
         try {
             $this->_resources = ObjectManager::getInstance()->get('Magento\Framework\App\ResourceConnection');
             $connection = $this->_resources->getConnection();

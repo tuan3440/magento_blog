@@ -110,6 +110,7 @@
         <column xsi:type="smallint" name="booking_status" comment="Booking Status" unsigned="true" default="0" nullable="false" />
         <column xsi:type="varchar" name="booking_hour" comment="Hour booking" length="255" nullable="false"/>
         <column xsi:type="varchar" name="name" comment="Name" nullable="false" length="255" />
+        <column xsi:type="int" name="charge" comment="Charge" nullable="false" unsigned="true"/>
         <column xsi:type="int" name="age" comment="Age" nullable="false" unsigned="true"/>
         <column xsi:type="smallint" name="gender" comment="Gender" nullable="false" />
         <column xsi:type="varchar" name="phone" comment="phone" length="255" nullable="false"/>

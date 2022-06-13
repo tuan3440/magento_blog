@@ -25,8 +25,7 @@ $charge = $block->getCharge();
             <div id="slot"></div>
             <h2>Charge($) : <?= $charge?></h2>
             <label>Require</label>
-            <textarea name="require" rows="7">
-            </textarea>
+            <textarea name="require" rows="7"></textarea>
             <button id="booking" class="booking">Book</button>
         </div>
     </div>
@@ -129,6 +128,8 @@ $charge = $block->getCharge();
         <input type="hidden" name="require" />
         <input type="hidden" name="locator_id" value="<?= $locator->getLocatorId();?>" />
         <input type="hidden" name="service_id" value="<?= $serviceId;?>" />
+        <input type="hidden" name="charge" value="<?= $charge;?>" />
+
         <h2>Hour : <span class="data-hour">8h30AM:10AM</span></h2>
         <?php echo $block->getBlockHtml('formkey') ?>
         <div class="field">

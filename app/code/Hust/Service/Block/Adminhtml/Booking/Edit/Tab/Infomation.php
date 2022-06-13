@@ -5,11 +5,13 @@ namespace Hust\Service\Block\Adminhtml\Booking\Edit\Tab;
 use Magento\Backend\Block\Widget\Form\Generic;
 use Hust\Service\Model\ServiceRegistry;
 use Hust\Service\Model\Source\Hour;
+use Hust\Service\Ui\Component\Form\Employee\ListService;
 
 class Infomation extends Generic
 {
     protected $serviceRegistry;
     protected $hour;
+    protected $service;
 
     public function __construct(
         \Magento\Backend\Block\Template\Context $context,
@@ -17,8 +19,10 @@ class Infomation extends Generic
         \Magento\Framework\Data\FormFactory     $formFactory,
         ServiceRegistry $serviceRegistry,
         Hour $hour,
+        ListService $service,
         array                                   $data = [])
     {
+        $this->service = $service;
         $this->hour = $hour;
         $this->serviceRegistry = $serviceRegistry;
         parent::__construct($context, $registry, $formFactory, $data);
@@ -147,6 +151,29 @@ class Infomation extends Generic
                 'required' => true,
                 'value' => $bookingCurrent->getBookingHour(),
                 'values' => $this->hour->toArray()
+            ]
+        );
+
+        $fieldGeneralInformation->addField(
+            'service_id',
+            'select',
+            [
+                'label' => __('Service'),
+                'name' => 'service_id',
+                'required' => true,
+                'value' => $bookingCurrent->getServiceId(),
+                'values' => $this->service->toOptionArray()
+            ]
+        );
+
+        $fieldGeneralInformation->addField(
+            'charge',
+            'text',
+            [
+                'label' => __('Charge'),
+                'name' => 'charge',
+                'required' => true,
+                'value' => $bookingCurrent->getCharge()
             ]
         );
 
