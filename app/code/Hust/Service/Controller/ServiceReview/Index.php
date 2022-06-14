@@ -24,9 +24,6 @@ class Index extends \Hust\Service\Controller\Index
 
     public function execute()
     {
-//        $serviceId = $this->getRequest()->getParam('id');
-//        $currentService = $this->serviceRepository->getById($serviceId);
-//        $this->registry->register('current_service', $currentService);
         $resultPage = $this->resultPageFactory->create();
         $resultPage->getConfig()->getTitle()->set(__('Review'));
 

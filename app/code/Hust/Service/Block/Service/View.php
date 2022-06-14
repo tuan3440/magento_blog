@@ -2,21 +2,26 @@
 
 namespace Hust\Service\Block\Service;
 
+use Hust\Service\Model\System\UrlResolver;
 use Magento\Framework\View\Element\Template;
 use Hust\Service\Model\ResourceModel\Service;
 use Hust\Service\Model\ServiceFactory;
 use Hust\Service\Model\ResourceModel\Service\CollectionFactory;
 use Hust\Service\Model\Repository\ServiceRepository;
 use Hust\Service\Model\LocatorFactory;
-
+use Hust\Service\Model\ResourceModel\Review;
 class View extends Template
 {
-
+    protected $review;
     protected $serviceResource;
     protected $serviceFactory;
     protected $serviceCollectionFactory;
     protected $serviceRepository;
     protected $locatorFactory;
+    /**
+     * @var UrlResolver
+     */
+    protected $urlResolver;
 
     public function __construct(
         Template\Context $context,
@@ -25,6 +30,8 @@ class View extends Template
         CollectionFactory $collectionFactory,
         ServiceRepository $serviceRepository,
         LocatorFactory $locatorFactory,
+        UrlResolver $urlResolver,
+        Review $review,
         array $data = []
     ) {
         $this->serviceResource = $serviceResource;
@@ -32,6 +39,8 @@ class View extends Template
         $this->serviceFactory = $serviceFactory;
         $this->serviceRepository = $serviceRepository;
         $this->locatorFactory = $locatorFactory;
+        $this->urlResolver = $urlResolver;
+        $this->review = $review;
         parent::__construct($context, $data);
     }
 
@@ -41,17 +50,25 @@ class View extends Template
     public function getContentService()
     {
         $id = $this->getRequest()->getParam('id');
+        $point = $this->review->getPointService($id);
         $data = [];
         if ($id) {
               $service = $this->serviceRepository->getById($id);
             $data = [
                 'service_id' => $service->getServiceId(),
                 'title' => $service->getName(),
-                'content' => $service->getContent()
+                'content' => $service->getContent(),
+                'image' => $this->getMediaImage($service->getImage()),
+                'point' => round($point[0]['avg'])
             ];
         }
 
         return $data;
+    }
+
+    private function getMediaImage($name)
+    {
+        return $this->urlResolver->getImageUrlByName($name);
     }
 
     public function getExistsLocator()
@@ -68,6 +85,16 @@ class View extends Template
             return $data;
         }
         return false;
+    }
+
+    public function getDataReview()
+    {
+        $id = $this->getRequest()->getParam('id');
+        $phone = $this->getRequest()->getParam('phone');
+        return [
+            'service_id' => $id,
+            "phone" => $phone
+        ];
     }
 
 }

@@ -7,7 +7,7 @@
     </head>
     <body>
         <referenceContainer name="content">
-            <block class="Hust\Service\Block\ListServices" name="booking.services.review" template="Hust_Service::review.phtml"/>
+            <block class="Hust\Service\Block\Service\View" name="booking.services.review" template="Hust_Service::review.phtml"/>
         </referenceContainer>
     </body>
 </page>

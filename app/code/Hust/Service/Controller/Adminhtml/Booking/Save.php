@@ -57,7 +57,7 @@ class Save extends Booking
                     $bookingRepo->setReason($data['reason']);
                 if ($data['booking_status'] == 3) {
                     $datax = (array) $bookingRepo;
-                    $this->sendMailSuccess($bookingRepo->getData('email'), $bookingRepo->getData('service_id'));
+                    $this->sendMailSuccess($bookingRepo->getData('email'), $bookingRepo->getData('service_id'), $bookingRepo->getData('phone'));
                     $this->saveBookingSale($bookingRepo);
                 }
                 if ($data['booking_status'] == 2) {
@@ -161,9 +161,9 @@ class Save extends Booking
         ];
     }
 
-    private function sendMailSuccess($email, $service_id)
+    private function sendMailSuccess($email, $service_id, $phone)
     {
-        $url = $this->helper->getUrlReview($service_id);
+        $url = $this->helper->getUrlReview($service_id, $phone);
         $this->mail->sendEmail("notify_cutomer_thankyou", [
             'urlReview' => $url
         ], $email);

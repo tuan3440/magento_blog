@@ -18,4 +18,13 @@ class BookingSale extends AbstractDb
     {
         $this->_init(self::TABLE_NAME, 'id');
     }
+
+    public function getListPhone($serviceId)
+    {
+        $phones = $this->getConnection()->fetchAll("
+          SELECT phone FROM hust_booking_sale where service_id = ".$serviceId
+        );
+
+        return $phones;
+    }
 }
