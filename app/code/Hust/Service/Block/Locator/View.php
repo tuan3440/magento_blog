@@ -57,15 +57,9 @@ class View extends Template
         $hoursList = [];
         $locatorId = $this->getLocatorIdCurrent();
         $serviceId = $this->getServiceIdCurrent();
-        $service = $this->serviceRepo->getById($serviceId);
         $slots = $this->serviceCollection->create()->getNumberSlot($locatorId, $serviceId);
-        if ($service->getData('type_service_time') == 0) {
-            $hours = [0 ,1, 2, 3, 4, 5, 6, 7];
-        } elseif ($service->getData('type_service_time') == 2) {
-            $hours = [24 , 25, 26, 27];
-        } else {
-            $hours = [8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23];
-        }
+        $locatorCurrent = $this->locator->create()->load($locatorId);
+        $hours = explode(",", $locatorCurrent->getData('hours'));
         $hourList = $this->hours->toArray();
         foreach ($hourList as $key => $value) {
             if (in_array($key, $hours)) {

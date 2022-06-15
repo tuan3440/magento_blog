@@ -44,6 +44,9 @@ class Save extends Locator
                 if (!$data['is_active']) {
                     $data['is_active'] = 1;
                 }
+                if (is_array($data['hours'])) {
+                    $data['hours'] = implode(",", $data['hours']);
+                }
                 $model->addData($data);
                 $this->getLocatorRepository()->save($model);
                 $this->saveService($model, $data);
