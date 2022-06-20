@@ -2,29 +2,38 @@
 
 namespace Hust\Service\Block\Adminhtml\Booking\Edit\Tab;
 
+use Hust\Service\Helper\Data;
+use Hust\Service\Model\Source\BookingStatus;
+use Magento\Backend\Block\Widget\Form\Element\Dependence;
 use Magento\Backend\Block\Widget\Form\Generic;
 use Hust\Service\Model\ServiceRegistry;
 use Hust\Service\Model\Source\Hour;
 use Hust\Service\Ui\Component\Form\Employee\ListService;
+use Magento\Config\Model\Config\Structure\Element\Dependency\Field;
 
 class Infomation extends Generic
 {
     protected $serviceRegistry;
     protected $hour;
     protected $service;
-
+    protected $helper;
+    protected $bookingStatus;
     public function __construct(
         \Magento\Backend\Block\Template\Context $context,
         \Magento\Framework\Registry             $registry,
         \Magento\Framework\Data\FormFactory     $formFactory,
         ServiceRegistry $serviceRegistry,
         Hour $hour,
+        Data $helper,
+        BookingStatus $bookingStatus,
         ListService $service,
         array                                   $data = [])
     {
         $this->service = $service;
         $this->hour = $hour;
         $this->serviceRegistry = $serviceRegistry;
+        $this->helper = $helper;
+        $this->bookingStatus = $bookingStatus;
         parent::__construct($context, $registry, $formFactory, $data);
     }
 
@@ -41,7 +50,8 @@ class Infomation extends Generic
             ]
         );
         $form = $this->_formFactory->create();
-
+        $htmlIdPrefix = 'booking_setting_';
+        $form->setHtmlIdPrefix($htmlIdPrefix);
         $bookingCurrent = $this->serviceRegistry->registry('booking_current');
         $fieldGeneralInformation = $form->addFieldset(
             'infomation_form',
@@ -57,7 +67,8 @@ class Infomation extends Generic
                 'label' => __('Booking ID'),
                 'name' => 'booking_id',
                 'required' => true,
-                'value' => $bookingCurrent->getBookingId()
+                'value' => $bookingCurrent->getBookingId(),
+                'class' => "info_booking"
             ]
         );
 
@@ -68,7 +79,9 @@ class Infomation extends Generic
                 'label' => __('Name'),
                 'name' => 'name',
                 'required' => true,
-                'value' => $bookingCurrent->getName()
+                'value' => $bookingCurrent->getName(),
+                'disabled' => true,
+                'class' => "info_booking"
             ]
         );
 
@@ -79,7 +92,9 @@ class Infomation extends Generic
                 'label' => __('Age'),
                 'name' => 'age',
                 'required' => true,
-                'value' => $bookingCurrent->getAge()
+                'value' => $bookingCurrent->getAge(),
+                'disabled' => true,
+                'class' => "info_booking"
             ]
         );
 
@@ -94,7 +109,9 @@ class Infomation extends Generic
                 'values' => [
                     0 => __('Male'),
                     1 => __('Female')
-                ]
+                ],
+                'disabled' => true,
+                'class' => "info_booking"
             ]
         );
 
@@ -105,8 +122,11 @@ class Infomation extends Generic
                 'label' => __('Phone'),
                 'name' => 'phone',
                 'required' => true,
-                'value' => $bookingCurrent->getPhone()
+                'value' => $bookingCurrent->getPhone(),
+                'disabled' => true,
+                'class' => "info_booking"
             ]
+
         );
 
         $fieldGeneralInformation->addField(
@@ -116,7 +136,9 @@ class Infomation extends Generic
                 'label' => __('Address'),
                 'name' => 'address',
                 'required' => true,
-                'value' => $bookingCurrent->getAddress()
+                'value' => $bookingCurrent->getAddress(),
+                'disabled' => true,
+                'class' => "info_booking"
             ]
         );
 
@@ -127,7 +149,9 @@ class Infomation extends Generic
                 'label' => __('Email'),
                 'name' => 'email',
                 'required' => true,
-                'value' => $bookingCurrent->getEmail()
+                'value' => $bookingCurrent->getEmail(),
+                'disabled' => true,
+                'class' => "info_booking"
             ]
         );
 
@@ -138,7 +162,9 @@ class Infomation extends Generic
                 'label' => __('Date'),
                 'name' => 'date',
                 'required' => true,
-                'value' => $bookingCurrent->getDate()
+                'value' => $bookingCurrent->getDate(),
+                'disabled' => true,
+                'class' => "info_booking"
             ]
         );
 
@@ -150,7 +176,9 @@ class Infomation extends Generic
                 'name' => 'booking_hour',
                 'required' => true,
                 'value' => $bookingCurrent->getBookingHour(),
-                'values' => $this->hour->toArray()
+                'values' => $this->hour->toArray(),
+                'disabled' => true,
+                'class' => "info_booking"
             ]
         );
 
@@ -162,7 +190,9 @@ class Infomation extends Generic
                 'name' => 'service_id',
                 'required' => true,
                 'value' => $bookingCurrent->getServiceId(),
-                'values' => $this->service->toOptionArray()
+                'values' => $this->service->toOptionArray(),
+                'disabled' => true,
+                'class' => "info_booking"
             ]
         );
 
@@ -173,7 +203,9 @@ class Infomation extends Generic
                 'label' => __('Charge'),
                 'name' => 'charge',
                 'required' => true,
-                'value' => $bookingCurrent->getCharge()
+                'value' => $bookingCurrent->getCharge(),
+                'disabled' => true,
+                'class' => "info_booking"
             ]
         );
 
@@ -183,8 +215,88 @@ class Infomation extends Generic
             [
                 'label' => __('Require of customer'),
                 'name' => 'require',
-                'value' => $bookingCurrent->getRequire()
+                'value' => $bookingCurrent->getRequire(),
+                'disabled' => true,
+                'class' => "info_booking"
             ]
+        );
+
+        $fieldGeneralInformation->addField(
+            'checkbox',
+            'checkbox',
+            [
+                'label' => __("Update"),
+                'name' => 'checkbox',
+                'value' => false,
+                'class' => "update_booking"
+            ]
+        );
+
+        $fieldSetting = $form->addFieldset(
+            'setting_form',
+            [
+                'legend' => __('Setting')
+            ]
+        );
+
+        $fieldSetting->addField(
+            'booking_status',
+            'select',
+            [
+                'label' => __('Status'),
+                'name' => 'booking_status',
+                'required' => true,
+                'value' => $bookingCurrent->getBookingStatus() ,
+                'values' => $this->bookingStatus->toArray(),
+
+            ]
+        );
+
+        $fieldSetting->addField(
+            'employee_id',
+            'select',
+            [
+                'label' => __('Employee'),
+                'name' => 'employee_id',
+                'value' => $this->helper->getEmployeeOfBooking($bookingCurrent->getBookingId()) ?? '' ,
+                'values' => $this->helper->getListEmployeeAvailable(
+                    $bookingCurrent->getLocatorId(),
+                    $bookingCurrent->getServiceId(),
+                    $bookingCurrent->getBookingHour(),
+                    $bookingCurrent->getDate(),
+                    $bookingCurrent->getBookingStatus()
+                ),
+                'display' => 'none',
+                'note' => __('you should choose in order from top to bottom')
+            ]
+        );
+
+        $fieldSetting->addField(
+            'reason',
+            'textarea',
+            [
+                'label' => __('Reason'),
+                'name' => 'reason',
+                'value' => $bookingCurrent->getReason(),
+                'display' => 'none'
+            ]
+        );
+
+        $this->setChild(
+            'form_after',
+            $this->getLayout()->createBlock(Dependence::class)
+                ->addFieldMap("{$htmlIdPrefix}booking_status", 'booking_status')
+                ->addFieldMap("{$htmlIdPrefix}employee_id", 'employee_id')
+                ->addFieldMap("{$htmlIdPrefix}reason", 'reason')
+                ->addFieldDependence('employee_id', 'booking_status', new Field([
+                    'separator'=> ',',
+                    'value'=>'1'
+                ]))
+                ->addFieldDependence('reason', 'booking_status', new Field([
+                    'separator'=> ',',
+                    'value'=>'2,4'
+                ]))
+//                ->addFieldDependence('reason', 'booking_status', '4')
         );
 
 //        $form->setUseContainer(true);

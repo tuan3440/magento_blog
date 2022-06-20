@@ -30,16 +30,16 @@ class Tabs extends WidgetTabs
                 'active' => true
             ]
         );
-
-        $this->addTab(
-            'setting',
-            [
-                'label' => __('Setting'),
-                'title' => __('Setting'),
-                'content' => $this->getLayout()->createBlock('Hust\Service\Block\Adminhtml\Booking\Edit\Tab\Setting')->toHtml(),
-                'active' => false
-            ]
-        );
+//
+//        $this->addTab(
+//            'setting',
+//            [
+//                'label' => __('Setting'),
+//                'title' => __('Setting'),
+//                'content' => $this->getLayout()->createBlock('Hust\Service\Block\Adminhtml\Booking\Edit\Tab\Setting')->toHtml(),
+//                'active' => false
+//            ]
+//        );
         parent::_beforeToHtml();
     }
 }

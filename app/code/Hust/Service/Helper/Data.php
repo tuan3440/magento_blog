@@ -87,18 +87,20 @@ class Data extends AbstractHelper
         $data[''] = __('Select employee');
 //        $employeeNotAvailable = $this->bookingResource->getEmployeeNotAvailable($locatorId, $serviceId, $booking_hour, $date);
         $xc = $this->bookingResource->getEmployeesByDate($locatorId, $serviceId, $date);
-        foreach ($employees as &$employee) {
-            $count = 0;
-            foreach ($xc as $x) {
-                if ($employee['employee_id'] == $x['employee_id']) {
-                    $count = $x['count'];
+        if ($employees) {
+            foreach ($employees as &$employee) {
+                $count = 0;
+                foreach ($xc as $x) {
+                    if ($employee['employee_id'] == $x['employee_id']) {
+                        $count = $x['count'];
+                    }
                 }
+                $employee['count'] = $count;
             }
-            $employee['count'] = $count;
+            usort($employees, function ($first, $second) {
+                return $first['count'] > $second['count'];
+            });
         }
-        usort($employees,function($first,$second){
-            return $first['count'] > $second['count'];
-        });
         if ($employees) {
             foreach ($employees as $employee2) {
 //                if (!in_array($employee2['employee_id'], $employeeNotAvailable) || $bookingStatus == 1)
