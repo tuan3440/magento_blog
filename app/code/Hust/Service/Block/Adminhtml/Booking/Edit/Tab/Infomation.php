@@ -221,6 +221,10 @@ class Infomation extends Generic
             ]
         );
 
+        $showButtonUpdate = false;
+        if ($bookingCurrent->getBookingStatus() != 0 && $bookingCurrent->getBookingStatus() != 1) {
+            $showButtonUpdate = true;
+        }
         $fieldGeneralInformation->addField(
             'checkbox',
             'checkbox',
@@ -228,7 +232,8 @@ class Infomation extends Generic
                 'label' => __("Update"),
                 'name' => 'checkbox',
                 'value' => false,
-                'class' => "update_booking"
+                'class' => "update_booking",
+                'disabled' => $showButtonUpdate
             ]
         );
 

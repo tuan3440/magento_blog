@@ -7,18 +7,17 @@ use Hust\Service\Model\BookingFactory;
 use Hust\Service\Model\Repository\BookingRepository;
 use Hust\Service\Model\ServiceRegistry;
 use Magento\Backend\App\Action\Context;
+use Magento\Backend\Model\Auth\Session;
 use Magento\Framework\App\ResponseInterface;
 use Magento\Framework\View\Result\LayoutFactory;
 use Magento\Framework\View\Result\PageFactory;
 
 class Index extends Booking
 {
-    public function __construct(Context $context,
-                                PageFactory $resultPageFactory,
-                                BookingFactory $bookingFactory,
-                                BookingRepository $bookingRepository, ServiceRegistry $serviceRegistry, LayoutFactory $layoutFactory)
+
+    public function __construct(Context $context, Session $session, PageFactory $resultPageFactory, BookingFactory $bookingFactory, BookingRepository $bookingRepository, ServiceRegistry $serviceRegistry, LayoutFactory $layoutFactory)
     {
-        parent::__construct($context, $resultPageFactory, $bookingFactory, $bookingRepository, $serviceRegistry, $layoutFactory);
+        parent::__construct($context, $session, $resultPageFactory, $bookingFactory, $bookingRepository, $serviceRegistry, $layoutFactory);
     }
 
     public function execute()

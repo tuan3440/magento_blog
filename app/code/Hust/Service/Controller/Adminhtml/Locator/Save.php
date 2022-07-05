@@ -7,6 +7,7 @@ use Hust\Service\Model\LocatorFactory;
 use Hust\Service\Model\Repository\LocatorRepository;
 use Hust\Service\Model\ServiceRegistry;
 use Magento\Backend\App\Action\Context;
+use Magento\Backend\Model\Auth\Session;
 use Magento\Framework\App\ObjectManager;
 use Magento\Framework\App\ResponseInterface;
 use Magento\Framework\Exception\LocalizedException;
@@ -17,7 +18,9 @@ use Magento\Framework\View\Result\PageFactory;
 class Save extends Locator
 {
     private $_jsHelper;
+
     public function __construct(Context $context,
+                                Session $session,
                                 PageFactory $resultPageFactory,
                                 LocatorFactory $locatorFactory,
                                 LocatorRepository $locatorRepository,
@@ -27,7 +30,7 @@ class Save extends Locator
     )
     {
         $this->_jsHelper = $_jsHelper;
-        parent::__construct($context, $resultPageFactory, $locatorFactory, $locatorRepository, $serviceRegistry, $layoutFactory);
+        parent::__construct($context, $session, $resultPageFactory, $locatorFactory, $locatorRepository, $serviceRegistry, $layoutFactory);
     }
 
     public function execute()

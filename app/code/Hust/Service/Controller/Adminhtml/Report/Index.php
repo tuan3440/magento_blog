@@ -8,7 +8,7 @@ use Magento\Framework\App\Action\HttpGetActionInterface as HttpGetActionInterfac
 
 class Index extends AbstractReport implements HttpGetActionInterface
 {
-
+    const ADMIN_RESOURCE = 'Hust_Service::hust_report';
     public function execute()
     {
         $this->_initAction()->_setActiveMenu(
@@ -25,5 +25,10 @@ class Index extends AbstractReport implements HttpGetActionInterface
         $this->_initReportAction([$filterFormBlock, $gridBlock]);
 
         $this->_view->renderLayout();
+    }
+
+    protected function _isAllowed()
+    {
+        return $this->_authorization->isAllowed(self::ADMIN_RESOURCE);
     }
 }

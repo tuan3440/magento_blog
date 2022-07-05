@@ -57,7 +57,7 @@ class BookingRepository implements BookingRepositoryInterface
         if (!isset($this->booking[$bookingId])) {
             $bookings = $this->bookingFactory->create();
             $this->bookingResource->load($bookings, $bookingId);
-            if (!$bookings->getServiceId()) {
+            if (!$bookings->getBookingId()) {
                 throw new NoSuchEntityException(__('Booking with specified ID "%1" not found.', $bookingId));
             }
             $this->bookings[$bookingId] = $bookings;

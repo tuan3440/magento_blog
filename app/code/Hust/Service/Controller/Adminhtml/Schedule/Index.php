@@ -7,6 +7,7 @@ use Magento\Reports\Controller\Adminhtml\Report\AbstractReport;
 
 class Index extends AbstractReport implements HttpGetActionInterface
 {
+    const ADMIN_RESOURCE = 'Hust_Service::hust_schedule';
 
     public function execute()
     {
@@ -24,6 +25,11 @@ class Index extends AbstractReport implements HttpGetActionInterface
         $this->_initReportAction([$filterFormBlock, $gridBlock]);
 
         $this->_view->renderLayout();
+    }
+
+    protected function _isAllowed()
+    {
+        return $this->_authorization->isAllowed(self::ADMIN_RESOURCE);
     }
 }
 

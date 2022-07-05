@@ -12,6 +12,11 @@ class Delete extends Employee
         $resultRedirect = $this->resultRedirectFactory->create();
 
         $id = (int)$this->getRequest()->getParam('employee_id');
+        if (!$this->checkEmployee($id)) {
+            $this->getMessageManager()->addErrorMessage(__("Error Permission"));
+            $this->_redirect('*/*');
+            return;
+        }
         if ($id) {
             try {
                 $this->getEmployeeRepository()->deleteById($id);

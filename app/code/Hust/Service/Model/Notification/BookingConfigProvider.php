@@ -12,6 +12,7 @@ use Magento\Framework\Locale\FormatInterface as LocaleFormat;
 use Magento\Framework\UrlInterface;
 use Magento\Framework\App\Config\ScopeConfigInterface;
 
+
 class BookingConfigProvider
 {
 
@@ -75,7 +76,6 @@ class BookingConfigProvider
      * @var \Webkul\Marketplace\Model\FeedbackFactory
      */
     protected $feedbackFactory;
-
     public function __construct(
         \Magento\Backend\Model\Auth\Session $authSession,
         FormKey $formKey,
@@ -125,8 +125,11 @@ class BookingConfigProvider
     protected function getSellerNotificationData()
     {
         $sellerData = [];
+        $locator_id = $this->getCurrentUser()->getData('locator_id');
+
         $sellerCollection = $this->bookingModel->create()->getCollection()
-            ->addFieldToFilter('admin_notification', ['neq' => 0]);
+            ->addFieldToFilter("locator_id", $locator_id)->addFieldToFilter('admin_notification', ['neq' => 0]);
+
         if ($sellerCollection->getSize()) {
             foreach ($sellerCollection as $seller) {
                 $sellerData[] = [
@@ -140,6 +143,11 @@ class BookingConfigProvider
     private function isAdminLoggedIn()
     {
         return (bool)$this->authSession->isLoggedIn();
+    }
+
+    public function getCurrentUser()
+    {
+        return $this->authSession->getUser();
     }
 }
 

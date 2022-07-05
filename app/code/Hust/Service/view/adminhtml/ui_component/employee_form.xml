@@ -167,26 +167,26 @@
                 </item>
             </argument>
         </field>
-        <field name="locator_id">
-            <argument name="data" xsi:type="array">
-                <item name="options" xsi:type="object">Hust\Service\Ui\Component\Form\Employee\ListLocator</item>
-                <item name="config" xsi:type="array">
-                    <item name="label" xsi:type="string" translate="true">Locator</item>
-                    <item name="componentType" xsi:type="string">field</item>
-                    <item name="formElement" xsi:type="string">select</item>
-                    <item name="component" xsi:type="string">Magento_Ui/js/form/element/ui-select</item>
-                    <item name="elementTmpl" xsi:type="string">ui/grid/filters/elements/ui-select</item>
-                    <item name="dataScope" xsi:type="string">locator_id</item>
-                    <item name="disableLabel" xsi:type="boolean">true</item>
-                    <item name="multiple" xsi:type="boolean">false</item>
-                    <item name="required" xsi:type="boolean">true</item>
-                    <item name="scopeLabel" xsi:type="string">[GLOBAL]</item>
-                    <item name="validation" xsi:type="array">
-                        <item name="required-entry" xsi:type="boolean">true</item>
-                    </item>
-                </item>
-            </argument>
-        </field>
+<!--        <field name="locator_id">-->
+<!--            <argument name="data" xsi:type="array">-->
+<!--                <item name="options" xsi:type="object">Hust\Service\Ui\Component\Form\Employee\ListLocator</item>-->
+<!--                <item name="config" xsi:type="array">-->
+<!--                    <item name="label" xsi:type="string" translate="true">Locator</item>-->
+<!--                    <item name="componentType" xsi:type="string">field</item>-->
+<!--                    <item name="formElement" xsi:type="string">select</item>-->
+<!--                    <item name="component" xsi:type="string">Magento_Ui/js/form/element/ui-select</item>-->
+<!--                    <item name="elementTmpl" xsi:type="string">ui/grid/filters/elements/ui-select</item>-->
+<!--                    <item name="dataScope" xsi:type="string">locator_id</item>-->
+<!--                    <item name="disableLabel" xsi:type="boolean">true</item>-->
+<!--                    <item name="multiple" xsi:type="boolean">false</item>-->
+<!--                    <item name="required" xsi:type="boolean">true</item>-->
+<!--                    <item name="scopeLabel" xsi:type="string">[GLOBAL]</item>-->
+<!--                    <item name="validation" xsi:type="array">-->
+<!--                        <item name="required-entry" xsi:type="boolean">true</item>-->
+<!--                    </item>-->
+<!--                </item>-->
+<!--            </argument>-->
+<!--        </field>-->
         <field name="service_id">
             <argument name="data" xsi:type="array">
                 <item name="options" xsi:type="object">Hust\Service\Ui\Component\Form\Employee\ListService</item>

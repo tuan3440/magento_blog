@@ -7,6 +7,7 @@ use Hust\Service\Model\EmployeeFactory;
 use Hust\Service\Model\Repository\EmployeeRepository;
 use Hust\Service\Model\ServiceRegistry;
 use Magento\Backend\App\Action\Context;
+use Magento\Backend\Model\Auth\Session;
 use Magento\Framework\App\ResponseInterface;
 use Magento\Framework\Controller\ResultFactory;
 use Magento\Framework\View\Result\LayoutFactory;
@@ -16,18 +17,31 @@ class Uploader extends Employee
 {
     private $imageUploader;
 
+//    public function __construct(
+//        Context $context,
+//        PageFactory $resultPageFactory,
+//        EmployeeFactory $employeeFactory,
+//        EmployeeRepository $employeeRepository,
+//        ServiceRegistry $serviceRegistry,
+//        LayoutFactory $layoutFactory,
+//        \Magento\Catalog\Model\ImageUploader $imageUploader
+//    )
+//    {
+//        $this->imageUploader = $imageUploader;
+//        parent::__construct($context, $resultPageFactory, $employeeFactory, $employeeRepository, $serviceRegistry, $layoutFactory);
+//    }
     public function __construct(
         Context $context,
+        Session $session,
         PageFactory $resultPageFactory,
         EmployeeFactory $employeeFactory,
         EmployeeRepository $employeeRepository,
         ServiceRegistry $serviceRegistry,
-        LayoutFactory $layoutFactory,
-        \Magento\Catalog\Model\ImageUploader $imageUploader
-    )
+        \Magento\Catalog\Model\ImageUploader $imageUploader,
+        LayoutFactory $layoutFactory)
     {
         $this->imageUploader = $imageUploader;
-        parent::__construct($context, $resultPageFactory, $employeeFactory, $employeeRepository, $serviceRegistry, $layoutFactory);
+        parent::__construct($context, $session, $resultPageFactory, $employeeFactory, $employeeRepository, $serviceRegistry, $layoutFactory);
     }
 
     public function execute()

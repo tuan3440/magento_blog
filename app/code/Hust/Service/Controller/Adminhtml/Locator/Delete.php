@@ -12,6 +12,11 @@ class Delete extends Locator
         $resultRedirect = $this->resultRedirectFactory->create();
 
         $id = (int)$this->getRequest()->getParam('locator_id');
+        if (!$this->checkLocator($id)) {
+            $this->getMessageManager()->addErrorMessage(__("Error Permission"));
+            $this->_redirect('*/*');
+            return;
+        }
         if ($id) {
             try {
                 $this->getLocatorRepository()->deleteById($id);

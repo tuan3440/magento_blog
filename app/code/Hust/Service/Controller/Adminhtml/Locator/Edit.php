@@ -12,6 +12,7 @@ class Edit extends Locator
     public function execute()
     {
         $locatorId = $this->getRequest()->getParam('locator_id');
+
         $model = $this->getLocatorFactory()->create();
         if ($locatorId) {
             try {
@@ -22,6 +23,11 @@ class Edit extends Locator
 
                 return;
             }
+        }
+        if (!$this->checkLocator($locatorId)) {
+            $this->getMessageManager()->addErrorMessage(__("Error Permission"));
+            $this->_redirect('*/*');
+            return;
         }
 
         $this->getServiceRegistry()->register(self::CURRENT_LOCATOR, $model);

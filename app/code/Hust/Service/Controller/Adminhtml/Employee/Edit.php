@@ -23,7 +23,14 @@ class Edit extends Employee
 
                 return;
             }
+            if (!$this->checkEmployee($employeeId)) {
+                $this->getMessageManager()->addErrorMessage(__("Error Permission"));
+                $this->_redirect('*/*');
+                return;
+            }
         }
+
+
 
         $this->getServiceRegistry()->register(self::CURRENT_EMPLOYEE, $model);
         $this->initAction();

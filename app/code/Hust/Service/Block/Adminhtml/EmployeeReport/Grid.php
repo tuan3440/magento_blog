@@ -6,10 +6,14 @@ use Hust\Service\Block\Adminhtml\Grid\Columns\Renderer\Employee;
 use Hust\Service\Block\Adminhtml\Grid\Columns\Renderer\Service;
 use Magento\Framework\App\ObjectManager;
 use Hust\Service\Model\ResourceModel\BookingSale\CollectionFactory;
+use Magento\Backend\Model\Auth\Session;
+
 
 class Grid extends \Magento\Backend\Block\Widget\Grid\Extended
 {
     protected $collection;
+    protected $session;
+
     /**
      * Grid constructor.
      * @param \Magento\Backend\Block\Template\Context $context
@@ -20,15 +24,19 @@ class Grid extends \Magento\Backend\Block\Widget\Grid\Extended
         \Magento\Backend\Block\Template\Context $context,
         \Magento\Backend\Helper\Data $backendHelper,
         CollectionFactory $collectionFactory,
+        Session       $session,
         array $data = []
     ) {
+        $this->session = $session;
         $this->collection = $collectionFactory;
         parent::__construct($context, $backendHelper, $data);
     }
 
     protected function _prepareCollection()
     {
-        $collection = $this->collection->create();
+        $locator_id = $this->getCurrentUser()->getData('locator_id');
+
+        $collection = $this->collection->create()->addFieldToFilter("locator_id", $locator_id);
         $collection->getSelect()->group(['employee_id', 'service_id'])->columns([
             'count' => 'count(*)'
         ]);
@@ -36,6 +44,11 @@ class Grid extends \Magento\Backend\Block\Widget\Grid\Extended
 //        die;
         $this->setCollection($collection);
         return parent::_prepareCollection();
+    }
+
+    public function getCurrentUser()
+    {
+        return $this->session->getUser();
     }
 
     /**

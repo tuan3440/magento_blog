@@ -316,4 +316,8 @@
             onDelete="CASCADE"
         />
     </table>
+    <table name="admin_user">
+        <column xsi:type="int" name="locator_id" padding="10" unsigned="true" nullable="false" identity="false"
+                default="0" comment="Locator"/>
+    </table>
 </schema>

@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:framework:Acl/etc/acl.xsd">
+    <acl>
+        <resources>
+            <resource id="Magento_Backend::admin">
+                <resource id="Hust_Service::booking_system" title="Booking and Reservation System">
+                    <resource id="Hust_Service::hust_locator" title="Locators"/>
+                    <resource id="Hust_Service::hust_service" title="Services"/>
+                    <resource id="Hust_Service::hust_employee" title="Employee"/>
+                    <resource id="Hust_Service::hust_promotion" title="Promotion"/>
+                    <resource id="Hust_Service::hust_booking" title="Booking"/>
+                    <resource id="Hust_Service::hust_schedule" title="Schedule"/>
+                    <resource id="Hust_Service::hust_report" title="Report Sale"/>
+                    <resource id="Hust_Service::hust_booking_customer" title="Customer Sale"/>
+                    <resource id="Hust_Service::hust_employee_report" title="Report Employee"/>
+                </resource>
+            </resource>
+        </resources>
+    </acl>
+</config>

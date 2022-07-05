@@ -87,8 +87,9 @@ class Save extends Employee
 
     private function saveLocatorEmployee($model)
     {
+        $locator_id = $this->getCurrentUser()->getData('locator_id');
         try {
-            $newLocator = $model['locator_id'];
+            $newLocator = $locator_id;
             $this->_resources = ObjectManager::getInstance()->get('Magento\Framework\App\ResourceConnection');
             $connection = $this->_resources->getConnection();
 

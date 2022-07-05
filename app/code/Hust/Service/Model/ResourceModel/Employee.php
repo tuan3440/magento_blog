@@ -42,5 +42,15 @@ WHERE hust_employee_locator.locator_id = " . $locatorId . " AND hust_employee_se
         return null;
     }
 
+    public function checkEmployee($employeeId, $locatorId)
+    {
+        $objectManager = \Magento\Framework\App\ObjectManager::getInstance();
+        $resource = $objectManager->get('Magento\Framework\App\ResourceConnection');
+        $connection = $resource->getConnection();
+        $sql = "SELECT  hust_employee.employee_id FROM hust_employee_locator, hust_employee
+WHERE hust_employee_locator.locator_id = " . $locatorId . " AND hust_employee.employee_id = " . $employeeId;
+        $result = $connection->fetchAll($sql);
+        return $result;
 
+    }
 }

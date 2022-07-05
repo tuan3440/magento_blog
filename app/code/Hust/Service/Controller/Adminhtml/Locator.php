@@ -9,6 +9,7 @@ use Magento\Backend\App\Action;
 use Magento\Backend\App\Action\Context;
 use Magento\Framework\View\Result\PageFactory;
 use Magento\Framework\View\Result\LayoutFactory;
+use Magento\Backend\Model\Auth\Session;
 
 abstract class Locator extends Action
 {
@@ -19,9 +20,12 @@ abstract class Locator extends Action
     private $locatorRepository;
     private $serviceRegistry;
     protected $layoutFactory;
+    protected $session;
+
 
     public function __construct(
         Context $context,
+        Session       $session,
         PageFactory $resultPageFactory,
         LocatorFactory $locatorFactory,
         LocatorRepository $locatorRepository,
@@ -29,6 +33,7 @@ abstract class Locator extends Action
         LayoutFactory $layoutFactory
     )
     {
+        $this->session = $session;
         $this->resultPageFactory = $resultPageFactory;
         $this->locatorFactory = $locatorFactory;
         $this->locatorRepository = $locatorRepository;
@@ -57,5 +62,22 @@ abstract class Locator extends Action
         return $this->serviceRegistry;
     }
 
+    protected function checkLocator($locatorCurrent)
+    {
+        $locatorId = $this->getCurrentUser()->getData('locator_id');
+        if ($locatorCurrent) {
+            if ($locatorId == $locatorCurrent || $locatorId == 0) return true;
+        } else {
+            if ($locatorId == 0) {
+                return true;
+            }
+        }
 
+        return false;
+    }
+
+    public function getCurrentUser()
+    {
+        return $this->session->getUser();
+    }
 }
