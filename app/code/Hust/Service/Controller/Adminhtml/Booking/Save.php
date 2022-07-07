@@ -7,6 +7,7 @@ use Hust\Service\Model\BookingFactory;
 use Hust\Service\Model\Repository\BookingRepository;
 use Hust\Service\Model\ServiceRegistry;
 use Magento\Backend\App\Action\Context;
+use Magento\Backend\Model\Auth\Session;
 use Magento\Framework\App\ObjectManager;
 use Magento\Framework\App\ResponseInterface;
 use Magento\Framework\View\Result\LayoutFactory;
@@ -16,6 +17,7 @@ use Hust\Service\Helper\Mail;
 use Hust\Service\Model\Repository\LocatorRepository;
 use Hust\Service\Model\Source\Hour;
 use Hust\Service\Helper\Data;
+use Hust\Service\Model\VoucherFactory;
 
 class Save extends Booking
 {
@@ -24,8 +26,10 @@ class Save extends Booking
     private $mail;
     private $hour;
     private $helper;
+    protected $voucher;
     public function __construct(
         Context $context,
+        Session       $session,
         PageFactory $resultPageFactory,
         BookingFactory $bookingFactory,
         BookingRepository $bookingRepository,
@@ -35,7 +39,8 @@ class Save extends Booking
         LocatorRepository $locatorRepo,
         Mail $mail,
         Hour $hour,
-        Data $helper
+        Data $helper,
+        VoucherFactory $voucher
     )
     {
         $this->serviceRepo = $serviceRepo;
@@ -43,7 +48,8 @@ class Save extends Booking
         $this->locatorRepo = $locatorRepo;
         $this->hour = $hour;
         $this->helper = $helper;
-        parent::__construct($context, $resultPageFactory, $bookingFactory, $bookingRepository, $serviceRegistry, $layoutFactory);
+        $this->voucher = $voucher;
+        parent::__construct($context, $session, $resultPageFactory, $bookingFactory, $bookingRepository, $serviceRegistry, $layoutFactory);
     }
 
     public function execute()
@@ -52,25 +58,22 @@ class Save extends Booking
         if ($data) {
             try {
                 $bookingRepo = $this->getBookingRepository()->getById($data['booking_id']);
-                $bookingRepo->setBookingStatus($data['booking_status']);
-                if (isset($data['reason']))
-                    $bookingRepo->setReason($data['reason']);
-                if ($data['booking_status'] == 3) {
-                    $datax = (array) $bookingRepo;
-                    $this->sendMailSuccess($bookingRepo->getData('email'), $bookingRepo->getData('service_id'), $bookingRepo->getData('phone'));
-                    $this->saveBookingSale($bookingRepo);
+                $bookingRepo->setData($data);
+                $this->getBookingRepository()->save($bookingRepo);
+                $bookingRepo = $this->getBookingRepository()->getById($data['booking_id']);
+                if ($bookingRepo['booking_status'] == 3) {
+                    $voucherCode = $this->createVoucher($data['booking_id']);
+                    $this->sendMailSuccess($bookingRepo->getData('email'), $bookingRepo->getData('service_id'), $bookingRepo->getData('phone'), $voucherCode);
+//                    $this->saveBookingSale($bookingRepo);
                 }
-                if ($data['booking_status'] == 2) {
+                if ($bookingRepo['booking_status'] == 2) {
                     $this->sendMailCancel(['reason' => $bookingRepo->getData('reason')], $bookingRepo->getData('email'));
                 }
-                if ($data['booking_status'] == 1) {
+                if ($bookingRepo['booking_status'] == 1) {
                     $this->sendMailAcept($bookingRepo);
                 }
-//                if ($data['booking_status'] == 4) {
-//                    $this->sendMailBoom($data);
-//                }
-                $this->getBookingRepository()->save($bookingRepo);
-                if (isset($data['employee_id']))
+
+                if (isset($bookingRepo['employee_id']))
                     $this->saveBookingEmployee($data);
                 $this->messageManager->addSuccessMessage(__('You saved the item.'));
 
@@ -80,6 +83,23 @@ class Save extends Booking
         }
         $this->_redirect('*/*/edit', ['booking_id' => $data['booking_id']]);
 
+    }
+
+    public function createVoucher($data)
+    {
+        $voucher = $this->voucher->create();
+        $code = $data.(string) rand(100000,1000000);
+        $today = date('Y-m-d');
+        $month = strtotime(date("Y-m-d", strtotime($today)) . " +1 month");
+        $dateEnd = strftime("%Y-%m-%d", $month);
+        $voucher->setData('voucher_code', $code);
+        $voucher->setData('date_end', $dateEnd);
+        try {
+            $voucher->save();
+        } catch (\Exception $e) {
+
+        }
+        return $code;
     }
 
     private function saveBookingEmployee($data)
@@ -156,16 +176,17 @@ class Save extends Booking
             'serviceName' => $service->getData('name'),
             'locatorName' => $locator->getData('name'),
             'address' => $locator->getData('address'),
-            'date'=> $data->getData('date'),
+            'date'=> $date,
             'hour'=> $hours[$hourId]
         ];
     }
 
-    private function sendMailSuccess($email, $service_id, $phone)
+    private function sendMailSuccess($email, $service_id, $phone, $voucherCode)
     {
         $url = $this->helper->getUrlReview($service_id, $phone);
         $this->mail->sendEmail("notify_cutomer_thankyou", [
-            'urlReview' => $url
+            'urlReview' => $url,
+            'code' => $voucherCode
         ], $email);
     }
 

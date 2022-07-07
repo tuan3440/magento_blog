@@ -320,4 +320,13 @@
         <column xsi:type="int" name="locator_id" padding="10" unsigned="true" nullable="false" identity="false"
                 default="0" comment="Locator"/>
     </table>
+    <table name="hust_booking_voucher" resource="default" engine="innodb" comment="hust_booking_voucher">
+        <column xsi:type="int" name="voucher_id" comment="Id" unsigned="true" padding="10" nullable="false"
+                identity="true"/>
+        <column xsi:type="varchar" name="voucher_code" nullable="false" length="255" comment="Voucher Code"/>
+        <column xsi:type="date" name="date_end" comment="Date End" nullable="true" />
+        <constraint xsi:type="primary" referenceId="PRIMARY">
+            <column name="voucher_id"/>
+        </constraint>
+    </table>
 </schema>

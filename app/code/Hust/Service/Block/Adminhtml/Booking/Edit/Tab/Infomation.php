@@ -49,7 +49,7 @@ class Infomation extends Generic
                 ]
             ]
         );
-        $form = $this->_formFactory->create();
+//        $form = $this->_formFactory->create();
         $htmlIdPrefix = 'booking_setting_';
         $form->setHtmlIdPrefix($htmlIdPrefix);
         $bookingCurrent = $this->serviceRegistry->registry('booking_current');
@@ -253,6 +253,7 @@ class Infomation extends Generic
                 'required' => true,
                 'value' => $bookingCurrent->getBookingStatus() ,
                 'values' => $this->bookingStatus->toArray(),
+                'disabled' => $showButtonUpdate
 
             ]
         );

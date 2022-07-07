@@ -26,7 +26,11 @@ $charge = $block->getCharge();
             <h2>Charge($) : <?= $charge?></h2>
             <label>Require</label>
             <textarea name="require" rows="7"></textarea>
-            <button id="booking" class="booking">Book</button>
+            <label>Voucher Code</label>
+            <input type="text" name="voucher_code">
+            <button style="background: lightblue" id="apply">Apply</button>
+            <br>
+            <button id="booking" class="booking" style="background: bisque">Book</button>
         </div>
     </div>
 </div>
@@ -57,6 +61,32 @@ $charge = $block->getCharge();
                     }
                 });
             });
+
+            $("#apply").click(function () {
+                var url2 = urlBuilder.build('bookings/locator/voucher');
+                $.ajax({
+                    url: url2,
+                    type: 'POST',
+                    dataType: 'json',
+                    data: {
+                       code : $("input[name='voucher_code']").val()
+                    },
+                    success: function (response) {
+                        if (response.has) {
+                            let voucher = response.code[0];
+                            let voucher_id = voucher.voucher_id;
+                            console.log("bb",voucher_id);
+                        } else {
+                            console.log("yy");
+                        }
+                        // console.log(response)
+                        // $('#slot').html(response.slot)
+                    },
+                    error: function (xhr, status, errorThrown) {
+                        console.log('Error happens. Try again.');
+                    }
+                });
+            })
 
         });
     })
@@ -111,8 +141,8 @@ $charge = $block->getCharge();
             showButtonPanel: true,
             currentText: $t('Go Today'),
             closeText: $t('Close'),
-            showWeek: true,
-            minDate: new Date()
+            minDate: new Date(),
+            maxDate : (new Date()).getDate() + 20
         });
     })
 </script>
