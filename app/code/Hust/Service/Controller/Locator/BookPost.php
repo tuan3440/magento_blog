@@ -10,6 +10,7 @@ use Magento\Framework\View\Result\PageFactory;
 use Magento\Customer\Model\Session;
 use Hust\Service\Model\Repository\BookingRepository;
 use Hust\Service\Model\BookingFactory;
+use Hust\Service\Model\VoucherFactory;
 use Hust\Service\Helper\Mail;
 
 class BookPost extends Index
@@ -19,6 +20,7 @@ class BookPost extends Index
     protected $bookingRepo;
     protected $timezone;
     protected $mail;
+    protected $voucher;
 
     public function __construct(
         Context $context,
@@ -27,7 +29,8 @@ class BookPost extends Index
         BookingRepository $bookingRepository,
         BookingFactory $bookingFactory,
         \Magento\Framework\Stdlib\DateTime\TimezoneInterface $timezone,
-        Mail $mail
+        Mail $mail,
+        VoucherFactory $voucher
     )
     {
         $this->timezone = $timezone;
@@ -35,6 +38,7 @@ class BookPost extends Index
         $this->bookingFactory = $bookingFactory;
         $this->bookingRepo = $bookingRepository;
         $this->mail = $mail;
+        $this->voucher = $voucher;
         parent::__construct($context, $resultPageFactory);
     }
 
@@ -47,7 +51,7 @@ class BookPost extends Index
                 $data['admin_notification'] = 1;
                 $model->addData($data);
                 $this->bookingRepo->save($model);
-//                $this->sendMailWaiting($model);
+                $this->removeVoucher($data['voucher_id']);
                 $this->messageManager->addSuccessMessage(__('You book successful. We will contact with you now!'));
             } catch (LocalizedException $e) {
 
@@ -56,16 +60,14 @@ class BookPost extends Index
         $this->_redirect('*/*/booking', ['id'=>$data['locator_id'], 'service'=> $data['service_id']]);
     }
 
-    private function sendMailWaiting($model)
+    public function removeVoucher($voucherId)
     {
-        $variables = [
-            'name' => $model->getData('name'),
-            'email' => $model->getData('email')
-        ];
         try {
-            $this->mail->sendEmail('notify_cutomer_waiting', $variables, $variables['email']);
-        } catch (\Exception $e) {
+            $this->voucher->create()->load($voucherId)->delete();
+        } catch (LocalizedException $e) {
 
         }
+
     }
+
 }

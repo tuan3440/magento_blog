@@ -24,7 +24,7 @@ class Voucher extends AbstractDb
         $objectManager = \Magento\Framework\App\ObjectManager::getInstance();
         $resource = $objectManager->get('Magento\Framework\App\ResourceConnection');
         $connection = $resource->getConnection();
-        $sql = "SELECT * FROM hust_booking_voucher WHERE voucher_code =".$code;
+        $sql = "SELECT * FROM hust_booking_voucher WHERE voucher_code =".$code. " AND date_end > NOW()";
         $result2 = $connection->fetchAll($sql);
         return $result2;
     }

@@ -23,14 +23,16 @@ $charge = $block->getCharge();
                        name="date" data-validate="{required:true, 'validate-date':true}"/>
             </div>
             <div id="slot"></div>
-            <h2>Charge($) : <?= $charge?></h2>
+            <h2>Charge($) : <strong class="charge"><?= $charge?></strong></h2>
             <label>Require</label>
             <textarea name="require" rows="7"></textarea>
-            <label>Voucher Code</label>
-            <input type="text" name="voucher_code">
-            <button style="background: lightblue" id="apply">Apply</button>
-            <br>
-            <button id="booking" class="booking" style="background: bisque">Book</button>
+            <div class="voucher-app">
+                <label style="margin-right: 30px">Voucher Code</label>
+                <div><input type="text" name="voucher_code"></div>
+                <div style="background: lightblue" id="apply">Apply</div>
+            </div>
+            <p class="note" style="color: red; display: none"></p>
+            <button id="booking" class="booking" style="background: bisque;padding: 20px 40px;">Book</button>
         </div>
     </div>
 </div>
@@ -75,15 +77,26 @@ $charge = $block->getCharge();
                         if (response.has) {
                             let voucher = response.code[0];
                             let voucher_id = voucher.voucher_id;
+                            let discount = voucher.discount;
+                            let charge = <?= $charge?>;
+                            var newCharge = parseInt(charge)*(100 - discount)*0.01;
                             console.log("bb",voucher_id);
+                            $(".voucher-app").hide();
+                            $(".charge").text(newCharge);
+                            $("input[name='charge']").val(newCharge);
+                            $("input[name='voucher_id']").val(voucher_id);
+                            $(".note").text("Voucher thành công");
+                            $(".note").show();
                         } else {
-                            console.log("yy");
+                            $(".note").text("Voucher không hợp lệ, vui lòng nhập lại");
+                            $(".note").show();
                         }
                         // console.log(response)
                         // $('#slot').html(response.slot)
                     },
                     error: function (xhr, status, errorThrown) {
-                        console.log('Error happens. Try again.');
+                        $(".note").text("Bạn vui lòng nhập voucher");
+                        $(".note").show();
                     }
                 });
             })
@@ -125,6 +138,15 @@ $charge = $block->getCharge();
         background-color: #c34706 !important;
     }
 
+    .voucher-app {
+        display: flex;
+    }
+    div#apply {
+        margin-left: 30px;
+        padding: 5px 10px;
+        cursor: pointer;
+    }
+
 </style>
 
 <script>
@@ -159,6 +181,7 @@ $charge = $block->getCharge();
         <input type="hidden" name="locator_id" value="<?= $locator->getLocatorId();?>" />
         <input type="hidden" name="service_id" value="<?= $serviceId;?>" />
         <input type="hidden" name="charge" value="<?= $charge;?>" />
+        <input type="hidden" name="voucher_id" value="0"/>
 
         <h2>Hour : <span class="data-hour">8h30AM:10AM</span></h2>
         <?php echo $block->getBlockHtml('formkey') ?>

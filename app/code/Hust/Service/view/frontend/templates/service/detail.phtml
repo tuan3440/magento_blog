@@ -10,6 +10,7 @@ $data = $block->getContentService();
             <?php echo __($data['content']); ?>
         </div>
     </div>
+    <?php if ($data['point'] != 0):?>
     <h2><?= __("Review")?></h2>
     <div id="rating">
         <input type="radio" id="star5" name="rating" value="5"/>
@@ -26,8 +27,7 @@ $data = $block->getContentService();
 
         <input type="radio" id="star1" name="rating" value="1"/>
         <label class="full" for="star1" title="Sucks big time - 1 star"></label>
-        <?php if ($data['point'] != 0):?>
-            <strong style="color: red; font-size: 15px">Point : <?= $data['point']?>/5</strong>
+        <strong style="color: red; font-size: 15px">Point : <?= $data['point']?>/5</strong>
         <?php endif; ?>
     </div>
 
