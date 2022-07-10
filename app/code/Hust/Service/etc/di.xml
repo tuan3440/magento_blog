@@ -11,6 +11,8 @@
     <preference for="Hust\Service\Api\Data\EmployeeInterface" type="Hust\Service\Model\Employee"/>
     <preference for="Hust\Service\Api\PromotionRepositoryInterface" type="Hust\Service\Model\Repository\PromotionRepository"/>
     <preference for="Hust\Service\Api\Data\PromotionInterface" type="Hust\Service\Model\Promotion"/>
+    <preference for="Hust\Service\Api\VoucherRepositoryInterface" type="Hust\Service\Model\Repository\VoucherRepository"/>
+    <preference for="Hust\Service\Api\Data\VoucherInterface" type="Hust\Service\Model\Voucher"/>
 
     <type name="Magento\Framework\View\Element\UiComponent\DataProvider\CollectionFactory">
         <arguments>
@@ -20,6 +22,7 @@
                 <item name="employee_listing_data_source" xsi:type="string">Hust\Service\Model\ResourceModel\Employee\Grid</item>
                 <item name="booking_listing_data_source" xsi:type="string">Hust\Service\Model\ResourceModel\Booking\Grid</item>
                 <item name="promotion_listing_data_source" xsi:type="string">Hust\Service\Model\ResourceModel\Promotion\Grid</item>
+                <item name="voucher_listing_data_source" xsi:type="string">Hust\Service\Model\ResourceModel\Voucher\Grid</item>
             </argument>
         </arguments>
     </type>

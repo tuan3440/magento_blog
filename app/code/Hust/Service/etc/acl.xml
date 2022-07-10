@@ -11,6 +11,7 @@
                     <resource id="Hust_Service::hust_promotion" title="Promotion"/>
                     <resource id="Hust_Service::hust_booking" title="Booking"/>
                     <resource id="Hust_Service::hust_schedule" title="Schedule"/>
+                    <resource id="Hust_Service::hust_voucher" title="Voucher manage"/>
                     <resource id="Hust_Service::hust_report" title="Report Sale"/>
                     <resource id="Hust_Service::hust_booking_customer" title="Customer Sale"/>
                     <resource id="Hust_Service::hust_employee_report" title="Report Employee"/>

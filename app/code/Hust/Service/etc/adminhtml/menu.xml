@@ -9,6 +9,7 @@
         <add id="Hust_Service::hust_locator" title="Locators" module="Hust_Service" sortOrder="20" action="booking/locator" parent="Hust_Service::booking_system" resource="Hust_Service::hust_locator" />
         <add id="Hust_Service::hust_employee" title="Employee" module="Hust_Service" sortOrder="30" action="booking/employee" parent="Hust_Service::booking_system" resource="Hust_Service::hust_employee" />
         <add id="Hust_Service::hust_promotion" title="Promotion" module="Hust_Service" sortOrder="40" action="booking/promotion" parent="Hust_Service::booking_system" resource="Hust_Service::hust_promotion" />
+        <add id="Hust_Service::hust_voucher" title="Voucher" module="Hust_Service" sortOrder="40" action="booking/voucher" parent="Hust_Service::booking_system" resource="Hust_Service::hust_voucher" />
         <add id="Hust_Service::hust_booking" title="Booking" module="Hust_Service" sortOrder="25" action="booking/booking" parent="Hust_Service::booking_system" resource="Hust_Service::hust_booking" />
         <add id="Hust_Service::hust_schedule" title="Schedule" module="Hust_Service" sortOrder="55" action="booking/schedule" parent="Hust_Service::booking_system" resource="Hust_Service::hust_schedule" />
         <add id="Hust_Service::hust_report" title="Report Sale" module="Hust_Service" sortOrder="70" action="booking/report" parent="Hust_Service::booking_system" resource="Hust_Service::hust_report" />
