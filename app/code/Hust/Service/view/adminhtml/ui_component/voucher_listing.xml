@@ -14,6 +14,12 @@
                 <item name="class" xsi:type="string">primary</item>
                 <item name="url" xsi:type="string">*/voucher/newAction</item>
             </item>
+            <item name="delete" xsi:type="array">
+                <item name="name" xsi:type="string">delete</item>
+                <item name="label" xsi:type="string" translate="true">Delete expire Voucher</item>
+<!--                <item name="class" xsi:type="string">primary</item>-->
+                <item name="url" xsi:type="string">*/voucher/massDeleteExpire</item>
+            </item>
         </item>
     </argument>
     <dataSource name="voucher_listing_data_source">
@@ -88,6 +94,21 @@
                     </item>
                 </argument>
             </action>
+<!--            <action name="delete_expire">-->
+<!--                <argument name="data" xsi:type="array">-->
+<!--                    <item name="config" xsi:type="array">-->
+<!--                        <item name="type" xsi:type="string">delete_expire</item>-->
+<!--                        <item name="label" xsi:type="string" translate="true">Delete Expire voucher</item>-->
+<!--                        <item name="url" xsi:type="url" path="*/voucher/massDeleteExpire">-->
+<!--                            <param name="action">delete</param>-->
+<!--                        </item>-->
+<!--                        <item name="confirm" xsi:type="array">-->
+<!--                            <item name="title" xsi:type="string" translate="true">Delete</item>-->
+<!--                            <item name="message" xsi:type="string" translate="true">Are you sure?</item>-->
+<!--                        </item>-->
+<!--                    </item>-->
+<!--                </argument>-->
+<!--            </action>-->
         </massaction>
         <paging name="listing_paging"/>
     </listingToolbar>

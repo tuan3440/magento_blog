@@ -94,6 +94,7 @@ class Save extends Booking
         $dateEnd = strftime("%Y-%m-%d", $month);
         $voucher->setData('voucher_code', $code);
         $voucher->setData('date_end', $dateEnd);
+        $voucher->setData('date_start', $today);
         try {
             $voucher->save();
         } catch (\Exception $e) {
