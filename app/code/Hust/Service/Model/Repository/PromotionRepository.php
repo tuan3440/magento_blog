@@ -92,8 +92,9 @@ class PromotionRepository implements PromotionRepositoryInterface
 
     public function getListPromotion()
     {
+        $now = new \DateTime();
         $promotions = $this->promotionFactory->create()->getCollection();
-        $promotions->addFieldToFilter('status', 1);
+        $promotions->addFieldToFilter('status', 1)->addFieldToFilter("date_end", ['gteq' => $now->format('Y-m-d H:i:s')]);
         return $promotions;
     }
 }

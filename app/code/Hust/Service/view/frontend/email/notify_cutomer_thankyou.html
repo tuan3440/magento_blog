@@ -1,8 +1,7 @@
-<!--@subject {{trans "Notify from Spa BK"}} @-->
-{{template config_path="design/email/header_template"}}
+<!--@subject {{trans "Thông báo từ Spa"}} @-->
 <table>
-    <tr>Thank for you use our service. I hope you are pleased. See you again</tr>
-    <tr>Please review our service by <a href={{var data.urlReview}}>Click here</a></tr>
-    <tr>Code <strong>{{var data.code}}</strong></tr>
+    <tr>Cảm ơn bạn đã đến và sử dụng dịch vụ của chúng tôi. Chúng tôi hy vọng bạn đã hài lòng với chất lượng dịch vụ cũng như sự phục vụ hết lòng của nhân viên chúng tôi.</tr>
+    <tr>Vui lòng dành thời gian đánh giá dịch vụ giúp chúng tôi qua link <a href={{var data.urlReview}}>Click here</a></tr>
+    <tr>Chúng tôi xin gửi tặng bạn mã voucher giảm giá khi đặt lịch dịch vụ của chúng tôi lần sau, mã voucher là <strong>{{var data.code}}</strong></tr>
+    <tr>Xin cảm ơn và hẹn gặp lại!</tr>
 </table>
-{{template config_path="design/email/footer_template"}}

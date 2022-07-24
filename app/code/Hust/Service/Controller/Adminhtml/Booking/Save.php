@@ -63,17 +63,21 @@ class Save extends Booking
                 $bookingRepo = $this->getBookingRepository()->getById($data['booking_id']);
                 if ($bookingRepo['booking_status'] == 3) {
                     $voucherCode = $this->createVoucher($data['booking_id']);
-                    $this->sendMailSuccess($bookingRepo->getData('email'), $bookingRepo->getData('service_id'), $bookingRepo->getData('phone'), $voucherCode);
-//                    $this->saveBookingSale($bookingRepo);
+                    $idBookingSale = $this->saveBookingSale($bookingRepo);
+                    $this->sendMailSuccess($idBookingSale, $bookingRepo->getData('email'), $bookingRepo->getData('service_id'), $bookingRepo->getData('phone'), $voucherCode);
+
                 }
                 if ($bookingRepo['booking_status'] == 2) {
-                    $this->sendMailCancel(['reason' => $bookingRepo->getData('reason')], $bookingRepo->getData('email'));
+                    $this->sendMailCancel([
+                        'reason' => $bookingRepo->getData('reason'),
+                        'name' => $bookingRepo->getData('name'),
+                        ], $bookingRepo->getData('email'));
                 }
                 if ($bookingRepo['booking_status'] == 1) {
                     $this->sendMailAcept($bookingRepo);
                 }
 
-                if (isset($bookingRepo['employee_id']))
+                if (isset($data['employee_id']))
                     $this->saveBookingEmployee($data);
                 $this->messageManager->addSuccessMessage(__('You saved the item.'));
 
@@ -146,6 +150,10 @@ class Save extends Booking
                 'employee_id' => $this->helper->getEmployeeOfBooking($bookingId)
             ];
             $connection->insert($table, $data);
+            $sql = "Select max(id) as maxId from hust_booking_sale";
+            $maxId = $connection->fetchAll($sql);
+            $idBookingSale = $maxId[0]['maxId'];
+            return $idBookingSale;
         } catch (\Exception $e) {
             $this->messageManager->addExceptionMessage($e, __('Something went wrong while saving the booking.'));
         }
@@ -182,9 +190,9 @@ class Save extends Booking
         ];
     }
 
-    private function sendMailSuccess($email, $service_id, $phone, $voucherCode)
+    private function sendMailSuccess($idBookingSale, $email, $service_id, $phone, $voucherCode)
     {
-        $url = $this->helper->getUrlReview($service_id, $phone);
+        $url = $this->helper->getUrlReview($service_id, $idBookingSale);
         $this->mail->sendEmail("notify_cutomer_thankyou", [
             'urlReview' => $url,
             'code' => $voucherCode

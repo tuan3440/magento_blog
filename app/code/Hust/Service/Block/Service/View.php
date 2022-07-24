@@ -66,6 +66,25 @@ class View extends Template
         return $data;
     }
 
+    public function getContentServiceReview()
+    {
+        $id = $this->getRequest()->getParam('service_id');
+        $point = $this->review->getPointService($id);
+        $data = [];
+        if ($id) {
+            $service = $this->serviceRepository->getById($id);
+            $data = [
+                'service_id' => $service->getServiceId(),
+                'title' => $service->getName(),
+                'content' => $service->getContent(),
+                'image' => $this->getMediaImage($service->getImage()),
+                'point' => round($point[0]['avg'])
+            ];
+        }
+
+        return $data;
+    }
+
     private function getMediaImage($name)
     {
         return $this->urlResolver->getImageUrlByName($name);
@@ -89,11 +108,11 @@ class View extends Template
 
     public function getDataReview()
     {
-        $id = $this->getRequest()->getParam('id');
-        $phone = $this->getRequest()->getParam('phone');
+        $service_id = $this->getRequest()->getParam('service_id');
+        $idbookingSale = $this->getRequest()->getParam('id');
         return [
-            'service_id' => $id,
-            "phone" => $phone
+            'service_id' => $service_id,
+            "bookingSale" => $idbookingSale
         ];
     }
 

@@ -1,7 +1,7 @@
-<!--@subject {{trans "Notify from Spa BK"}} @-->
-{{template config_path="design/email/header_template"}}
+<!--@subject {{trans "Thông báo từ Spa"}} @-->
 <table>
-    <tr>Your booking spa is canceled</tr>
-    <tr>Reason : <strong>{{var data.reason}}</strong></tr>
+    <tr>Xin chào <strong>{{var data.name}}</strong>,</tr>
+    <tr>Lịch đặt của bạn đã bị hủy.</tr>
+    <tr>Lí do : <strong>{{var data.reason.}}</strong></tr>
+    <tr>Bạn vui lòng đặt lại lịch làm đẹp của mình, xin cảm ơn!</tr>
 </table>
-{{template config_path="design/email/footer_template"}}

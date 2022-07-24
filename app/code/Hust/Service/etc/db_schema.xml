@@ -250,6 +250,7 @@
         <column xsi:type="varchar" name="email" comment="email" length="255" nullable="false"/>
         <column xsi:type="date" name="date" comment="Date select" nullable="false" />
         <column xsi:type="int" name="charge" nullable="true" comment="Charge"/>
+        <column xsi:type="smallint" name="is_review" nullable="false" comment="Is Review" default="0"/>
         <constraint xsi:type="primary" referenceId="PRIMARY">
             <column name="id"/>
         </constraint>

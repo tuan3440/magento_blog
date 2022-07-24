@@ -272,6 +272,7 @@ class Infomation extends Generic
                     $bookingCurrent->getDate(),
                     $bookingCurrent->getBookingStatus()
                 ),
+                'required' => true,
                 'display' => 'none',
                 'note' => __('you should choose in order from top to bottom')
             ]

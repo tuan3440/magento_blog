@@ -116,8 +116,8 @@ class Data extends AbstractHelper
        return $this->bookingResource->getEmployeeBooking($bookingId);
    }
 
-   public function getUrlReview($service_id, $phone)
+   public function getUrlReview($service_id, $idBookingSale)
    {
-       return $this->_storeManager->getStore()->getBaseUrl()."bookings/servicereview/index/id/".$service_id."/phone/".$phone;
+       return $this->_storeManager->getStore()->getBaseUrl()."bookings/servicereview/index/service_id/".$service_id."/id/".$idBookingSale;
    }
 }

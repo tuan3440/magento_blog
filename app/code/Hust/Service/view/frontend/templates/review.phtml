@@ -1,5 +1,5 @@
 <?php
-$service = $block->getContentService();
+$service = $block->getContentServiceReview();
 $data = $block->getDataReview();
 ?>
 <div class="col-row">
@@ -8,9 +8,9 @@ $data = $block->getDataReview();
         <img src="<?= $service['image'] ?>" alt="" >
     </div>
     <div class="" style="margin-top: 200px; margin-left: 30px">
-        <form method="post" action="<?php echo $block->getUrl('bookings/servicereview/save') ?>">
+        <form method="post" action="<?php echo $block->getUrl('bookings/servicereview/save/service_id/'.$data['service_id'].'/id/'.$data['bookingSale'] ) ?>">
             <input type="hidden" name="service_id" value="<?= $data['service_id']?>">
-            <input type="hidden" name="phone" value="<?= $data['phone']?>">
+            <input type="hidden" name="booking_sale" value="<?= $data['bookingSale']?>">
             <div class="rating-x">
             <div id="rating">
                 <input type="radio" id="star5" name="rating" value="5"/>

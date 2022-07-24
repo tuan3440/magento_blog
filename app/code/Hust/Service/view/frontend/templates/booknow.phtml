@@ -23,13 +23,13 @@ $charge = $block->getCharge();
                        name="date" data-validate="{required:true, 'validate-date':true}"/>
             </div>
             <div id="slot"></div>
-            <h2>Charge($) : <strong class="charge"><?= $charge?></strong></h2>
-            <label>Require</label>
+            <h2>Phí dịch vụ ($) : <strong class="charge"><?= $charge?></strong></h2>
+            <label>Yêu cầu từ bạn</label>
             <textarea name="require" rows="7"></textarea>
             <div class="voucher-app">
                 <label style="margin-right: 30px">Voucher Code</label>
                 <div><input type="text" name="voucher_code"></div>
-                <div style="background: lightblue" id="apply">Apply</div>
+                <div style="background: lightblue" id="apply"><?=__("Apply")?></div>
             </div>
             <p class="note" style="color: red; display: none"></p>
             <button id="booking" class="booking" style="background: bisque;padding: 20px 40px;">Book</button>

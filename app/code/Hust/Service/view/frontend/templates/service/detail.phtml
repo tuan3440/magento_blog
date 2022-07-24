@@ -69,6 +69,7 @@ $data = $block->getContentService();
             });
             let point = <?= (int)$data['point']; ?>;
             $( "input[type=radio]" ).each(function() {
+                $(this).attr("disabled",true);
                 if ($(this).val() == point) {
                     $(this).attr("checked", true)
                 }
