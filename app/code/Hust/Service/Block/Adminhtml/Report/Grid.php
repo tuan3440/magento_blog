@@ -185,7 +185,7 @@ class Grid extends \Magento\Backend\Block\Widget\Grid\Extended
         );
 
         $this->addColumn('charge', [
-            'header' => __('Charge'),
+            'header' => __('Charge($)'),
             'type' => 'number',
             'index' => 'charge',
         ]);

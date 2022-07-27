@@ -5,6 +5,7 @@ namespace Hust\Service\Controller\Adminhtml\Employee;
 use Hust\Service\Controller\Adminhtml\Employee;
 use Hust\Service\Model\EmployeeFactory;
 use Hust\Service\Model\Repository\EmployeeRepository;
+use Hust\Service\Model\ResourceModel\Employee as ResourceEmployee;
 use Hust\Service\Model\ServiceRegistry;
 use Magento\Backend\App\Action\Context;
 use Magento\Backend\Model\Auth\Session;
@@ -17,31 +18,21 @@ class Uploader extends Employee
 {
     private $imageUploader;
 
-//    public function __construct(
-//        Context $context,
-//        PageFactory $resultPageFactory,
-//        EmployeeFactory $employeeFactory,
-//        EmployeeRepository $employeeRepository,
-//        ServiceRegistry $serviceRegistry,
-//        LayoutFactory $layoutFactory,
-//        \Magento\Catalog\Model\ImageUploader $imageUploader
-//    )
-//    {
-//        $this->imageUploader = $imageUploader;
-//        parent::__construct($context, $resultPageFactory, $employeeFactory, $employeeRepository, $serviceRegistry, $layoutFactory);
-//    }
-    public function __construct(
-        Context $context,
-        Session $session,
-        PageFactory $resultPageFactory,
-        EmployeeFactory $employeeFactory,
-        EmployeeRepository $employeeRepository,
-        ServiceRegistry $serviceRegistry,
-        \Magento\Catalog\Model\ImageUploader $imageUploader,
-        LayoutFactory $layoutFactory)
+
+
+    public function __construct(Context $context,
+                                Session $session,
+                                PageFactory $resultPageFactory,
+                                EmployeeFactory $employeeFactory,
+                                EmployeeRepository $employeeRepository,
+                                ServiceRegistry $serviceRegistry,
+                                LayoutFactory $layoutFactory,
+                                ResourceEmployee $resource,
+                                \Magento\Catalog\Model\ImageUploader $imageUploader
+    )
     {
         $this->imageUploader = $imageUploader;
-        parent::__construct($context, $session, $resultPageFactory, $employeeFactory, $employeeRepository, $serviceRegistry, $layoutFactory);
+        parent::__construct($context, $session, $resultPageFactory, $employeeFactory, $employeeRepository, $serviceRegistry, $layoutFactory, $resource);
     }
 
     public function execute()

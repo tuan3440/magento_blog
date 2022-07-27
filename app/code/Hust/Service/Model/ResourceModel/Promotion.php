@@ -22,7 +22,7 @@ class Promotion extends AbstractDb
     public function getPromotionByServiceId($serviceId)
     {
         $select = $this->getConnection()->select()->from(['main_table' => $this->getTable('hust_booking_promotion')])
-            ->where('main_table.service_id LIKE ?', '%'.$serviceId.'%')->where('date_start < NOW()')->where('date_end > NOW()');
+            ->where('main_table.service_id LIKE ?', '%'.$serviceId.'%')->where('date_start < NOW()')->where('date_end > NOW()')->where('status = 1');
         $promotions = $this->getConnection()->fetchAll($select);
 
         return $promotions;

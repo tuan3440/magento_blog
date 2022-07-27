@@ -23,11 +23,13 @@ class Save extends Voucher
         if ($data) {
             $i = 1;
             while ($i <= $data['count']) {
+                $today = date('Y-m-d');
                 $voucher = $this->getVoucherFactory()->create();
                 $code = (string) rand(100000,1000000).(string) rand(10,100);
                 $voucher->setData('voucher_code', $code);
                 $voucher->setData('discount', $data['discount']);
                 $voucher->setData('date_end', $data['date_end']);
+                $voucher->setData('date_start', $today);
                 try {
                     $voucher->save();
                     $i ++;

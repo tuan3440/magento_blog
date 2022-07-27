@@ -99,7 +99,8 @@ class View extends Template
             foreach ($list as $id) {
                 $locator = $this->locatorFactory->create();
                 $locatorCurrent = $locator->load($id);
-                $data[] = $locatorCurrent;
+                if ($locator->getIsActive() == 1) $data[] = $locatorCurrent;
+
             }
             return $data;
         }

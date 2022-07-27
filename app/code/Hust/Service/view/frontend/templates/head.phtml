@@ -17,7 +17,7 @@ $a = 1;
     require(['jquery', 'owlcarousel'], function($) {
         $(document).ready(function() {
             $('.owl-carousel').owlCarousel({
-                loop: true,
+                loop: false,
                 margin: 10,
                 nav: true,
                 navText: [
@@ -27,11 +27,11 @@ $a = 1;
                 autoplay: true,
                 autoplayHoverPause: true,
                 responsive: {
-                    0: {
-                        items: 1
-                    },
+                    // 0: {
+                    //     items: 1
+                    // },
                     600: {
-                        items: 1
+                        items: 2
                     },
                     1000: {
                         items: 1
