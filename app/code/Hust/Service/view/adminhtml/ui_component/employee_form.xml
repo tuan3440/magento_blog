@@ -193,9 +193,9 @@
                 <item name="config" xsi:type="array">
                     <item name="label" xsi:type="string" translate="true">Service</item>
                     <item name="componentType" xsi:type="string">field</item>
-                    <item name="formElement" xsi:type="string">select</item>
-                    <item name="component" xsi:type="string">Magento_Ui/js/form/element/ui-select</item>
-                    <item name="elementTmpl" xsi:type="string">ui/grid/filters/elements/ui-select</item>
+                    <item name="formElement" xsi:type="string">multiselect</item>
+<!--                    <item name="component" xsi:type="string">Magento_Ui/js/form/element/ui-select</item>-->
+<!--                    <item name="elementTmpl" xsi:type="string">ui/grid/filters/elements/ui-select</item>-->
                     <item name="dataScope" xsi:type="string">service_id</item>
                     <item name="disableLabel" xsi:type="boolean">true</item>
                     <item name="multiple" xsi:type="boolean">true</item>

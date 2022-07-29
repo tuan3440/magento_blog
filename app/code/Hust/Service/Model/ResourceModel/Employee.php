@@ -24,8 +24,12 @@ class Employee extends AbstractDb
         $objectManager = \Magento\Framework\App\ObjectManager::getInstance();
         $resource = $objectManager->get('Magento\Framework\App\ResourceConnection');
         $connection = $resource->getConnection();
-        $sql = "SELECT DISTINCT hust_employee_locator.employee_id FROM hust_employee_locator, hust_employee_service
-WHERE hust_employee_locator.locator_id = " . $locatorId . " AND hust_employee_service.service_id = " . $serviceId;
+//        $sql = "SELECT DISTINCT hust_employee_locator.employee_id FROM hust_employee_locator, hust_employee_service
+//WHERE hust_employee_locator.locator_id = " . $locatorId . " AND hust_employee_service.service_id = " . $serviceId;
+        $sql = "SELECT DISTINCT hust_employee_service.employee_id FROM hust_employee_service "
+            . "LEFT JOIN  hust_employee_locator on hust_employee_service.employee_id = hust_employee_locator.employee_id"
+            . " where hust_employee_locator.locator_id = ". $locatorId
+            . " and hust_employee_service.service_id = ".$serviceId;
         $result = $connection->fetchAll($sql);
         if ($result) {
             $employeeIds = [];

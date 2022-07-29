@@ -37,7 +37,7 @@ class Grid extends \Magento\Backend\Block\Widget\Grid\Extended
         $locator_id = $this->getCurrentUser()->getData('locator_id');
 
         $collection = $this->collection->create()->addFieldToFilter("locator_id", $locator_id);
-        $collection->getSelect()->group(['employee_id', 'service_id'])->columns([
+        $collection->getSelect()->group(['employee_id', 'date'])->columns([
             'count' => 'count(*)'
         ]);
 //        echo $collection->getSelect()->__toString();
