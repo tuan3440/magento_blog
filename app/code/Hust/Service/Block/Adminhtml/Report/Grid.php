@@ -67,7 +67,7 @@ class Grid extends \Magento\Backend\Block\Widget\Grid\Extended
             $from = $this->_prepareDateFrom($from);
             $to = $this->_prepareDateTo($to);
             $collection->addFieldToFilter('date', ['from' => $from , 'to' => $to]);
-
+            $collection->setOrder('date', 'asc');
             switch ($period) {
                 case 'day':
                     $collection->getSelect()->group('concat(day(date), month(date), year(date))');

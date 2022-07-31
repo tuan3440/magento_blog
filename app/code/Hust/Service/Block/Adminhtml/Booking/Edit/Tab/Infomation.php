@@ -67,8 +67,7 @@ class Infomation extends Generic
                 'label' => __('Booking ID'),
                 'name' => 'booking_id',
                 'required' => true,
-                'value' => $bookingCurrent->getBookingId(),
-                'class' => "info_booking"
+                'value' => $bookingCurrent->getBookingId()
             ]
         );
 
