@@ -27,20 +27,21 @@ class Save extends Booking
     private $hour;
     private $helper;
     protected $voucher;
+
     public function __construct(
-        Context $context,
-        Session       $session,
-        PageFactory $resultPageFactory,
-        BookingFactory $bookingFactory,
+        Context           $context,
+        Session           $session,
+        PageFactory       $resultPageFactory,
+        BookingFactory    $bookingFactory,
         BookingRepository $bookingRepository,
-        ServiceRegistry $serviceRegistry,
-        LayoutFactory $layoutFactory,
+        ServiceRegistry   $serviceRegistry,
+        LayoutFactory     $layoutFactory,
         ServiceRepository $serviceRepo,
         LocatorRepository $locatorRepo,
-        Mail $mail,
-        Hour $hour,
-        Data $helper,
-        VoucherFactory $voucher
+        Mail              $mail,
+        Hour              $hour,
+        Data              $helper,
+        VoucherFactory    $voucher
     )
     {
         $this->serviceRepo = $serviceRepo;
@@ -62,16 +63,16 @@ class Save extends Booking
                 $this->getBookingRepository()->save($bookingRepo);
                 $bookingRepo = $this->getBookingRepository()->getById($data['booking_id']);
                 if ($bookingRepo['booking_status'] == 3) {
-                    $voucherCode = $this->createVoucher($data['booking_id']);
+                    $voucherData = $this->createVoucher($data['booking_id'], $bookingRepo->getData('charge'));
                     $idBookingSale = $this->saveBookingSale($bookingRepo);
-                    $this->sendMailSuccess($idBookingSale, $bookingRepo->getData('email'), $bookingRepo->getData('service_id'), $bookingRepo->getData('phone'), $voucherCode);
+                    $this->sendMailSuccess($idBookingSale, $bookingRepo->getData('email'), $bookingRepo->getData('service_id'), $bookingRepo->getData('phone'), $voucherData);
 
                 }
                 if ($bookingRepo['booking_status'] == 2) {
                     $this->sendMailCancel([
                         'reason' => $bookingRepo->getData('reason'),
                         'name' => $bookingRepo->getData('name'),
-                        ], $bookingRepo->getData('email'));
+                    ], $bookingRepo->getData('email'));
                 }
                 if ($bookingRepo['booking_status'] == 1) {
                     $this->sendMailAcept($bookingRepo);
@@ -89,22 +90,33 @@ class Save extends Booking
 
     }
 
-    public function createVoucher($data)
+    public function createVoucher($booking_id, $charge)
     {
         $voucher = $this->voucher->create();
-        $code = $data.(string) rand(100000,1000000);
+        $code = $booking_id . (string)rand(100000, 1000000);
         $today = date('Y-m-d');
         $month = strtotime(date("Y-m-d", strtotime($today)) . " +1 month");
         $dateEnd = strftime("%Y-%m-%d", $month);
         $voucher->setData('voucher_code', $code);
         $voucher->setData('date_end', $dateEnd);
         $voucher->setData('date_start', $today);
+        if ($charge < 100) {
+            $discount = 5;
+        } else if ($charge >= 100 && $charge <= 500) {
+            $discount = 10;
+        } else {
+            $discount = 20;
+        }
+        $voucher->setData('discount', $discount);
         try {
             $voucher->save();
         } catch (\Exception $e) {
 
         }
-        return $code;
+        return [
+            'code' => $code,
+            'discount' => $discount
+        ];
     }
 
     private function saveBookingEmployee($data)
@@ -185,17 +197,18 @@ class Save extends Booking
             'serviceName' => $service->getData('name'),
             'locatorName' => $locator->getData('name'),
             'address' => $locator->getData('address'),
-            'date'=> $date,
-            'hour'=> $hours[$hourId]
+            'date' => $date,
+            'hour' => $hours[$hourId]
         ];
     }
 
-    private function sendMailSuccess($idBookingSale, $email, $service_id, $phone, $voucherCode)
+    private function sendMailSuccess($idBookingSale, $email, $service_id, $phone, $voucherData)
     {
         $url = $this->helper->getUrlReview($service_id, $idBookingSale);
         $this->mail->sendEmail("notify_cutomer_thankyou", [
             'urlReview' => $url,
-            'code' => $voucherCode
+            'code' => $voucherData['code'],
+            'discount' => $voucherData['discount']
         ], $email);
     }
 
