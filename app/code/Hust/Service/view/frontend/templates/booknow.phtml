@@ -6,6 +6,7 @@ $locator = $block->getLocator();
 $serviceId = $block->getServiceId();
 //$hours = $block->getHours();
 $charge = $block->getCharge();
+$data = $this->getCustomerData();
 ?>
 <div class="container">
     <div class="title">Chọn thời gian và khung giờ sử dụng dịch vụ</div>
@@ -188,19 +189,19 @@ $charge = $block->getCharge();
         <div class="field">
             <label class="label">Name</label>
             <div class="control">
-                <input type="text" name="name" data-validate='{"required":true}'/>
+                <input type="text" name="name" data-validate='{"required":true}' value="<?= $data['name']?>"/>
             </div>
         </div>
         <div class="field">
             <label class="label">Age</label>
             <div class="control">
-                <input type="text" name="age" data-validate='{"required":true}'/>
+                <input type="text" name="age" data-validate='{"required":true}' />
             </div>
         </div>
         <div class="field">
             <label class="label">Gender</label>
             <div class="control">
-                <select name="gender">
+                <select name="gender" value="<?= $data['gender']?>">
                     <option value="1">Male</option>
                     <option value="0">Female</option>
                 </select>
@@ -209,7 +210,7 @@ $charge = $block->getCharge();
         <div class="field">
             <label class="label">Phone</label>
             <div class="control">
-                <input type="text" name="phone" data-validate='{"required":true}'>
+                <input type="text" name="phone" data-validate='{"required":true}' value="<?= $data['phone']?>">
             </div>
         </div>
         <div class="field">
@@ -221,7 +222,7 @@ $charge = $block->getCharge();
         <div class="field">
             <label class="label">Email</label>
             <div class="control">
-                <input type="text" name="email" data-validate="{required:true, 'validate-email':true}"/>
+                <input type="text" name="email" data-validate="{required:true, 'validate-email':true}" value="<?= $data['email']?>"/>
             </div>
         </div>
     </form>

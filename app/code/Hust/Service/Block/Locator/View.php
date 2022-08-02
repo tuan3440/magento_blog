@@ -10,6 +10,7 @@ use Hust\Service\Model\Repository\PromotionRepository;
 use Hust\Service\Model\ResourceModel\Promotion;
 use Hust\Service\Model\ResourceModel\Booking\CollectionFactory;
 use Hust\Service\Model\ResourceModel\Service\CollectionFactory as ServiceCollection;
+use Magento\Customer\Model\SessionFactory;
 
 class View extends Template
 {
@@ -19,7 +20,7 @@ class View extends Template
     protected $serviceRepo;
     protected $bookingCollection;
     protected $serviceCollection;
-
+    protected $session;
     public function __construct(Template\Context $context,
                                 LocatorFactory $locatorFactory,
                                 ServiceRepository $serviceRepository,
@@ -27,6 +28,7 @@ class View extends Template
                                 ServiceCollection $serviceCollection,
                                 Hour $hours,
                                 Promotion $promotion,
+                                SessionFactory $session,
                                 array $data = [])
     {
         $this->promotion = $promotion;
@@ -35,6 +37,7 @@ class View extends Template
         $this->serviceRepo = $serviceRepository;
         $this->bookingCollection = $bookingCollection;
         $this->serviceCollection = $serviceCollection;
+        $this->session = $session;
         parent::__construct($context, $data);
     }
 
@@ -45,7 +48,28 @@ class View extends Template
         return $locatorCurrent;
     }
 
+    public function getCustomerData() {
+        $data = [
+            'name' => '',
+            'gender' => 0,
+            'phone' => '',
+            'email' => '',
+        ];
+        if ($customer = $this->isLogin()) {
+            $data = [
+                'name' => $customer->getName(),
+                'gender' => $customer->getData('gender') ? $customer->getData('gender') : 0,
+                'phone' => $customer->getData('telephone') ? $customer->getData('telephone') : '',
+                'email' => $customer->getEmail() ? $customer->getEmail() : ''
+            ];
+        }
+        return $data;
+    }
 
+    public function isLogin()
+    {
+        return $this->session->create()->getCustomer();
+    }
 
     public function getServiceId()
     {
